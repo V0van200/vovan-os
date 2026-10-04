@@ -1,0 +1,1916 @@
+{
+ "generated_from": {
+  "198": "2026-10-04T18:21:08+0000",
+  "78": "2026-10-04T18:22:33+0000"
+ },
+ "nodes": [
+  {
+   "id": "server:198",
+   "type": "server",
+   "label": "Сервер 198",
+   "ip": "198.13.184.145",
+   "cpus": 1,
+   "ram": 1008189440
+  },
+  {
+   "id": "service:198:claude-rc",
+   "type": "service",
+   "label": "claude-rc",
+   "state": "active",
+   "ports": [],
+   "memory": 619130880
+  },
+  {
+   "id": "service:198:fail2ban",
+   "type": "service",
+   "label": "fail2ban",
+   "state": "active",
+   "ports": [],
+   "memory": 25473024
+  },
+  {
+   "id": "service:198:nginx",
+   "type": "service",
+   "label": "nginx",
+   "state": "active",
+   "ports": [
+    80,
+    443
+   ],
+   "memory": 18210816
+  },
+  {
+   "id": "service:198:watchdog",
+   "type": "service",
+   "label": "watchdog",
+   "state": "active",
+   "ports": [],
+   "memory": 593920
+  },
+  {
+   "id": "service:198:xray",
+   "type": "service",
+   "label": "xray",
+   "state": "active",
+   "ports": [
+    2053,
+    2087,
+    8443
+   ],
+   "memory": 19607552
+  },
+  {
+   "id": "domain:eeklera.online",
+   "type": "domain",
+   "label": "eeklera.online",
+   "server": "198"
+  },
+  {
+   "id": "domain:www.eeklera.online",
+   "type": "domain",
+   "label": "www.eeklera.online",
+   "server": "198"
+  },
+  {
+   "id": "domain:os.eeklera.online",
+   "type": "domain",
+   "label": "os.eeklera.online",
+   "server": "198"
+  },
+  {
+   "id": "domain:os.vovan20.ru",
+   "type": "domain",
+   "label": "os.vovan20.ru",
+   "server": "198"
+  },
+  {
+   "id": "domain:sentra.vovan20.ru",
+   "type": "domain",
+   "label": "sentra.vovan20.ru",
+   "server": "198"
+  },
+  {
+   "id": "domain:shop.eeklera.online",
+   "type": "domain",
+   "label": "shop.eeklera.online",
+   "server": "198"
+  },
+  {
+   "id": "domain:vovan20.ru",
+   "type": "domain",
+   "label": "vovan20.ru",
+   "server": "198"
+  },
+  {
+   "id": "domain:www.vovan20.ru",
+   "type": "domain",
+   "label": "www.vovan20.ru",
+   "server": "198"
+  },
+  {
+   "id": "server:78",
+   "type": "server",
+   "label": "Сервер 78",
+   "ip": "78.17.19.43",
+   "cpus": 2,
+   "ram": 2066169856
+  },
+  {
+   "id": "service:78:agent-hub",
+   "type": "service",
+   "label": "agent-hub",
+   "state": "active",
+   "ports": [
+    3495
+   ],
+   "memory": 1695744
+  },
+  {
+   "id": "service:78:auth-gateway",
+   "type": "service",
+   "label": "auth-gateway",
+   "state": "active",
+   "ports": [
+    3481
+   ],
+   "memory": 3428352
+  },
+  {
+   "id": "service:78:beaver-api",
+   "type": "service",
+   "label": "beaver-api",
+   "state": "active",
+   "ports": [
+    3701
+   ],
+   "memory": 2920448
+  },
+  {
+   "id": "service:78:beaver-realtime",
+   "type": "service",
+   "label": "beaver-realtime",
+   "state": "active",
+   "ports": [
+    3702
+   ],
+   "memory": 25509888
+  },
+  {
+   "id": "service:78:blenderq",
+   "type": "service",
+   "label": "blenderq",
+   "state": "active",
+   "ports": [
+    3520
+   ],
+   "memory": 2957312
+  },
+  {
+   "id": "service:78:casting-engine",
+   "type": "service",
+   "label": "casting-engine",
+   "state": "active",
+   "ports": [
+    3503
+   ],
+   "memory": 174465024
+  },
+  {
+   "id": "service:78:docker",
+   "type": "service",
+   "label": "docker",
+   "state": "active",
+   "ports": [
+    5433,
+    6380,
+    7777
+   ],
+   "memory": 60219392
+  },
+  {
+   "id": "service:78:drop",
+   "type": "service",
+   "label": "drop",
+   "state": "active",
+   "ports": [
+    3530
+   ],
+   "memory": 1708032
+  },
+  {
+   "id": "service:78:eeklera-admin",
+   "type": "service",
+   "label": "eeklera-admin",
+   "state": "active",
+   "ports": [
+    3505
+   ],
+   "memory": 12914688
+  },
+  {
+   "id": "service:78:eeklera-analytics",
+   "type": "service",
+   "label": "eeklera-analytics",
+   "state": "active",
+   "ports": [
+    3610
+   ],
+   "memory": 2072576
+  },
+  {
+   "id": "service:78:eeklera-chat",
+   "type": "service",
+   "label": "eeklera-chat",
+   "state": "active",
+   "ports": [
+    3011
+   ],
+   "memory": 2174976
+  },
+  {
+   "id": "service:78:eeklera-inquiries",
+   "type": "service",
+   "label": "eeklera-inquiries",
+   "state": "active",
+   "ports": [
+    3504
+   ],
+   "memory": 1667072
+  },
+  {
+   "id": "service:78:eeklera-sub-bot",
+   "type": "service",
+   "label": "eeklera-sub-bot",
+   "state": "active",
+   "ports": [],
+   "memory": 14290944
+  },
+  {
+   "id": "service:78:exchange",
+   "type": "service",
+   "label": "exchange",
+   "state": "active",
+   "ports": [
+    3497
+   ],
+   "memory": 1740800
+  },
+  {
+   "id": "service:78:fail2ban",
+   "type": "service",
+   "label": "fail2ban",
+   "state": "active",
+   "ports": [],
+   "memory": 24563712
+  },
+  {
+   "id": "service:78:gate",
+   "type": "service",
+   "label": "gate",
+   "state": "active",
+   "ports": [
+    3480
+   ],
+   "memory": 2699264
+  },
+  {
+   "id": "service:78:jarvis",
+   "type": "service",
+   "label": "jarvis",
+   "state": "active",
+   "ports": [
+    7070
+   ],
+   "memory": 1630208
+  },
+  {
+   "id": "service:78:kabluk",
+   "type": "service",
+   "label": "kabluk",
+   "state": "active",
+   "ports": [
+    8091
+   ],
+   "memory": 91672576
+  },
+  {
+   "id": "service:78:mediamtx",
+   "type": "service",
+   "label": "mediamtx",
+   "state": "active",
+   "ports": [
+    1935,
+    8000,
+    8001,
+    8189,
+    8554,
+    8888,
+    8889,
+    8890,
+    8892,
+    8892
+   ],
+   "memory": 24809472
+  },
+  {
+   "id": "service:78:modbot",
+   "type": "service",
+   "label": "modbot",
+   "state": "active",
+   "ports": [
+    3485
+   ],
+   "memory": 10285056
+  },
+  {
+   "id": "service:78:nginx",
+   "type": "service",
+   "label": "nginx",
+   "state": "active",
+   "ports": [
+    80,
+    443,
+    7443
+   ],
+   "memory": 9482240
+  },
+  {
+   "id": "service:78:pomoshnik-bot",
+   "type": "service",
+   "label": "pomoshnik-bot",
+   "state": "active",
+   "ports": [],
+   "memory": 13254656
+  },
+  {
+   "id": "service:78:sentra-api",
+   "type": "service",
+   "label": "sentra-api",
+   "state": "active",
+   "ports": [
+    3600
+   ],
+   "memory": 22687744
+  },
+  {
+   "id": "service:78:sentra-worker",
+   "type": "service",
+   "label": "sentra-worker",
+   "state": "active",
+   "ports": [],
+   "memory": 48066560
+  },
+  {
+   "id": "service:78:sentra2-api",
+   "type": "service",
+   "label": "sentra2-api",
+   "state": "active",
+   "ports": [
+    3601
+   ],
+   "memory": 13029376
+  },
+  {
+   "id": "service:78:strike",
+   "type": "service",
+   "label": "strike",
+   "state": "active",
+   "ports": [
+    3498
+   ],
+   "memory": 1630208
+  },
+  {
+   "id": "service:78:stunnel4",
+   "type": "service",
+   "label": "stunnel4",
+   "state": "active",
+   "ports": [],
+   "memory": 2088960
+  },
+  {
+   "id": "service:78:video2md-cloud",
+   "type": "service",
+   "label": "video2md-cloud",
+   "state": "active",
+   "ports": [
+    3515
+   ],
+   "memory": 3420160
+  },
+  {
+   "id": "service:78:webos",
+   "type": "service",
+   "label": "webos",
+   "state": "active",
+   "ports": [
+    3502
+   ],
+   "memory": 1736704
+  },
+  {
+   "id": "service:78:wstunnel",
+   "type": "service",
+   "label": "wstunnel",
+   "state": "active",
+   "ports": [
+    8087
+   ],
+   "memory": 6529024
+  },
+  {
+   "id": "service:78:xray",
+   "type": "service",
+   "label": "xray",
+   "state": "active",
+   "ports": [
+    2053
+   ],
+   "memory": 17457152
+  },
+  {
+   "id": "docker:78:terraria",
+   "type": "container",
+   "label": "terraria",
+   "state": "Up 3 days"
+  },
+  {
+   "id": "docker:78:mtg",
+   "type": "container",
+   "label": "mtg",
+   "state": "Exited (0) 11 days ago"
+  },
+  {
+   "id": "docker:78:sentra-postgres",
+   "type": "container",
+   "label": "sentra-postgres",
+   "state": "Up 6 days (healthy)"
+  },
+  {
+   "id": "docker:78:sentra-redis",
+   "type": "container",
+   "label": "sentra-redis",
+   "state": "Up 6 days (healthy)"
+  },
+  {
+   "id": "domain:agents.vovan20.ru",
+   "type": "domain",
+   "label": "agents.vovan20.ru",
+   "server": "78"
+  },
+  {
+   "id": "domain:claw.vovan20.ru",
+   "type": "domain",
+   "label": "claw.vovan20.ru",
+   "server": "78"
+  },
+  {
+   "id": "domain:cools1s.online",
+   "type": "domain",
+   "label": "cools1s.online",
+   "server": "78"
+  },
+  {
+   "id": "domain:www.cools1s.online",
+   "type": "domain",
+   "label": "www.cools1s.online",
+   "server": "78"
+  },
+  {
+   "id": "domain:cools1s.ru",
+   "type": "domain",
+   "label": "cools1s.ru",
+   "server": "78"
+  },
+  {
+   "id": "domain:www.cools1s.ru",
+   "type": "domain",
+   "label": "www.cools1s.ru",
+   "server": "78"
+  },
+  {
+   "id": "domain:213.148.25.57",
+   "type": "domain",
+   "label": "213.148.25.57",
+   "server": "78"
+  },
+  {
+   "id": "domain:kabluk.78-17-19-43.sslip.io",
+   "type": "domain",
+   "label": "kabluk.78-17-19-43.sslip.io",
+   "server": "78"
+  },
+  {
+   "id": "domain:kursis.ru",
+   "type": "domain",
+   "label": "kursis.ru",
+   "server": "78"
+  },
+  {
+   "id": "domain:www.kursis.ru",
+   "type": "domain",
+   "label": "www.kursis.ru",
+   "server": "78"
+  },
+  {
+   "id": "db:78-data-terraria-config-tshock-sqlite",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "tshock.sqlite",
+   "tables": 11,
+   "rows": 10
+  },
+  {
+   "id": "db:78-data-terraria-newconf-tshock-sqlite",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "tshock.sqlite",
+   "tables": 11,
+   "rows": 8
+  },
+  {
+   "id": "db:78-eeklera-eeklera-site-data-chat-db",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "chat.db",
+   "tables": 7,
+   "rows": 77
+  },
+  {
+   "id": "db:78-home-claude-apps-agent-hub-projects-eeklera-site-eeklera-site-data-chat-db",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "chat.db",
+   "tables": 7,
+   "rows": 77
+  },
+  {
+   "id": "db:78-home-claude-apps-agent-hub-projects-vovan-app-backend-demo-db",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "demo.db",
+   "tables": 14,
+   "rows": 130
+  },
+  {
+   "id": "db:78-home-claude-apps-agent-hub-projects-vovan-app-backend-vovan-db",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "vovan.db",
+   "tables": 80,
+   "rows": 409
+  },
+  {
+   "id": "db:78-home-claude-apps-agent-hub-projects-vovan-app-push-subscriptions-db",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "push_subscriptions.db",
+   "tables": 1,
+   "rows": 0
+  },
+  {
+   "id": "db:78-home-claude-apps-chatguard-db-chatguard-db",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "chatguard.db",
+   "tables": 21,
+   "rows": 43
+  },
+  {
+   "id": "db:78-home-claude-apps-eeklera-admin-admin-db",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "admin.db",
+   "tables": 5,
+   "rows": 514
+  },
+  {
+   "id": "db:78-home-claude-apps-eeklera-analytics-analytics-db",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "analytics.db",
+   "tables": 2,
+   "rows": 1484
+  },
+  {
+   "id": "db:78-home-claude-apps-pomoshnik-bot-session-db",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "session.db",
+   "tables": 4,
+   "rows": 11
+  },
+  {
+   "id": "db:78-root-data-db",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "data.db",
+   "tables": 2,
+   "rows": 5
+  },
+  {
+   "id": "db:78-var-lib-kabluk-kabluk-sqlite",
+   "type": "database",
+   "engine": "sqlite",
+   "label": "kabluk.sqlite",
+   "tables": 49,
+   "rows": 1703
+  },
+  {
+   "id": "db:78-postgres-sentra",
+   "type": "database",
+   "engine": "postgres",
+   "label": "sentra",
+   "tables": 102,
+   "rows": 5910
+  },
+  {
+   "id": "db:78-postgres-sentra_test",
+   "type": "database",
+   "engine": "postgres",
+   "label": "sentra_test",
+   "tables": 103,
+   "rows": 84646
+  },
+  {
+   "id": "db:78-postgres-beaver",
+   "type": "database",
+   "engine": "postgres",
+   "label": "beaver",
+   "tables": 12,
+   "rows": 191
+  },
+  {
+   "id": "db:78-postgres-beaver_test",
+   "type": "database",
+   "engine": "postgres",
+   "label": "beaver_test",
+   "tables": 12,
+   "rows": 1567
+  },
+  {
+   "id": "db:78-postgres-eeklera",
+   "type": "database",
+   "engine": "postgres",
+   "label": "eeklera",
+   "tables": 11,
+   "rows": 42
+  },
+  {
+   "id": "db:78-postgres-eeklera_test",
+   "type": "database",
+   "engine": "postgres",
+   "label": "eeklera_test",
+   "tables": 11,
+   "rows": 30
+  },
+  {
+   "id": "db:78-redis-sentra-redis",
+   "type": "database",
+   "engine": "redis",
+   "label": "sentra-redis",
+   "tables": 0,
+   "rows": 0
+  },
+  {
+   "id": "project:kabluk",
+   "type": "project",
+   "label": "Каблуковск / Kabluk",
+   "kind": "game",
+   "repo": "Kabluk",
+   "repo_url": "https://github.com/V0van200/Kabluk",
+   "confidence": "high",
+   "note": "Онлайн-город в Telegram (@Kablukgamebot) + «Каблук-Сити». Автодеплой из main, бэкап базы перед каждым деплоем."
+  },
+  {
+   "id": "project:terraria",
+   "type": "project",
+   "label": "Terraria Server",
+   "kind": "game",
+   "repo": "terraria-server",
+   "repo_url": "https://github.com/V0van200/terraria-server",
+   "confidence": "high",
+   "note": "TShock в Docker, порт 7777."
+  },
+  {
+   "id": "project:sentra",
+   "type": "project",
+   "label": "Sentra",
+   "kind": "platform",
+   "repo": "sentra",
+   "repo_url": "https://github.com/V0van200/sentra",
+   "confidence": "high",
+   "note": "Домены на сервере 198 проксируют на 78 /sentra/. Ежедневный дамп Postgres тянется на 198 (pull-backup-78.timer)."
+  },
+  {
+   "id": "project:beaver",
+   "type": "project",
+   "label": "Beaver",
+   "kind": "service",
+   "repo": null,
+   "repo_url": null,
+   "confidence": "medium",
+   "note": "Отдельного репозитория не найдено — вероятно часть server-misc."
+  },
+  {
+   "id": "project:eeklera-site",
+   "type": "project",
+   "label": "EEKLERA — сайт",
+   "kind": "site",
+   "repo": "eeklera-online",
+   "repo_url": "https://github.com/V0van200/eeklera-online",
+   "confidence": "high",
+   "note": "Живой сайт на 198, автодеплой из GitHub eeklera-online. Код сайта — зона Astra 6."
+  },
+  {
+   "id": "project:eeklera-backend",
+   "type": "project",
+   "label": "EEKLERA — сервисы",
+   "kind": "services",
+   "repo": "Eeklera_new_site",
+   "repo_url": "https://github.com/V0van200/Eeklera_new_site",
+   "confidence": "medium",
+   "note": "На 78 остался старый блок eeklera.online (/var/www/eeklera_new, /stats, /app) — DNS сайта смотрит на 198."
+  },
+  {
+   "id": "project:eeklera-os",
+   "type": "project",
+   "label": "EEKLERA OS + /neuro",
+   "kind": "site",
+   "repo": "Eeklera_file",
+   "repo_url": "https://github.com/V0van200/Eeklera_file",
+   "confidence": "high",
+   "note": "/neuro — зашифрованная база знаний (vault.enc/data.enc), собирается из репозитория Eeklera_file."
+  },
+  {
+   "id": "project:lera-app",
+   "type": "project",
+   "label": "Lera App",
+   "kind": "app",
+   "repo": "lera-app",
+   "repo_url": "https://github.com/V0van200/lera-app",
+   "confidence": "medium",
+   "note": null
+  },
+  {
+   "id": "project:vovan-app",
+   "type": "project",
+   "label": "Vovan App",
+   "kind": "app",
+   "repo": "vovan-app",
+   "repo_url": "https://github.com/V0van200/vovan-app",
+   "confidence": "medium",
+   "note": "Соцсеть / чаты / медиа. База vovan.db — 80 таблиц."
+  },
+  {
+   "id": "project:agent-hub",
+   "type": "project",
+   "label": "Agent Hub",
+   "kind": "agents",
+   "repo": "server-misc",
+   "repo_url": "https://github.com/V0van200/server-misc",
+   "confidence": "medium",
+   "note": "Вход через auth-gateway (/__auth)."
+  },
+  {
+   "id": "project:auth-gateway",
+   "type": "project",
+   "label": "Auth Gateway",
+   "kind": "service",
+   "repo": "auth-gateway",
+   "repo_url": "https://github.com/V0van200/auth-gateway",
+   "confidence": "high",
+   "note": "Проверка входа для agents.vovan20.ru и vovan20.ru (/__auth)."
+  },
+  {
+   "id": "project:exchange",
+   "type": "project",
+   "label": "Exchange",
+   "kind": "service",
+   "repo": "exchange",
+   "repo_url": "https://github.com/V0van200/exchange",
+   "confidence": "high",
+   "note": null
+  },
+  {
+   "id": "project:modbot",
+   "type": "project",
+   "label": "ModBot",
+   "kind": "bot",
+   "repo": "modbot",
+   "repo_url": "https://github.com/V0van200/modbot",
+   "confidence": "high",
+   "note": "Модерация Telegram."
+  },
+  {
+   "id": "project:chatguard",
+   "type": "project",
+   "label": "ChatGuard",
+   "kind": "bot",
+   "repo": null,
+   "repo_url": null,
+   "confidence": "medium",
+   "note": "Сервис не запущен (нет в systemd) — только папка и база."
+  },
+  {
+   "id": "project:pomoshnik-bot",
+   "type": "project",
+   "label": "Помощник-бот",
+   "kind": "bot",
+   "repo": "pomoshnik-bot",
+   "repo_url": "https://github.com/V0van200/pomoshnik-bot",
+   "confidence": "high",
+   "note": null
+  },
+  {
+   "id": "project:studio",
+   "type": "project",
+   "label": "Studio (vovan20.ru)",
+   "kind": "site",
+   "repo": "studio",
+   "repo_url": "https://github.com/V0van200/studio",
+   "confidence": "high",
+   "note": "Домен vovan20.ru на 198 проксирует на 78."
+  },
+  {
+   "id": "project:graph",
+   "type": "project",
+   "label": "Graph",
+   "kind": "site",
+   "repo": "graph",
+   "repo_url": "https://github.com/V0van200/graph",
+   "confidence": "medium",
+   "note": "/graph/game, /graph/fly, /graph/live идут в сервис gate (3480)."
+  },
+  {
+   "id": "project:video2md",
+   "type": "project",
+   "label": "Video2MD",
+   "kind": "service",
+   "repo": "video2md-phone",
+   "repo_url": "https://github.com/V0van200/video2md-phone",
+   "confidence": "medium",
+   "note": "Python/FastAPI, порт 3515."
+  },
+  {
+   "id": "project:orion",
+   "type": "project",
+   "label": "Orion",
+   "kind": "agents",
+   "repo": "orion",
+   "repo_url": "https://github.com/V0van200/orion",
+   "confidence": "low",
+   "note": "Nginx проксирует /orion/ на 127.0.0.1:3459 — процесса на этом порту в инвентаре нет. Проверить, где живёт Orion."
+  },
+  {
+   "id": "project:jarvis",
+   "type": "project",
+   "label": "Jarvis",
+   "kind": "agents",
+   "repo": null,
+   "repo_url": null,
+   "confidence": "medium",
+   "note": "Порт 7070, закрыт авторизацией nginx."
+  },
+  {
+   "id": "project:media",
+   "type": "project",
+   "label": "Стриминг (MediaMTX)",
+   "kind": "infra",
+   "repo": null,
+   "repo_url": null,
+   "confidence": "high",
+   "note": "RTMP 1935, WebRTC/HLS 8888–8892."
+  },
+  {
+   "id": "project:vpn",
+   "type": "project",
+   "label": "VPN",
+   "kind": "infra",
+   "repo": null,
+   "repo_url": null,
+   "confidence": "high",
+   "note": "AmneziaWG (awg0/awg1) и Xray на 198; Xray/wstunnel/stunnel на 78. Ключи никогда не публикуются."
+  },
+  {
+   "id": "project:misc-78",
+   "type": "project",
+   "label": "Прочие сервисы 78",
+   "kind": "services",
+   "repo": "server-misc",
+   "repo_url": "https://github.com/V0van200/server-misc",
+   "confidence": "low",
+   "note": "Репозиторий server-misc содержит 13 подпроектов — сопоставить по одному."
+  },
+  {
+   "id": "project:cools1s",
+   "type": "project",
+   "label": "cools1s / kursis",
+   "kind": "site",
+   "repo": null,
+   "repo_url": null,
+   "confidence": "medium",
+   "note": null
+  }
+ ],
+ "edges": [
+  {
+   "from": "server:198",
+   "to": "service:198:claude-rc",
+   "kind": "runs"
+  },
+  {
+   "from": "server:198",
+   "to": "service:198:fail2ban",
+   "kind": "runs"
+  },
+  {
+   "from": "server:198",
+   "to": "service:198:nginx",
+   "kind": "runs"
+  },
+  {
+   "from": "server:198",
+   "to": "service:198:watchdog",
+   "kind": "runs"
+  },
+  {
+   "from": "server:198",
+   "to": "service:198:xray",
+   "kind": "runs"
+  },
+  {
+   "from": "domain:sentra.vovan20.ru",
+   "to": "server:78",
+   "kind": "proxies",
+   "path": "/"
+  },
+  {
+   "from": "domain:shop.eeklera.online",
+   "to": "server:78",
+   "kind": "proxies",
+   "path": "/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "server:78",
+   "kind": "proxies",
+   "path": "/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "server:78",
+   "kind": "proxies",
+   "path": "/"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:agent-hub",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:auth-gateway",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:beaver-api",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:beaver-realtime",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:blenderq",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:casting-engine",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:docker",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:drop",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:eeklera-admin",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:eeklera-analytics",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:eeklera-chat",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:eeklera-inquiries",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:eeklera-sub-bot",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:exchange",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:fail2ban",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:gate",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:jarvis",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:kabluk",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:mediamtx",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:modbot",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:nginx",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:pomoshnik-bot",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:sentra-api",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:sentra-worker",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:sentra2-api",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:strike",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:stunnel4",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:video2md-cloud",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:webos",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:wstunnel",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:xray",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "docker:78:terraria",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "docker:78:mtg",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "docker:78:sentra-postgres",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "docker:78:sentra-redis",
+   "kind": "runs"
+  },
+  {
+   "from": "domain:agents.vovan20.ru",
+   "to": "service:78:auth-gateway",
+   "kind": "routes",
+   "path": "= /__auth"
+  },
+  {
+   "from": "domain:eeklera.online",
+   "to": "service:78:eeklera-analytics",
+   "kind": "routes",
+   "path": "= /stats/collect"
+  },
+  {
+   "from": "domain:eeklera.online",
+   "to": "service:78:eeklera-analytics",
+   "kind": "routes",
+   "path": "^~ /stats"
+  },
+  {
+   "from": "domain:eeklera.online",
+   "to": "service:78:mediamtx",
+   "kind": "routes",
+   "path": "^~ /app/api/"
+  },
+  {
+   "from": "domain:eeklera.online",
+   "to": "service:78:mediamtx",
+   "kind": "routes",
+   "path": "^~ /app/ws/"
+  },
+  {
+   "from": "domain:eeklera.online",
+   "to": "service:78:eeklera-admin",
+   "kind": "routes",
+   "path": "^~ /admin/"
+  },
+  {
+   "from": "domain:eeklera.online",
+   "to": "service:78:eeklera-chat",
+   "kind": "routes",
+   "path": "^~ /api/chat/"
+  },
+  {
+   "from": "domain:eeklera.online",
+   "to": "service:78:mediamtx",
+   "kind": "routes",
+   "path": "= /api/pay/webhook"
+  },
+  {
+   "from": "domain:eeklera.online",
+   "to": "service:78:eeklera-inquiries",
+   "kind": "routes",
+   "path": "^~ /spheres/api/"
+  },
+  {
+   "from": "domain:kabluk.78-17-19-43.sslip.io",
+   "to": "service:78:kabluk",
+   "kind": "routes",
+   "path": "/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:auth-gateway",
+   "kind": "routes",
+   "path": "= /__auth_panel"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:auth-gateway",
+   "kind": "routes",
+   "path": "= /__auth"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "/graph/game/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "/graph/fly/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "= /graph/live"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "/gate/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:modbot",
+   "kind": "routes",
+   "path": "/modbot/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "^~ /gate/u/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "= /studio/ai"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "= /studio/track"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "= /studio/statsdata"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "= /studio/stats"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:auth-gateway",
+   "kind": "routes",
+   "path": "/portal/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:jarvis",
+   "kind": "routes",
+   "path": "^~ /jarvis/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:auth-gateway",
+   "kind": "routes",
+   "path": "/admin/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:sentra-api",
+   "kind": "routes",
+   "path": "/chatguard/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:beaver-realtime",
+   "kind": "routes",
+   "path": "/beaver/ws"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:beaver-api",
+   "kind": "routes",
+   "path": "/beaver/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:sentra2-api",
+   "kind": "routes",
+   "path": "/sentra2/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:sentra-api",
+   "kind": "routes",
+   "path": "/sentra/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:wstunnel",
+   "kind": "routes",
+   "path": "/bf2f49708c138f52"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:drop",
+   "kind": "routes",
+   "path": "/drop9k2/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:blenderq",
+   "kind": "routes",
+   "path": "/blender/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:exchange",
+   "kind": "routes",
+   "path": "/exchange/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:strike",
+   "kind": "routes",
+   "path": "/strike/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:webos",
+   "kind": "routes",
+   "path": "/admin/os/"
+  },
+  {
+   "from": "domain:vovan20.ru",
+   "to": "service:78:agent-hub",
+   "kind": "routes",
+   "path": "/claude/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:auth-gateway",
+   "kind": "routes",
+   "path": "= /__auth_panel"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:auth-gateway",
+   "kind": "routes",
+   "path": "= /__auth"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "/graph/game/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "/graph/fly/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "= /graph/live"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "/gate/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:modbot",
+   "kind": "routes",
+   "path": "/modbot/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "^~ /gate/u/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "= /studio/ai"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "= /studio/track"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "= /studio/statsdata"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:gate",
+   "kind": "routes",
+   "path": "= /studio/stats"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:auth-gateway",
+   "kind": "routes",
+   "path": "/portal/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:jarvis",
+   "kind": "routes",
+   "path": "^~ /jarvis/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:auth-gateway",
+   "kind": "routes",
+   "path": "/admin/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:sentra-api",
+   "kind": "routes",
+   "path": "/chatguard/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:beaver-realtime",
+   "kind": "routes",
+   "path": "/beaver/ws"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:beaver-api",
+   "kind": "routes",
+   "path": "/beaver/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:sentra2-api",
+   "kind": "routes",
+   "path": "/sentra2/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:sentra-api",
+   "kind": "routes",
+   "path": "/sentra/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:wstunnel",
+   "kind": "routes",
+   "path": "/bf2f49708c138f52"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:drop",
+   "kind": "routes",
+   "path": "/drop9k2/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:blenderq",
+   "kind": "routes",
+   "path": "/blender/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:exchange",
+   "kind": "routes",
+   "path": "/exchange/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:strike",
+   "kind": "routes",
+   "path": "/strike/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:webos",
+   "kind": "routes",
+   "path": "/admin/os/"
+  },
+  {
+   "from": "domain:www.vovan20.ru",
+   "to": "service:78:agent-hub",
+   "kind": "routes",
+   "path": "/claude/"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-data-terraria-config-tshock-sqlite",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-data-terraria-newconf-tshock-sqlite",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-eeklera-eeklera-site-data-chat-db",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-home-claude-apps-agent-hub-projects-eeklera-site-eeklera-site-data-chat-db",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-home-claude-apps-agent-hub-projects-vovan-app-backend-demo-db",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-home-claude-apps-agent-hub-projects-vovan-app-backend-vovan-db",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-home-claude-apps-agent-hub-projects-vovan-app-push-subscriptions-db",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-home-claude-apps-chatguard-db-chatguard-db",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-home-claude-apps-eeklera-admin-admin-db",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-home-claude-apps-eeklera-analytics-analytics-db",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-home-claude-apps-pomoshnik-bot-session-db",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-root-data-db",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-var-lib-kabluk-kabluk-sqlite",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-postgres-sentra",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-postgres-sentra_test",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-postgres-beaver",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-postgres-beaver_test",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-postgres-eeklera",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-postgres-eeklera_test",
+   "kind": "stores"
+  },
+  {
+   "from": "server:78",
+   "to": "db:78-redis-sentra-redis",
+   "kind": "stores"
+  },
+  {
+   "from": "project:kabluk",
+   "to": "service:78:kabluk",
+   "kind": "has"
+  },
+  {
+   "from": "project:kabluk",
+   "to": "domain:kabluk.78-17-19-43.sslip.io",
+   "kind": "has"
+  },
+  {
+   "from": "project:kabluk",
+   "to": "db:78-var-lib-kabluk-kabluk-sqlite",
+   "kind": "uses"
+  },
+  {
+   "from": "project:terraria",
+   "to": "docker:78:terraria",
+   "kind": "has"
+  },
+  {
+   "from": "project:terraria",
+   "to": "db:78-data-terraria-config-tshock-sqlite",
+   "kind": "uses"
+  },
+  {
+   "from": "project:terraria",
+   "to": "db:78-data-terraria-newconf-tshock-sqlite",
+   "kind": "uses"
+  },
+  {
+   "from": "project:sentra",
+   "to": "service:78:sentra-api",
+   "kind": "has"
+  },
+  {
+   "from": "project:sentra",
+   "to": "service:78:sentra-worker",
+   "kind": "has"
+  },
+  {
+   "from": "project:sentra",
+   "to": "service:78:sentra2-api",
+   "kind": "has"
+  },
+  {
+   "from": "project:sentra",
+   "to": "docker:78:sentra-postgres",
+   "kind": "has"
+  },
+  {
+   "from": "project:sentra",
+   "to": "docker:78:sentra-redis",
+   "kind": "has"
+  },
+  {
+   "from": "project:sentra",
+   "to": "domain:sentra.vovan20.ru",
+   "kind": "has"
+  },
+  {
+   "from": "project:sentra",
+   "to": "domain:shop.eeklera.online",
+   "kind": "has"
+  },
+  {
+   "from": "project:sentra",
+   "to": "db:78-postgres-sentra",
+   "kind": "uses"
+  },
+  {
+   "from": "project:sentra",
+   "to": "db:78-redis-sentra-redis",
+   "kind": "uses"
+  },
+  {
+   "from": "project:beaver",
+   "to": "service:78:beaver-api",
+   "kind": "has"
+  },
+  {
+   "from": "project:beaver",
+   "to": "service:78:beaver-realtime",
+   "kind": "has"
+  },
+  {
+   "from": "project:beaver",
+   "to": "db:78-postgres-beaver",
+   "kind": "uses"
+  },
+  {
+   "from": "project:eeklera-site",
+   "to": "domain:eeklera.online",
+   "kind": "has"
+  },
+  {
+   "from": "project:eeklera-site",
+   "to": "domain:www.eeklera.online",
+   "kind": "has"
+  },
+  {
+   "from": "project:eeklera-backend",
+   "to": "service:78:eeklera-admin",
+   "kind": "has"
+  },
+  {
+   "from": "project:eeklera-backend",
+   "to": "service:78:eeklera-analytics",
+   "kind": "has"
+  },
+  {
+   "from": "project:eeklera-backend",
+   "to": "service:78:eeklera-chat",
+   "kind": "has"
+  },
+  {
+   "from": "project:eeklera-backend",
+   "to": "service:78:eeklera-inquiries",
+   "kind": "has"
+  },
+  {
+   "from": "project:eeklera-backend",
+   "to": "service:78:eeklera-sub-bot",
+   "kind": "has"
+  },
+  {
+   "from": "project:eeklera-backend",
+   "to": "db:78-home-claude-apps-eeklera-admin-admin-db",
+   "kind": "uses"
+  },
+  {
+   "from": "project:eeklera-backend",
+   "to": "db:78-home-claude-apps-eeklera-analytics-analytics-db",
+   "kind": "uses"
+  },
+  {
+   "from": "project:eeklera-backend",
+   "to": "db:78-eeklera-eeklera-site-data-chat-db",
+   "kind": "uses"
+  },
+  {
+   "from": "project:eeklera-backend",
+   "to": "db:78-home-claude-apps-agent-hub-projects-eeklera-site-eeklera-site-data-chat-db",
+   "kind": "uses"
+  },
+  {
+   "from": "project:eeklera-backend",
+   "to": "db:78-postgres-eeklera",
+   "kind": "uses"
+  },
+  {
+   "from": "project:eeklera-os",
+   "to": "domain:os.eeklera.online",
+   "kind": "has"
+  },
+  {
+   "from": "project:eeklera-os",
+   "to": "domain:os.vovan20.ru",
+   "kind": "has"
+  },
+  {
+   "from": "project:vovan-app",
+   "to": "db:78-home-claude-apps-agent-hub-projects-vovan-app-backend-vovan-db",
+   "kind": "uses"
+  },
+  {
+   "from": "project:agent-hub",
+   "to": "service:78:agent-hub",
+   "kind": "has"
+  },
+  {
+   "from": "project:agent-hub",
+   "to": "domain:agents.vovan20.ru",
+   "kind": "has"
+  },
+  {
+   "from": "project:auth-gateway",
+   "to": "service:78:auth-gateway",
+   "kind": "has"
+  },
+  {
+   "from": "project:exchange",
+   "to": "service:78:exchange",
+   "kind": "has"
+  },
+  {
+   "from": "project:modbot",
+   "to": "service:78:modbot",
+   "kind": "has"
+  },
+  {
+   "from": "project:chatguard",
+   "to": "db:78-home-claude-apps-chatguard-db-chatguard-db",
+   "kind": "uses"
+  },
+  {
+   "from": "project:pomoshnik-bot",
+   "to": "service:78:pomoshnik-bot",
+   "kind": "has"
+  },
+  {
+   "from": "project:pomoshnik-bot",
+   "to": "db:78-home-claude-apps-pomoshnik-bot-session-db",
+   "kind": "uses"
+  },
+  {
+   "from": "project:studio",
+   "to": "domain:vovan20.ru",
+   "kind": "has"
+  },
+  {
+   "from": "project:studio",
+   "to": "domain:www.vovan20.ru",
+   "kind": "has"
+  },
+  {
+   "from": "project:graph",
+   "to": "service:78:gate",
+   "kind": "has"
+  },
+  {
+   "from": "project:video2md",
+   "to": "service:78:video2md-cloud",
+   "kind": "has"
+  },
+  {
+   "from": "project:jarvis",
+   "to": "service:78:jarvis",
+   "kind": "has"
+  },
+  {
+   "from": "project:media",
+   "to": "service:78:mediamtx",
+   "kind": "has"
+  },
+  {
+   "from": "project:vpn",
+   "to": "service:78:xray",
+   "kind": "has"
+  },
+  {
+   "from": "project:vpn",
+   "to": "service:78:wstunnel",
+   "kind": "has"
+  },
+  {
+   "from": "project:vpn",
+   "to": "service:78:stunnel4",
+   "kind": "has"
+  },
+  {
+   "from": "project:misc-78",
+   "to": "service:78:blenderq",
+   "kind": "has"
+  },
+  {
+   "from": "project:misc-78",
+   "to": "service:78:casting-engine",
+   "kind": "has"
+  },
+  {
+   "from": "project:misc-78",
+   "to": "service:78:drop",
+   "kind": "has"
+  },
+  {
+   "from": "project:misc-78",
+   "to": "service:78:strike",
+   "kind": "has"
+  },
+  {
+   "from": "project:misc-78",
+   "to": "service:78:webos",
+   "kind": "has"
+  },
+  {
+   "from": "project:cools1s",
+   "to": "domain:cools1s.ru",
+   "kind": "has"
+  },
+  {
+   "from": "project:cools1s",
+   "to": "domain:cools1s.online",
+   "kind": "has"
+  },
+  {
+   "from": "project:cools1s",
+   "to": "domain:kursis.ru",
+   "kind": "has"
+  }
+ ]
+}

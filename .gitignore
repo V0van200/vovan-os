@@ -1,0 +1,20 @@
+# Vovan OS: в репозиторий НИКОГДА не попадают данные и секреты (см. docs/SECURITY.md)
+.env
+.env.*
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.sql.gz
+*.dump
+*.pem
+*.key
+*.p12
+id_*
+*_deploy
+*.conf.secret
+secrets/
+backups/
+node_modules/
+__pycache__/
+.DS_Store

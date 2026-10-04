@@ -1,0 +1,41 @@
+{
+ "_about": "Связи репозиториев GitHub с тем, что реально работает на серверах. Составлено вручную по инвентарю 2026-10-04 (collector/collect.py). confidence: high — проверено по сервисам/доменам/базам; medium — по имени и пути; low — догадка, проверить.",
+ "groups": {
+  "kabluk": {"name": "Каблуковск / Kabluk", "kind": "game", "repo": "Kabluk", "server": "78", "services": ["kabluk"], "domains": ["kabluk.78-17-19-43.sslip.io"], "databases": ["/var/lib/kabluk/kabluk.sqlite"], "timers": ["kabluk-deploy.timer", "kabluk-backup.timer"], "confidence": "high", "note": "Онлайн-город в Telegram (@Kablukgamebot) + «Каблук-Сити». Автодеплой из main, бэкап базы перед каждым деплоем."},
+  "terraria": {"name": "Terraria Server", "kind": "game", "repo": "terraria-server", "server": "78", "docker": ["terraria"], "databases": ["/data/terraria/config/tshock.sqlite"], "timers": ["terraria-deploy.timer"], "confidence": "high", "note": "TShock в Docker, порт 7777."},
+  "sentra": {"name": "Sentra", "kind": "platform", "repo": "sentra", "server": "78", "services": ["sentra-api", "sentra-worker", "sentra2-api"], "docker": ["sentra-postgres", "sentra-redis"], "domains": ["sentra.vovan20.ru", "shop.eeklera.online"], "databases": ["postgres:sentra", "redis:sentra-redis"], "confidence": "high", "note": "Домены на сервере 198 проксируют на 78 /sentra/. Ежедневный дамп Postgres тянется на 198 (pull-backup-78.timer)."},
+  "beaver": {"name": "Beaver", "kind": "service", "repo": null, "server": "78", "services": ["beaver-api", "beaver-realtime"], "databases": ["postgres:beaver"], "confidence": "medium", "note": "Отдельного репозитория не найдено — вероятно часть server-misc."},
+  "eeklera-site": {"name": "EEKLERA — сайт", "kind": "site", "repo": "eeklera-online", "server": "198", "domains": ["eeklera.online", "www.eeklera.online"], "timers": ["eeklera-deploy.timer"], "paths": ["/data/sites/eeklera-online"], "confidence": "high", "note": "Живой сайт на 198, автодеплой из GitHub eeklera-online. Код сайта — зона Astra 6."},
+  "eeklera-backend": {"name": "EEKLERA — сервисы", "kind": "services", "repo": "Eeklera_new_site", "server": "78", "services": ["eeklera-admin", "eeklera-analytics", "eeklera-chat", "eeklera-inquiries", "eeklera-sub-bot"], "databases": ["/home/claude/apps/eeklera-admin/admin.db", "/home/claude/apps/eeklera-analytics/analytics.db", "/home/claude/apps/agent-hub/projects/Eeklera/site/eeklera_site/data/chat.db", "postgres:eeklera"], "confidence": "medium", "note": "На 78 остался старый блок eeklera.online (/var/www/eeklera_new, /stats, /app) — DNS сайта смотрит на 198."},
+  "eeklera-os": {"name": "EEKLERA OS + /neuro", "kind": "site", "repo": "Eeklera_file", "server": "198", "domains": ["os.eeklera.online", "os.vovan20.ru"], "paths": ["/var/www/eeklera-os", "/var/www/eeklera-neuro"], "confidence": "high", "note": "/neuro — зашифрованная база знаний (vault.enc/data.enc), собирается из репозитория Eeklera_file."},
+  "lera-app": {"name": "Lera App", "kind": "app", "repo": "lera-app", "server": "78", "paths": ["/opt/lera-app"], "domains": ["eeklera.online/app (старый блок на 78)"], "confidence": "medium"},
+  "vovan-app": {"name": "Vovan App", "kind": "app", "repo": "vovan-app", "server": "78", "paths": ["/opt/vovan-app", "/home/claude/apps/agent-hub/projects/vovan-app"], "databases": ["/home/claude/apps/agent-hub/projects/vovan-app/backend/vovan.db"], "confidence": "medium", "note": "Соцсеть / чаты / медиа. База vovan.db — 80 таблиц."},
+  "agent-hub": {"name": "Agent Hub", "kind": "agents", "repo": "server-misc", "server": "78", "services": ["agent-hub"], "domains": ["agents.vovan20.ru"], "paths": ["/opt/agent-hub", "/home/claude/apps/agent-hub"], "confidence": "medium", "note": "Вход через auth-gateway (/__auth)."},
+  "auth-gateway": {"name": "Auth Gateway", "kind": "service", "repo": "auth-gateway", "server": "78", "services": ["auth-gateway"], "confidence": "high", "note": "Проверка входа для agents.vovan20.ru и vovan20.ru (/__auth)."},
+  "exchange": {"name": "Exchange", "kind": "service", "repo": "exchange", "server": "78", "services": ["exchange"], "confidence": "high"},
+  "modbot": {"name": "ModBot", "kind": "bot", "repo": "modbot", "server": "78", "services": ["modbot"], "confidence": "high", "note": "Модерация Telegram."},
+  "chatguard": {"name": "ChatGuard", "kind": "bot", "repo": null, "server": "78", "paths": ["/home/claude/apps/chatguard"], "databases": ["/home/claude/apps/chatguard/db/chatguard.db"], "confidence": "medium", "note": "Сервис не запущен (нет в systemd) — только папка и база."},
+  "pomoshnik-bot": {"name": "Помощник-бот", "kind": "bot", "repo": "pomoshnik-bot", "server": "78", "services": ["pomoshnik-bot"], "databases": ["/home/claude/apps/pomoshnik-bot/session.db"], "confidence": "high"},
+  "studio": {"name": "Studio (vovan20.ru)", "kind": "site", "repo": "studio", "server": "78", "domains": ["vovan20.ru", "www.vovan20.ru"], "paths": ["/var/www/studio"], "confidence": "high", "note": "Домен vovan20.ru на 198 проксирует на 78."},
+  "graph": {"name": "Graph", "kind": "site", "repo": "graph", "server": "78", "services": ["gate"], "domains": ["vovan20.ru/graph"], "paths": ["/var/www/graph"], "confidence": "medium", "note": "/graph/game, /graph/fly, /graph/live идут в сервис gate (3480)."},
+  "video2md": {"name": "Video2MD", "kind": "service", "repo": "video2md-phone", "server": "78", "services": ["video2md-cloud"], "paths": ["/opt/video2md-cloud"], "confidence": "medium", "note": "Python/FastAPI, порт 3515."},
+  "orion": {"name": "Orion", "kind": "agents", "repo": "orion", "server": "78", "domains": ["/orion/ на IP 213.148.25.57"], "confidence": "low", "note": "Nginx проксирует /orion/ на 127.0.0.1:3459 — процесса на этом порту в инвентаре нет. Проверить, где живёт Orion."},
+  "jarvis": {"name": "Jarvis", "kind": "agents", "repo": null, "server": "78", "services": ["jarvis"], "paths": ["/opt/jarvis"], "confidence": "medium", "note": "Порт 7070, закрыт авторизацией nginx."},
+  "media": {"name": "Стриминг (MediaMTX)", "kind": "infra", "repo": null, "server": "78", "services": ["mediamtx"], "confidence": "high", "note": "RTMP 1935, WebRTC/HLS 8888–8892."},
+  "vpn": {"name": "VPN", "kind": "infra", "repo": null, "server": "198+78", "services": ["xray", "wstunnel", "stunnel4"], "confidence": "high", "note": "AmneziaWG (awg0/awg1) и Xray на 198; Xray/wstunnel/stunnel на 78. Ключи никогда не публикуются."},
+  "misc-78": {"name": "Прочие сервисы 78", "kind": "services", "repo": "server-misc", "server": "78", "services": ["blenderq", "casting-engine", "drop", "strike", "webos"], "confidence": "low", "note": "Репозиторий server-misc содержит 13 подпроектов — сопоставить по одному."},
+  "cools1s": {"name": "cools1s / kursis", "kind": "site", "repo": null, "server": "78", "domains": ["cools1s.ru", "cools1s.online", "kursis.ru"], "paths": ["/var/www/cools1s"], "confidence": "medium"}
+ },
+ "repos_without_runtime": {
+  "Eeklera": "Старый вариант сайта; сравнить с eeklera-online перед архивацией.",
+  "eeklera-site-archive": "Архив сайта.",
+  "lera-assistant": "На серверах не найден запущенным.",
+  "lera-vault-old": "Старое хранилище заметок.",
+  "eeklera-obsidian": "Пустой (size 0).",
+  "obsidian-systems": "Документация/системы Obsidian.",
+  "business-ideas": "Идеи, без кода.",
+  "twitch-manager": "На серверах не найден запущенным.",
+  "airrock": "Есть /opt/bdc-airrock — проверить, запущен ли.",
+  "server-misc": "Набор подпроектов сервера 78 (см. misc-78, agent-hub)."
+ }
+}

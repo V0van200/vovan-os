@@ -1,0 +1,609 @@
+{
+ "collected_at": "2026-10-04T18:21:08+0000",
+ "host": {
+  "hostname": "server",
+  "os": "Ubuntu 24.04.4 LTS",
+  "kernel": "6.8.0-142-generic",
+  "cpus": 1,
+  "ram_total": 1008189440,
+  "ram_available": 215298048,
+  "load": [
+   0.1162109375,
+   0.13623046875,
+   0.068359375
+  ],
+  "uptime_s": 445116,
+  "disks": [
+   {
+    "mount": "/",
+    "size": 5203439616,
+    "used": 4465729536,
+    "avail": 495603712
+   },
+   {
+    "mount": "/data",
+    "size": 5196382208,
+    "used": 1911844864,
+    "avail": 2999324672
+   }
+  ],
+  "public_ip": "198.13.184.145"
+ },
+ "services": [
+  {
+   "name": "claude-rc",
+   "description": "Claude Code Remote Control (server-198)",
+   "enabled": "enabled",
+   "state": "active",
+   "sub": "running",
+   "since": "Tue 2026-09-29 14:42:49 UTC",
+   "user": "root",
+   "workdir": "/root/server-admin",
+   "exec": "/root/.local/bin/claude remote-control --name server-198",
+   "memory": 619130880,
+   "restarts": 0,
+   "unit_file": "/etc/systemd/system/claude-rc.service",
+   "ports": []
+  },
+  {
+   "name": "fail2ban",
+   "description": "Fail2Ban Service",
+   "enabled": "enabled",
+   "state": "active",
+   "sub": "running",
+   "since": "Tue 2026-09-29 14:42:49 UTC",
+   "user": "root",
+   "workdir": null,
+   "exec": "/usr/bin/fail2ban-server -xf start",
+   "memory": 25473024,
+   "restarts": 0,
+   "unit_file": "/usr/lib/systemd/system/fail2ban.service",
+   "ports": []
+  },
+  {
+   "name": "nginx",
+   "description": "A high performance web server and a reverse proxy server",
+   "enabled": "enabled",
+   "state": "active",
+   "sub": "running",
+   "since": "Tue 2026-09-29 14:42:52 UTC",
+   "user": "root",
+   "workdir": null,
+   "exec": "/usr/sbin/nginx -g daemon on",
+   "memory": 18210816,
+   "restarts": 0,
+   "unit_file": "/usr/lib/systemd/system/nginx.service",
+   "ports": [
+    [
+     80,
+     "tcp"
+    ],
+    [
+     443,
+     "tcp"
+    ]
+   ]
+  },
+  {
+   "name": "watchdog",
+   "description": "watchdog daemon",
+   "enabled": "enabled",
+   "state": "active",
+   "sub": "running",
+   "since": "Tue 2026-09-29 14:42:52 UTC",
+   "user": "root",
+   "workdir": null,
+   "exec": "/bin/sh -c [ $run_watchdog != 1 ] || exec /usr/sbin/watchdog $watchdog_options",
+   "memory": 593920,
+   "restarts": 0,
+   "unit_file": "/usr/lib/systemd/system/watchdog.service",
+   "ports": []
+  },
+  {
+   "name": "xray",
+   "description": "Xray Service",
+   "enabled": "enabled",
+   "state": "active",
+   "sub": "running",
+   "since": "Tue 2026-09-29 14:42:50 UTC",
+   "user": "nobody",
+   "workdir": null,
+   "exec": "/usr/local/bin/xray run -config /usr/local/etc/xray/config.json",
+   "memory": 19607552,
+   "restarts": 0,
+   "unit_file": "/etc/systemd/system/xray.service",
+   "ports": [
+    [
+     2053,
+     "tcp"
+    ],
+    [
+     2087,
+     "tcp"
+    ],
+    [
+     8443,
+     "tcp"
+    ]
+   ]
+  }
+ ],
+ "timers": [
+  {
+   "timer": "eeklera-deploy.timer",
+   "runs": "eeklera-deploy.service",
+   "description": "Проверять main каждую минуту",
+   "last": "Sun 2026-10-04 18:20:42 UTC",
+   "next": null
+  },
+  {
+   "timer": "pull-backup-78.timer",
+   "runs": "pull-backup-78.service",
+   "description": "Каждую ночь в 03:30 по Алматы",
+   "last": "Sat 2026-10-03 22:35:53 UTC",
+   "next": "Sun 2026-10-04 22:31:02 UTC"
+  },
+  {
+   "timer": "certbot.timer",
+   "runs": "certbot.service",
+   "description": "Run certbot twice daily",
+   "last": "Sun 2026-10-04 10:43:53 UTC",
+   "next": "Sun 2026-10-04 23:25:51 UTC"
+  }
+ ],
+ "docker": [],
+ "nginx": [
+  {
+   "file": "eeklera.online",
+   "names": [
+    "eeklera.online",
+    "www.eeklera.online"
+   ],
+   "listen": [
+    "443 ssl",
+    "[::]:443 ssl"
+   ],
+   "root": "/data/sites/eeklera-online/current",
+   "locations": [
+    {
+     "path": "~ ^/(server|node_modules|data|src-dev|dev|tools|legacy|scripts|_audit|_backup|_trash|_stage|_deploy|_work)(/|$)",
+     "proxy": null,
+     "root": null,
+     "return": "404",
+     "auth": false
+    },
+    {
+     "path": "~* \\.(bak|backup|sql|tar|gz|zip|7z|rar|log|md|bat|cjs|ps1)$",
+     "proxy": null,
+     "root": null,
+     "return": "404",
+     "auth": false
+    },
+    {
+     "path": "~ /\\.",
+     "proxy": null,
+     "root": null,
+     "return": "404",
+     "auth": false
+    },
+    {
+     "path": "= /redesign",
+     "proxy": null,
+     "root": null,
+     "return": "301 /redesign/",
+     "auth": false
+    },
+    {
+     "path": "^~ /redesign/",
+     "proxy": null,
+     "root": "/data/sites/eeklera-online/current/redesign/",
+     "return": null,
+     "auth": false
+    },
+    {
+     "path": "~* \\.(jpg|jpeg|png|webp|svg|ico|css|js|mp3|mp4|woff2?)$",
+     "proxy": null,
+     "root": null,
+     "return": null,
+     "auth": false
+    },
+    {
+     "path": "/",
+     "proxy": null,
+     "root": null,
+     "return": null,
+     "auth": false
+    }
+   ],
+   "redirect_only": false,
+   "auth": false
+  },
+  {
+   "file": "eeklera.online",
+   "names": [],
+   "listen": [],
+   "root": null,
+   "locations": [],
+   "redirect_only": false,
+   "auth": false
+  },
+  {
+   "file": "eeklera.online",
+   "names": [
+    "eeklera.online",
+    "www.eeklera.online"
+   ],
+   "listen": [
+    "80",
+    "[::]:80"
+   ],
+   "root": null,
+   "locations": [
+    {
+     "path": "/.well-known/acme-challenge/",
+     "proxy": null,
+     "root": "/var/www/html",
+     "return": null,
+     "auth": false
+    },
+    {
+     "path": "/",
+     "proxy": null,
+     "root": null,
+     "return": "301 https://eeklera.online$request_uri",
+     "auth": false
+    }
+   ],
+   "redirect_only": false,
+   "auth": false
+  },
+  {
+   "file": "os.eeklera.online",
+   "names": [
+    "os.eeklera.online",
+    "os.vovan20.ru"
+   ],
+   "listen": [
+    "443 ssl",
+    "[::]:443 ssl"
+   ],
+   "root": "/var/www/eeklera-os",
+   "locations": [
+    {
+     "path": "= /neuro",
+     "proxy": null,
+     "root": null,
+     "return": "301 /neuro/",
+     "auth": false
+    },
+    {
+     "path": "^~ /neuro/",
+     "proxy": null,
+     "root": "/var/www/eeklera-neuro/",
+     "return": null,
+     "auth": false
+    },
+    {
+     "path": "/",
+     "proxy": null,
+     "root": null,
+     "return": null,
+     "auth": false
+    },
+    {
+     "path": "~* \\.(css|js|html)$",
+     "proxy": null,
+     "root": null,
+     "return": null,
+     "auth": false
+    },
+    {
+     "path": "= /img/desktop.png",
+     "proxy": null,
+     "root": null,
+     "return": "403",
+     "auth": false
+    },
+    {
+     "path": "~* \\.(jpg|jpeg|png|webp|svg|woff2)$",
+     "proxy": null,
+     "root": null,
+     "return": null,
+     "auth": false
+    },
+    {
+     "path": "~* \\.(mp3|m4a|ogg|wav)$",
+     "proxy": null,
+     "root": null,
+     "return": null,
+     "auth": false
+    }
+   ],
+   "redirect_only": false,
+   "auth": false
+  },
+  {
+   "file": "os.eeklera.online",
+   "names": [
+    "os.eeklera.online",
+    "os.vovan20.ru"
+   ],
+   "listen": [
+    "80",
+    "[::]:80"
+   ],
+   "root": null,
+   "locations": [
+    {
+     "path": "/.well-known/acme-challenge/",
+     "proxy": null,
+     "root": "/var/www/html",
+     "return": null,
+     "auth": false
+    },
+    {
+     "path": "/",
+     "proxy": null,
+     "root": null,
+     "return": "301 https://$host$request_uri",
+     "auth": false
+    }
+   ],
+   "redirect_only": false,
+   "auth": false
+  },
+  {
+   "file": "sentra.vovan20.ru",
+   "names": [
+    "sentra.vovan20.ru"
+   ],
+   "listen": [
+    "443 ssl"
+   ],
+   "root": null,
+   "locations": [
+    {
+     "path": "/",
+     "proxy": "https://78.17.19.43/sentra/",
+     "root": null,
+     "return": null,
+     "auth": false
+    }
+   ],
+   "redirect_only": false,
+   "auth": false
+  },
+  {
+   "file": "sentra.vovan20.ru",
+   "names": [
+    "sentra.vovan20.ru"
+   ],
+   "listen": [
+    "80"
+   ],
+   "root": null,
+   "locations": [
+    {
+     "path": "/.well-known/acme-challenge/",
+     "proxy": null,
+     "root": "/var/www/html",
+     "return": null,
+     "auth": false
+    },
+    {
+     "path": "/",
+     "proxy": null,
+     "root": null,
+     "return": "301 https://$host$request_uri",
+     "auth": false
+    }
+   ],
+   "redirect_only": false,
+   "auth": false
+  },
+  {
+   "file": "shop.eeklera.online",
+   "names": [
+    "shop.eeklera.online"
+   ],
+   "listen": [
+    "443 ssl"
+   ],
+   "root": null,
+   "locations": [
+    {
+     "path": "/",
+     "proxy": "https://78.17.19.43/sentra/",
+     "root": null,
+     "return": null,
+     "auth": false
+    }
+   ],
+   "redirect_only": false,
+   "auth": false
+  },
+  {
+   "file": "shop.eeklera.online",
+   "names": [
+    "shop.eeklera.online"
+   ],
+   "listen": [
+    "80"
+   ],
+   "root": null,
+   "locations": [
+    {
+     "path": "/.well-known/acme-challenge/",
+     "proxy": null,
+     "root": "/var/www/html",
+     "return": null,
+     "auth": false
+    },
+    {
+     "path": "/",
+     "proxy": null,
+     "root": null,
+     "return": "301 https://$host$request_uri",
+     "auth": false
+    }
+   ],
+   "redirect_only": false,
+   "auth": false
+  },
+  {
+   "file": "vovan20.ru",
+   "names": [
+    "vovan20.ru",
+    "www.vovan20.ru"
+   ],
+   "listen": [
+    "443 ssl"
+   ],
+   "root": null,
+   "locations": [
+    {
+     "path": "/",
+     "proxy": "https://78.17.19.43",
+     "root": null,
+     "return": null,
+     "auth": false
+    }
+   ],
+   "redirect_only": false,
+   "auth": false
+  },
+  {
+   "file": "vovan20.ru",
+   "names": [
+    "vovan20.ru",
+    "www.vovan20.ru"
+   ],
+   "listen": [
+    "80"
+   ],
+   "root": null,
+   "locations": [
+    {
+     "path": "/.well-known/acme-challenge/",
+     "proxy": null,
+     "root": "/var/www/html",
+     "return": null,
+     "auth": false
+    },
+    {
+     "path": "/",
+     "proxy": null,
+     "root": null,
+     "return": "301 https://$host$request_uri",
+     "auth": false
+    }
+   ],
+   "redirect_only": false,
+   "auth": false
+  }
+ ],
+ "certs": [
+  {
+   "name": "sentra.vovan20.ru",
+   "expires": "Dec  7 03:22:47 2026 GMT",
+   "domains": [
+    "sentra.vovan20.ru"
+   ]
+  },
+  {
+   "name": "os.eeklera.online",
+   "expires": "Dec 14 10:23:20 2026 GMT",
+   "domains": [
+    "os.eeklera.online"
+   ]
+  },
+  {
+   "name": "shop.eeklera.online",
+   "expires": "Dec  7 03:34:34 2026 GMT",
+   "domains": [
+    "shop.eeklera.online"
+   ]
+  }
+ ],
+ "apps": [
+  {
+   "path": "/var/www/eeklera-neuro",
+   "name": "eeklera-neuro",
+   "size": 527836273,
+   "stack": [],
+   "git": null,
+   "has_env_file": false,
+   "readme_first_line": null
+  },
+  {
+   "path": "/var/www/eeklera-online",
+   "name": "eeklera-online",
+   "size": 96548490,
+   "stack": [],
+   "git": null,
+   "has_env_file": false,
+   "readme_first_line": null
+  },
+  {
+   "path": "/var/www/eeklera-online-redesign",
+   "name": "eeklera-online-redesign",
+   "size": 25747607,
+   "stack": [],
+   "git": null,
+   "has_env_file": false,
+   "readme_first_line": null
+  },
+  {
+   "path": "/var/www/eeklera-os",
+   "name": "eeklera-os",
+   "size": 212905880,
+   "stack": [],
+   "git": null,
+   "has_env_file": false,
+   "readme_first_line": null
+  },
+  {
+   "path": "/var/www/html",
+   "name": "html",
+   "size": 615,
+   "stack": [],
+   "git": null,
+   "has_env_file": false,
+   "readme_first_line": null
+  },
+  {
+   "path": "/data/sites/eeklera-online",
+   "name": "eeklera-online",
+   "size": 545065800,
+   "stack": [],
+   "git": null,
+   "has_env_file": false,
+   "readme_first_line": null
+  }
+ ],
+ "databases": [],
+ "backups": [
+  {
+   "dir": "/data/backups",
+   "files": 24887,
+   "size": 5076295242,
+   "latest": "sentra-2026-10-03.sql.gz",
+   "latest_at": "2026-10-03T22:36:04"
+  }
+ ],
+ "vpn": {
+  "awg1": {
+   "peers": 1,
+   "active_24h": 0,
+   "port": "443"
+  },
+  "awg0": {
+   "peers": 4,
+   "active_24h": 2,
+   "port": "51820"
+  },
+  "xray": {
+   "running": true
+  }
+ }
+}

@@ -1,0 +1,734 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="5080" height="5040" viewBox="0 0 5080 5040"><rect width="100%" height="100%" fill="#09121e"/>
+<rect x="0" y="0" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="40" y="68.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">01 Вся система на одном листе</text>
+<text x="40" y="110.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">Локальная платформа управления • реальные источники • единый поиск • автономная работа</text>
+<text x="40" y="1173.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<rect x="40" y="150" width="480" height="220" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="60" y="190.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#88e0a0">ФАКТЫ GITHUB</text>
+<text x="60" y="229.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">26 репозиториев доступны</text>
+<text x="60" y="255.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">22 с содержимым / 4 с size = 0</text>
+<text x="60" y="281.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">25 private / 1 public</text>
+<text x="60" y="307.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Список и корневые каталоги проверены.</text>
+<rect x="560" y="150" width="500" height="220" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="580" y="190.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">ЧТО ЕЩЁ НЕ ПРОВЕРЕНО</text>
+<text x="580" y="229.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Текущие процессы, домены, серверные</text>
+<text x="580" y="255.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">БД, объём диска и бэкапы.</text>
+<text x="580" y="281.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">README — описание проекта, не</text>
+<text x="580" y="307.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">мониторинг сервера.</text>
+<rect x="1100" y="150" width="500" height="220" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1120" y="190.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">КАК ЧИТАТЬ КАРТУ</text>
+<text x="1120" y="229.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Зелёный: проверенные метаданные.</text>
+<text x="1120" y="255.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Голубой: предлагаемая архитектура.</text>
+<text x="1120" y="281.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Фиолетовый: домен / интеграция.</text>
+<text x="1120" y="307.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Жёлтый: ограничения и решения.</text>
+<rect x="40" y="430" width="430" height="230" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="60" y="470.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">ИСТОЧНИКИ</text>
+<text x="60" y="509.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">GitHub • серверы • ноутбук</text>
+<text x="60" y="535.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Телефон / Obsidian • внешние API</text>
+<text x="60" y="561.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Код, файлы, БД и статусы</text>
+<text x="60" y="587.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Каждый факт имеет источник.</text>
+<rect x="600" y="425" width="460" height="250" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="620" y="465.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#88e0a0">SENTRA / VOVAN OS</text>
+<text x="620" y="504.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Локальная панель + Core API</text>
+<text x="620" y="530.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Реестр проектов и связей</text>
+<text x="620" y="556.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Пользователи, поиск, задачи</text>
+<text x="620" y="582.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Каталог файлов и баз</text>
+<rect x="1180" y="430" width="420" height="230" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1200" y="470.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">МОДУЛИ</text>
+<text x="1200" y="509.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">EEKLERA • Social • Sites</text>
+<text x="1200" y="535.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">AI Agents • Streaming • Games</text>
+<text x="1200" y="561.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Mini Apps • Knowledge • Files</text>
+<path d="M470,550 L600,550 M589.4690092573155,555.7531064632504 L600,550 L589.4690092573155,544.2468935367496" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<path d="M1060,550 L1180,550 M1169.4690092573155,555.7531064632504 L1180,550 L1169.4690092573155,544.2468935367496" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="40" y="745" width="740" height="310" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="60" y="785.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">ЛОКАЛЬНО — ПО УМОЛЧАНИЮ</text>
+<text x="60" y="824.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Панель открывается на ПК / в домашней сети.</text>
+<text x="60" y="850.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">PostgreSQL, файлы и поисковый индекс хранятся локально.</text>
+<text x="60" y="876.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">При появлении сети агент скачивает разрешённые обновления.</text>
+<text x="60" y="902.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Без интернета доступны последние снимки, заметки и</text>
+<text x="60" y="928.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">локальные сервисы.</text>
+<text x="60" y="954.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Внешние AI/API офлайн недоступны — это видно в интерфейсе.</text>
+<rect x="820" y="745" width="780" height="310" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="840" y="785.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">ЕДИНЫЙ КАТАЛОГ, НЕ ОБЯЗАТЕЛЬНО ЕДИНЫЙ</text>
+<text x="840" y="817.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">РЕПОЗИТОРИЙ</text>
+<text x="840" y="857.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Начать с подключения существующих репозиториев и сервисов.</text>
+<text x="840" y="883.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Незавершённые проекты тоже получают карточку и статус.</text>
+<text x="840" y="909.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Перенос кода в monorepo — отдельный последующий выбор.</text>
+<text x="840" y="935.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Наличие проекта, его запуск и свежесть данных — разные поля.</text>
+<text x="840" y="961.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Цифры online, GB и uptime из изображения не используются как</text>
+<text x="840" y="987.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">факты.</text>
+<rect x="1720" y="0" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="1760" y="68.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">02 Архитектура и границы доступа</text>
+<text x="1760" y="110.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">Целевая схема • публичные приложения продолжают жить отдельно от локальной панели</text>
+<text x="1760" y="1173.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<rect x="1760" y="150" width="420" height="190" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1780" y="190.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">БРАУЗЕР / УСТРОЙСТВА</text>
+<text x="1780" y="229.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">ПК, телефон, домашняя LAN</text>
+<text x="1780" y="255.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">HTTPS + локальное имя</text>
+<text x="1780" y="281.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Удалённый доступ через VPN</text>
+<rect x="2290" y="150" width="470" height="190" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2310" y="190.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#88e0a0">CONTROL CENTER</text>
+<text x="2310" y="229.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Dashboard • проекты • карта</text>
+<text x="2310" y="255.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Файлы • базы • логи • задачи</text>
+<text x="2310" y="281.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Синхронизация • настройки</text>
+<rect x="2870" y="150" width="450" height="190" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2890" y="190.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">IDENTITY / OIDC</text>
+<text x="2890" y="229.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Локальный вход работает офлайн</text>
+<text x="2890" y="255.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">RBAC + права по project_id</text>
+<text x="2890" y="281.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Связать внешние аккаунты явно</text>
+<path d="M2180,240 L2290,240 M2279.4690092573155,245.75310646325045 L2290,240 L2279.4690092573155,234.24689353674955" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<path d="M2760,240 L2870,240 M2859.4690092573155,245.75310646325045 L2870,240 L2859.4690092573155,234.24689353674955" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="2040" y="430" width="1000" height="230" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2060" y="470.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">CORE API / МОДУЛЬНОЕ ЯДРО</text>
+<text x="2060" y="509.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Project Registry • Search • Files • Tasks • Notifications</text>
+<text x="2060" y="535.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Integration Registry • Audit • Sync Scheduler • AI Gateway</text>
+<text x="2060" y="561.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Core хранит каталог и ссылки на данные. Адаптеры знают форматы проектов.</text>
+<text x="2060" y="587.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Секреты доступны только серверной стороне; в UI — ссылки и состояния.</text>
+<path d="M2525,340 L2525,430 M2519.2468935367497,419.4690092573155 L2525,430 L2530.7531064632503,419.4690092573155" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="1760" y="800" width="500" height="240" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1780" y="840.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">ЛОКАЛЬНЫЕ ДАННЫЕ</text>
+<text x="1780" y="879.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">PostgreSQL: каталог, задачи, снимки</text>
+<text x="1780" y="905.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Файловое / S3-совместимое хранилище</text>
+<text x="1780" y="931.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Индекс можно пересоздать</text>
+<path d="M2270,660 L2010,800 M2016.544686246353,789.9418151768424 L2010,800 L2021.9997797586102,800.0727031281774" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="2290" y="800" width="500" height="240" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2310" y="840.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">WORKERS / АДАПТЕРЫ</text>
+<text x="2310" y="879.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">GitHub, SSH/VPN, REST, exports</text>
+<text x="2310" y="905.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Video2MD, Orion, Telegram, Twitch</text>
+<text x="2310" y="931.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Очередь, retries, лимиты ресурсов</text>
+<path d="M2520,660 L2540,800 M2532.8154081763732,790.3884631651396 L2540,800 L2544.2059778369207,788.7612389279186" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="2820" y="800" width="500" height="240" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2840" y="840.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">ПУБЛИЧНЫЕ RUNTIME</text>
+<text x="2840" y="879.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">VPS: сайты, Social, Terraria</text>
+<text x="2840" y="905.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Kabluk: D1 или self-host</text>
+<text x="2840" y="931.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Локально — read-only снимки</text>
+<path d="M2770,660 L3070,800 M3058.024088637722,800.7599651589775 L3070,800 L3062.8898988453443,790.3332289997868" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<text x="1760" y="1110.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#ffd080">Интернет не получает прямой доступ к локальной БД. Команды управления идут через отдельный контролируемый канал.</text>
+<rect x="3440" y="0" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="3480" y="68.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">03 Как обновлять локальную систему</text>
+<text x="3480" y="110.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">Загрузка при старте и восстановлении связи • чтение отдельно от деплоя и команд</text>
+<text x="3480" y="1173.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<rect x="3480" y="180" width="290" height="250" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3500" y="220.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">1 / ОБНАРУЖИТЬ</text>
+<text x="3500" y="252.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">СЕТЬ</text>
+<text x="3500" y="290.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">Запуск → проверка</text>
+<text x="3500" y="313.4" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">источников</text>
+<text x="3500" y="336.8" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">Планировщик + кнопка</text>
+<text x="3500" y="360.2" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">обновить</text>
+<text x="3500" y="383.6" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">Нет связи → локальный</text>
+<text x="3500" y="407.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">снимок</text>
+<path d="M3770,305 L3795,305 M3784.4690092573155,310.75310646325045 L3795,305 L3784.4690092573155,299.24689353674955" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="3795" y="180" width="290" height="250" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3815" y="220.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">2 / ЗАБРАТЬ</text>
+<text x="3815" y="252.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">ИЗМЕНЕНИЯ</text>
+<text x="3815" y="290.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">GitHub API: страницы +</text>
+<text x="3815" y="313.4" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">ETag</text>
+<text x="3815" y="336.8" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">git fetch в отдельную</text>
+<text x="3815" y="360.2" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">копию</text>
+<text x="3815" y="383.6" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">VPS: разрешённый export</text>
+<text x="3815" y="407.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">/ API</text>
+<path d="M4085,305 L4110,305 M4099.4690092573155,310.75310646325045 L4110,305 L4099.4690092573155,299.24689353674955" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="4110" y="180" width="290" height="250" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4130" y="220.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">3 / ПРОВЕРИТЬ</text>
+<text x="4130" y="259.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Схема, hash, лимиты</text>
+<text x="4130" y="285.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">размера</text>
+<text x="4130" y="311.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Карантин</text>
+<text x="4130" y="337.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">некорректных файлов</text>
+<text x="4130" y="363.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Ничего не исполнять</text>
+<text x="4130" y="389.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">при импорте</text>
+<path d="M4400,305 L4425,305 M4414.4690092573155,310.75310646325045 L4425,305 L4414.4690092573155,299.24689353674955" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="4425" y="180" width="290" height="250" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4445" y="220.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">4 / СОХРАНИТЬ</text>
+<text x="4445" y="259.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Staging → транзакция</text>
+<text x="4445" y="285.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">→ снимок</text>
+<text x="4445" y="311.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">source_id + revision +</text>
+<text x="4445" y="337.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">observed_at</text>
+<text x="4445" y="363.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Повтор не создаёт</text>
+<text x="4445" y="389.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">дубликаты</text>
+<path d="M4715,305 L4740,305 M4729.4690092573155,310.75310646325045 L4740,305 L4729.4690092573155,299.24689353674955" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="4740" y="180" width="290" height="250" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4760" y="220.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">5 / ОБНОВИТЬ</text>
+<text x="4760" y="252.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">ПАНЕЛЬ</text>
+<text x="4760" y="290.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">Индекс и связи проектов</text>
+<text x="4760" y="313.4" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">Показать last_success /</text>
+<text x="4760" y="336.8" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">ошибки</text>
+<text x="4760" y="360.2" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">Сохранить предыдущую</text>
+<text x="4760" y="383.6" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">версию</text>
+<rect x="3480" y="490" width="740" height="270" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3500" y="530.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">КТО ВЛАДЕЕТ ДАННЫМИ</text>
+<text x="3500" y="569.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">GitHub — код и метаданные репозитория.</text>
+<text x="3500" y="595.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Рабочая БД проекта — пользователи и игровые / бизнес-данные.</text>
+<text x="3500" y="621.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Локальное ядро — каталог, заметки владельца, история</text>
+<text x="3500" y="647.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">синхронизации.</text>
+<text x="3500" y="673.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Файлы — версии по hash; происхождение сохраняется.</text>
+<text x="3500" y="699.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Редактирование удалённых данных — только через API</text>
+<text x="3500" y="725.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">владельца.</text>
+<rect x="4260" y="490" width="780" height="270" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4280" y="530.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">СБОИ И КОНФЛИКТЫ</text>
+<text x="4280" y="569.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Timeout / 429 → backoff с jitter, учёт Retry-After.</text>
+<text x="4280" y="595.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Обрыв сети → продолжить с checkpoint, оставить старый снимок.</text>
+<text x="4280" y="621.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Удаление источника → tombstone, не удалять локальный архив</text>
+<text x="4280" y="647.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">сразу.</text>
+<text x="4280" y="673.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Локальные изменения кода → отдельная ветка; не делать reset.</text>
+<text x="4280" y="699.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Нет доступа → unknown / stale, не «проект удалён».</text>
+<rect x="3480" y="810" width="740" height="260" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3500" y="850.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">ПРОФИЛИ ПРИВАТНОСТИ</text>
+<text x="3500" y="889.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Строго локальный: исходящие AI-запросы отключены.</text>
+<text x="3500" y="915.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Синхронизация: только выбранные GitHub и серверные</text>
+<text x="3500" y="941.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">источники.</text>
+<text x="3500" y="967.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Облачный AI: отдельный opt-in по проекту и типу данных.</text>
+<text x="3500" y="993.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Публичные сайты не имеют маршрута к локальному storage.</text>
+<text x="3500" y="1019.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Локальный frontend без CDN, аналитики и внешних шрифтов.</text>
+<rect x="4260" y="810" width="780" height="260" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4280" y="850.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">КОМАНДЫ — ОТДЕЛЬНЫЙ ПОТОК</text>
+<text x="4280" y="889.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Кнопка → проверка прав → plan → подтверждение опасной операции</text>
+<text x="4280" y="915.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">→ очередь → разрешённый серверный runner → audit + результат.</text>
+<text x="4280" y="941.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">idempotency_key, срок действия и версия целевого deployment.</text>
+<text x="4280" y="967.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Устаревшую команду после офлайн не выполнять автоматически.</text>
+<text x="4280" y="993.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Обновление каталога само по себе никогда не запускает деплой.</text>
+<rect x="0" y="1280" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="40" y="1348.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">04 Реестр GitHub / 1 из 2</text>
+<text x="40" y="1390.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">Все 26 доступных репозиториев • название карточки содержит ссылку на GitHub • назначение справа — предложение</text>
+<text x="40" y="2453.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<rect x="40" y="1425" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="54" y="1455.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">Eeklera → EEKLERA</text>
+<text x="54" y="1480.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 299,720 KiB • HTML / CSS / JS</text>
+<text x="54" y="1507.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Вариант сайта; _deploy и несколько версий.</text>
+<text x="54" y="1529.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Сравнить с eeklera-online; архивировать только после выбора версии.</text>
+<rect x="830" y="1425" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="844" y="1455.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">Eeklera_file → Knowledge / Archive</text>
+<text x="844" y="1480.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 298,127 KiB • Код + медиа + архив ПК</text>
+<text x="844" y="1507.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Obsidian, video2md, редизайн и codex.</text>
+<text x="844" y="1529.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Выборочный импорт; изолировать секреты; данные вне Git.</text>
+<rect x="40" y="1564" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="54" y="1594.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">Eeklera_new_site → EEKLERA</text>
+<text x="54" y="1619.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">public • GitHub size 26,114 KiB • HTML / CSS / JS</text>
+<text x="54" y="1646.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">acting, modeling, blog, media, UI-kit.</text>
+<text x="54" y="1668.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Источник нового дизайна; отдельная проверка перед слиянием.</text>
+<rect x="830" y="1564" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="844" y="1594.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">vovan-app → Social</text>
+<text x="844" y="1619.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 693 KiB • FastAPI / React / SQLite</text>
+<text x="844" y="1646.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Соцсеть: чаты, посты, звонки, игры, роли.</text>
+<text x="844" y="1668.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Подключить API, БД и uploads; кандидат основного Social.</text>
+<rect x="40" y="1703" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="54" y="1733.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">lera-app → EEKLERA Community</text>
+<text x="54" y="1758.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 1,491 KiB • FastAPI / React / SQLite</text>
+<text x="54" y="1785.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Telegram Mini App: сообщество, платежи, игры.</text>
+<text x="54" y="1807.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Сохранить Telegram-вход и уникальные функции; не удалять.</text>
+<rect x="830" y="1703" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="844" y="1733.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">eeklera-site-archive → Archive</text>
+<text x="844" y="1758.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 238,029 KiB • Статика / медиа / SQLite</text>
+<text x="844" y="1785.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Исторический сайт и chat.db.</text>
+<text x="844" y="1807.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Холодный архив; импорт с происхождением и дедупликацией.</text>
+<rect x="40" y="1842" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="54" y="1872.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">orion → AI Agents</text>
+<text x="54" y="1897.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 102,416 KiB • Node.js / JSON / Obsidian</text>
+<text x="54" y="1924.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Агент, память, Moltbook, Telegram, pm2.</text>
+<text x="54" y="1946.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Изолированный worker; память в data; облачные вызовы по политике.</text>
+<rect x="830" y="1842" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="844" y="1872.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">lera-assistant → EEKLERA Assistant</text>
+<text x="844" y="1897.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 74,558 KiB • Node.js / Telegram</text>
+<text x="844" y="1924.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Gemini, видео, Google, база знаний.</text>
+<text x="844" y="1946.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Worker + AI Gateway; доступ к Knowledge по правам.</text>
+<rect x="40" y="1981" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="54" y="2011.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">lera-vault-old → Knowledge</text>
+<text x="54" y="2036.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 74,553 KiB • Markdown / Obsidian</text>
+<text x="54" y="2063.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Старый vault и отчёт качества заметок.</text>
+<text x="54" y="2085.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Импорт с hash и source; не затирать новые заметки.</text>
+<rect x="830" y="1981" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="844" y="2011.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">twitch-manager → Streaming</text>
+<text x="844" y="2036.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 1,059 KiB • Node / React / SQLite</text>
+<text x="844" y="2063.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Панель агентов Twitch; README отмечает недоделки IRC.</text>
+<text x="844" y="2085.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Подключить как разработку; не считать ботами online.</text>
+<rect x="40" y="2120" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="54" y="2150.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">pomoshnik-bot → Automation</text>
+<text x="54" y="2175.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 1,827 KiB • Python / Telegram</text>
+<text x="54" y="2202.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Задачи Claude Code, голосовые, Google OAuth.</text>
+<text x="54" y="2224.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Адаптер задач и ролей; внешние команды отдельно от импорта.</text>
+<rect x="830" y="2120" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="844" y="2150.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">modbot → Streaming</text>
+<text x="844" y="2175.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 593 KiB • Node.js / JSON</text>
+<text x="844" y="2202.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Модерация Twitch, команды, таймеры, AI, логи.</text>
+<text x="844" y="2224.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Панель Streaming; JSON сначала читать через адаптер.</text>
+<rect x="40" y="2259" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="54" y="2289.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">studio → Sites</text>
+<text x="54" y="2314.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 15,332 KiB • HTML / CSS / JS</text>
+<text x="54" y="2341.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Витрина услуг, кейсы, изображения.</text>
+<text x="54" y="2363.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Каталог сайтов + независимый деплой.</text>
+<text x="40" y="2421.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#ffd080">GitHub size — размер по API, не объём рабочей БД или диска. Runtime всех проектов требует отдельного опроса.</text>
+<rect x="1720" y="1280" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="1760" y="1348.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">05 Реестр GitHub / 2 из 2</text>
+<text x="1760" y="1390.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">Все 26 доступных репозиториев • название карточки содержит ссылку на GitHub • назначение справа — предложение</text>
+<text x="1760" y="2453.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<rect x="1760" y="1425" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1774" y="1455.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">graph → Control Center</text>
+<text x="1774" y="1480.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 1,408 KiB • HTML / JS / graph data</text>
+<text x="1774" y="1507.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Локальные карты кода 2D/3D.</text>
+<text x="1774" y="1529.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Вкладка карты; данные из реестра и анализа исходников.</text>
+<rect x="2550" y="1425" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2564" y="1455.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">exchange → Files</text>
+<text x="2564" y="1480.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 9,659 KiB • Node.js / файлы</text>
+<text x="2564" y="1507.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Обменник с чатом и передачей файлов.</text>
+<text x="2564" y="1529.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Встроить в Files; ACL, версии, ссылки на объекты.</text>
+<rect x="1760" y="1564" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1774" y="1594.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">auth-gateway → Identity</text>
+<text x="1774" y="1619.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 3,385 KiB • Python / nginx auth_request</text>
+<text x="1774" y="1646.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Старый SSO и файловый портал.</text>
+<text x="1774" y="1668.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Адаптер на переходный период; целевой OIDC + RBAC.</text>
+<rect x="2550" y="1564" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2564" y="1594.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">airrock → Sites</text>
+<text x="2564" y="1619.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 33 KiB • React / Vite</text>
+<text x="2564" y="1646.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Лендинг-магазин колонки; демо по README.</text>
+<text x="2564" y="1668.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Записать как проект; факт публичного запуска проверить.</text>
+<rect x="1760" y="1703" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1774" y="1733.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">server-misc → Control / Mini Apps</text>
+<text x="1774" y="1758.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 706 KiB • Python / Node / HTML</text>
+<text x="1774" y="1785.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">13 папок сервисов со старого сервера.</text>
+<text x="1774" y="1807.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Каждой папке — свой project_id, parent_id = server-misc.</text>
+<rect x="2550" y="1703" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2564" y="1733.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">video2md-phone → Media / Knowledge</text>
+<text x="2564" y="1758.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 23,807 KiB • Python / ffmpeg / Termux</text>
+<text x="2564" y="1785.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Видео → транскрипт → проверка → Obsidian.</text>
+<text x="2564" y="1807.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Сохранить телефонный узел; импорт результатов в Knowledge.</text>
+<rect x="1760" y="1842" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1774" y="1872.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">eeklera-obsidian → Knowledge</text>
+<text x="1774" y="1897.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 0 KiB • Пустой репозиторий</text>
+<text x="1774" y="1924.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">GitHub size = 0; содержимое не получено.</text>
+<text x="1774" y="1946.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Карточка planned; реальный vault искать на устройстве.</text>
+<rect x="2550" y="1842" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2564" y="1872.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">sentra → Platform Core</text>
+<text x="2564" y="1897.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 0 KiB • Пустой репозиторий</text>
+<text x="2564" y="1924.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">GitHub size = 0; содержимое не получено.</text>
+<text x="2564" y="1946.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Предлагаемое место ядра и панели, пока не реализовано.</text>
+<rect x="1760" y="1981" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1774" y="2011.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">obsidian-systems → Knowledge</text>
+<text x="1774" y="2036.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 0 KiB • Пустой репозиторий</text>
+<text x="1774" y="2063.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">GitHub size = 0; содержимое не получено.</text>
+<text x="1774" y="2085.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Карточка planned; назначение уточнить.</text>
+<rect x="2550" y="1981" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2564" y="2011.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">business-ideas → Ideas</text>
+<text x="2564" y="2036.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 0 KiB • Пустой репозиторий</text>
+<text x="2564" y="2063.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">GitHub size = 0; содержимое не получено.</text>
+<text x="2564" y="2085.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Карточка идеи; не выдавать за готовый сервис.</text>
+<rect x="1760" y="2120" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1774" y="2150.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">eeklera-online → EEKLERA</text>
+<text x="1774" y="2175.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 54,521 KiB • HTML / CSS / JS</text>
+<text x="1774" y="2202.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Снимок основного сайта от 29.09.2026 по README.</text>
+<text x="1774" y="2224.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Кандидат канонической версии; сверить с текущим сервером.</text>
+<rect x="2550" y="2120" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2564" y="2150.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">terraria-server → Games</text>
+<text x="2564" y="2175.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 350 KiB • C# / TShock / Docker</text>
+<text x="2564" y="2202.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Плагины, конфиги, pull-deploy, rollback.</text>
+<text x="2564" y="2224.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Оставить свой runtime; читать deploy-status и health.</text>
+<rect x="1760" y="2259" width="760" height="127" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1774" y="2289.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">Kabluk → Games</text>
+<text x="1774" y="2314.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">private • GitHub size 2,703 KiB • Worker / D1 / Three.js</text>
+<text x="1774" y="2341.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Онлайн-город; есть self-host адаптер и локальная SQLite.</text>
+<text x="1774" y="2363.1" font-family="DejaVu Sans,Arial,sans-serif" font-size="17" fill="#e8f1fa">Выбрать D1 или self-host как единственный источник записей.</text>
+<text x="1760" y="2421.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#ffd080">GitHub size — размер по API, не объём рабочей БД или диска. Runtime всех проектов требует отдельного опроса.</text>
+<rect x="3440" y="1280" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="3480" y="1348.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">06 Вложенные проекты и сервер без Git</text>
+<text x="3480" y="1390.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">server-misc: 13 каталогов подтверждены • роль описана в README • запуск не проверен</text>
+<text x="3480" y="2453.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<text x="3485" y="1450.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">server-admin</text>
+<text x="3790" y="1448.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Infrastructure</text>
+<text x="4095" y="1448.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Администрирование сервера → вкладка Servers</text>
+<text x="3485" y="1504.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">gate</text>
+<text x="3790" y="1502.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Infrastructure</text>
+<text x="4095" y="1502.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Статистика и VPN → инфраструктурный адаптер</text>
+<text x="3485" y="1558.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">tasker</text>
+<text x="3790" y="1556.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Tasks</text>
+<text x="4095" y="1556.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Доска задач → задачи с project_id</text>
+<text x="3485" y="1612.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">team</text>
+<text x="3790" y="1610.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Tasks / GitHub</text>
+<text x="4095" y="1610.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Канбан веток → связи Task ↔ Branch</text>
+<text x="3485" y="1666.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">bot-panel</text>
+<text x="3790" y="1664.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Bots</text>
+<text x="4095" y="1664.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Управление pomoshnik-bot → панель ботов</text>
+<text x="3485" y="1720.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">agents</text>
+<text x="3790" y="1718.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">AI Agents</text>
+<text x="4095" y="1718.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Рабочая область команды → workers и логи</text>
+<text x="3485" y="1774.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">bday-quest</text>
+<text x="3790" y="1772.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Mini Apps / Games</text>
+<text x="4095" y="1772.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Telegram-квест; quest.db → отдельный модуль</text>
+<text x="3485" y="1828.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">linux-academy</text>
+<text x="3790" y="1826.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Mini Apps / Learn</text>
+<text x="4095" y="1826.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Уроки и терминал → локальное учебное приложение</text>
+<text x="3485" y="1882.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">shopper</text>
+<text x="3790" y="1880.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Mini Apps / Shop</text>
+<text x="4095" y="1880.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Python API и data.json → отдельный адаптер</text>
+<text x="3485" y="1936.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">shopper-www</text>
+<text x="3790" y="1934.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Mini Apps / Shop</text>
+<text x="4095" y="1934.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Витрина → интерфейс Shopper</text>
+<text x="3485" y="1990.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">mp3-converter</text>
+<text x="3790" y="1988.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Media / Forge</text>
+<text x="4095" y="1988.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">mp4 → mp3 → очередь медиаобработки</text>
+<text x="3485" y="2044.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">hashtag-tracker</text>
+<text x="3790" y="2042.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Analytics</text>
+<text x="4095" y="2042.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Снимки трендов → временные ряды</text>
+<text x="3485" y="2098.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#88e0a0">www-misc</text>
+<text x="3790" y="2096.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#c3a5f4">Sites / Experiments</text>
+<text x="4095" y="2096.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Хаб, 3D, колесо, AI-лента → вложенные карточки</text>
+<rect x="3480" y="2180" width="740" height="210" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3500" y="2220.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">СЕРВЕРНЫЕ ПРОЕКТЫ БЕЗ РЕПОЗИТОРИЯ</text>
+<text x="3500" y="2259.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Read-only инвентаризация: Docker / systemd / pm2, nginx, пути.</text>
+<text x="3500" y="2285.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Для каждого: project_id, host_id, runtime, volumes, DB, endpoint.</text>
+<text x="3500" y="2311.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Нет Git → source_type=server; maturity=unknown / draft.</text>
+<text x="3500" y="2337.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Секреты и содержимое БД не выгружать в общий каталог.</text>
+<rect x="4260" y="2180" width="780" height="210" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4280" y="2220.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">ГРАНИЦА ПРОВЕРКИ</text>
+<text x="4280" y="2259.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Доступ к самому серверу в этой работе не выполнялся.</text>
+<text x="4280" y="2285.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Число текущих процессов и серверных проектов неизвестно.</text>
+<text x="4280" y="2311.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Исторические адреса из README не подтверждают текущий хост.</text>
+<text x="4280" y="2337.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Новые проекты добавляются без обязательного создания</text>
+<text x="4280" y="2363.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Git-репозитория.</text>
+<rect x="0" y="2560" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="40" y="2628.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">07 Модель данных и владельцы записей</text>
+<text x="40" y="2670.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">Целевая логическая модель • PostgreSQL для ядра • базы приложений подключаются постепенно</text>
+<text x="40" y="3733.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<rect x="40" y="2720" width="500" height="255" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="60" y="2760.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">PROJECT</text>
+<text x="60" y="2799.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">id PK • parent_id FK → PROJECT</text>
+<text x="60" y="2825.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">name • domain • maturity</text>
+<text x="60" y="2851.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">repository_id? • owner_id</text>
+<text x="60" y="2877.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">planned / development / archived</text>
+<rect x="570" y="2720" width="500" height="255" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="590" y="2760.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">REPOSITORY / SOURCE</text>
+<text x="590" y="2799.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">repo_id PK • provider_id UNIQUE</text>
+<text x="590" y="2825.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">url • visibility • branch • head_sha</text>
+<text x="590" y="2851.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">source_id PK • type • project_id FK</text>
+<text x="590" y="2877.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">revision • observed_at • freshness</text>
+<rect x="1100" y="2720" width="500" height="255" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1120" y="2760.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">HOST / SERVICE</text>
+<text x="1120" y="2799.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">host_id PK • name • environment</text>
+<text x="1120" y="2825.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">service_id PK • project_id FK</text>
+<text x="1120" y="2851.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">host_id FK • runtime • endpoint</text>
+<text x="1120" y="2877.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">health_status • last_seen</text>
+<rect x="40" y="3025" width="500" height="255" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="60" y="3065.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">DATASET / OBJECT</text>
+<text x="60" y="3104.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">dataset_id PK • project_id FK</text>
+<text x="60" y="3130.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">owner_service_id • engine • locator</text>
+<text x="60" y="3156.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">object_id PK • hash • version</text>
+<text x="60" y="3182.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">source_id FK • ACL • sensitivity</text>
+<rect x="570" y="3025" width="500" height="255" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="590" y="3065.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">SYNC_RUN / SNAPSHOT</text>
+<text x="590" y="3104.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">run_id PK • source_id FK • cursor</text>
+<text x="590" y="3130.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">started_at • last_success • error</text>
+<text x="590" y="3156.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">snapshot_id PK • revision • hash</text>
+<text x="590" y="3182.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">UNIQUE(source_id, revision)</text>
+<rect x="1100" y="3025" width="500" height="255" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1120" y="3065.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">TASK / DEPLOYMENT / AUDIT</text>
+<text x="1120" y="3104.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">task_id PK • project_id FK • status</text>
+<text x="1120" y="3130.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">deploy_id • service_id • commit</text>
+<text x="1120" y="3156.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">audit_id • actor • action • result</text>
+<text x="1120" y="3182.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">idempotency_key • timestamp</text>
+<path d="M290,2975 L290,3025 M284.24689353674955,3014.4690092573155 L290,3025 L295.75310646325045,3014.4690092573155" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<path d="M820,2975 L820,3025 M814.2468935367496,3014.4690092573155 L820,3025 L825.7531064632504,3014.4690092573155" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<path d="M1350,2975 L1350,3025 M1344.2468935367497,3014.4690092573155 L1350,3025 L1355.7531064632503,3014.4690092573155" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="40" y="3370" width="740" height="285" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="60" y="3410.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">СХЕМЫ И ДОСТУП</text>
+<text x="60" y="3449.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">core: users, identities, roles, projects, sources, tasks, audit.</text>
+<text x="60" y="3475.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">knowledge: documents, versions, chunks, citations, entities, edges.</text>
+<text x="60" y="3501.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">monitoring: observations, sync_runs, health, deployments.</text>
+<text x="60" y="3527.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Позже: social / streaming / ai / games — только после миграции.</text>
+<text x="60" y="3553.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">FK внутри владельца данных; между сервисами — устойчивые</text>
+<text x="60" y="3579.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">ID.</text>
+<text x="60" y="3605.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Связь аккаунтов по подтверждению, не по совпадению</text>
+<text x="60" y="3631.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">nickname.</text>
+<rect x="820" y="3370" width="780" height="285" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="840" y="3410.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">СУЩЕСТВУЮЩИЕ БАЗЫ НЕ СЛИВАТЬ ВСЛЕПУЮ</text>
+<text x="840" y="3449.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">vovan.db / lera.db • Twitch data.sqlite • quest.db</text>
+<text x="840" y="3475.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">ModBot JSON • Orion memory • Kabluk D1 или SQLite</text>
+<text x="840" y="3501.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Изначально: read-only экспорт + ссылка на источник.</text>
+<text x="840" y="3527.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">SQLite копировать через backup API, учитывая WAL; не живой файл.</text>
+<text x="840" y="3553.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Миграция: mapping ID → dry run → counts / FK / hashes → cutover.</text>
+<text x="840" y="3579.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Одна authoritative БД на домен; без двустороннего слияния SQL.</text>
+<rect x="1720" y="2560" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="1760" y="2628.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">08 Файлы, знания и достоверность</text>
+<text x="1760" y="2670.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">От исходного видео или заметки до проверяемого факта • данные вне репозитория платформы</text>
+<text x="1760" y="3733.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<rect x="1760" y="2730" width="370" height="255" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1780" y="2770.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">ИСТОЧНИКИ</text>
+<text x="1780" y="2809.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Eeklera_file • lera-vault-old</text>
+<text x="1780" y="2835.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">lera-assistant/data • Orion</text>
+<text x="1780" y="2861.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Телефон / Video2MD / uploads</text>
+<path d="M2130,2857 L2155,2857 M2144.4690092573155,2862.7531064632503 L2155,2857 L2144.4690092573155,2851.2468935367497" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="2155" y="2730" width="370" height="255" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2175" y="2770.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">IMMUTABLE RAW</text>
+<text x="2175" y="2809.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Исходный файл + sha256</text>
+<text x="2175" y="2835.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Дата импорта + source +</text>
+<text x="2175" y="2861.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">revision</text>
+<text x="2175" y="2887.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Версии, ACL и путь в storage</text>
+<path d="M2525,2857 L2550,2857 M2539.4690092573155,2862.7531064632503 L2550,2857 L2539.4690092573155,2851.2468935367497" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="2550" y="2730" width="370" height="255" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2570" y="2770.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">ОБРАБОТКА</text>
+<text x="2570" y="2809.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Текст / OCR / транскрипт</text>
+<text x="2570" y="2835.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Chunks + ссылки + таймкоды</text>
+<text x="2570" y="2861.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">AI-выводы помечать как</text>
+<text x="2570" y="2887.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">generated</text>
+<path d="M2920,2857 L2945,2857 M2934.4690092573155,2862.7531064632503 L2945,2857 L2934.4690092573155,2851.2468935367497" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="2945" y="2730" width="370" height="255" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2965" y="2770.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">ПРОВЕРКА / ПОИСК</text>
+<text x="2965" y="2809.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">reviewed / unreviewed / rejected</text>
+<text x="2965" y="2835.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Полнотекстовый поиск + граф</text>
+<text x="2965" y="2861.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Ответ содержит ссылку на</text>
+<text x="2965" y="2887.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">оригинал</text>
+<rect x="1760" y="3050" width="740" height="305" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1780" y="3090.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">DATA / НА ДИСКЕ ИЛИ NAS</text>
+<text x="1780" y="3129.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">repositories/ — отдельные read-only кэши Git</text>
+<text x="1780" y="3155.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">raw/ — неизменённые импорты, раздельно по источникам</text>
+<text x="1780" y="3181.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">media/ • uploads/ • video2md/ • orion-memory/</text>
+<text x="1780" y="3207.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">databases/ — рабочие volumes и согласованные exports</text>
+<text x="1780" y="3233.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">quarantine/ — спорные или отклонённые объекты</text>
+<text x="1780" y="3259.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">backups/ — локальные снимки; ещё одна копия на другом</text>
+<text x="1780" y="3285.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">носителе</text>
+<rect x="2540" y="3050" width="780" height="305" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2560" y="3090.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">НЕ ПОДМЕНЯТЬ ФАКТЫ ГЕНЕРАЦИЕЙ</text>
+<text x="2560" y="3129.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Отделять сказанную цитату от AI-интерпретации.</text>
+<text x="2560" y="3155.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Каждый фрагмент: source, document_version, page / timecode.</text>
+<text x="2560" y="3181.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Поиск выполняет ACL-фильтрацию до передачи контекста модели.</text>
+<text x="2560" y="3207.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Дубликаты по hash объединяют хранение, но сохраняют источники.</text>
+<text x="2560" y="3233.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Изменение исходника создаёт новую версию и переиндексацию.</text>
+<text x="2560" y="3259.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Индекс / embeddings — производные, их можно пересоздать.</text>
+<rect x="1760" y="3410" width="740" height="240" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1780" y="3450.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">БЭКАП И ВОССТАНОВЛЕНИЕ</text>
+<text x="1780" y="3489.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Согласованный manifest: версия БД + список объектов + hash.</text>
+<text x="1780" y="3515.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Шифрованная копия на отдельный диск / NAS, ключ отдельно.</text>
+<text x="1780" y="3541.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Проверка восстановления в чистую среду и выборочных файлов.</text>
+<text x="1780" y="3567.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Политику retention / RPO / RTO задать по доступному диску.</text>
+<rect x="2540" y="3410" width="780" height="240" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2560" y="3450.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">ПЕРЕД ИМПОРТОМ EEKLERA_FILE</text>
+<text x="2560" y="3489.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">README явно сообщает о credentials, session keys, HF token и SSH.</text>
+<text x="2560" y="3515.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Значения ключей не читались и в схему не включены.</text>
+<text x="2560" y="3541.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">До подключения: проверить актуальность и отозвать / заменить их;</text>
+<text x="2560" y="3567.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">секреты исключить из общего поиска и импорта.</text>
+<text x="2560" y="3593.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Переписывание истории — отдельная операция, здесь не</text>
+<text x="2560" y="3619.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">выполнялась.</text>
+<rect x="3440" y="2560" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="3480" y="2628.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">09 Панель управления / макет</text>
+<text x="3480" y="2670.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">Визуальное направление из твоего изображения: тёмная тема, зелёные акценты, карта в центре</text>
+<text x="3480" y="3733.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<rect x="3480" y="2715" width="250" height="945" rx="12" fill="#0c1825" stroke="#36546d"/>
+<text x="3500" y="2769.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="30" fill="#88e0a0">VOVAN OS</text>
+<text x="3500" y="2832.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa">Главная</text>
+<text x="3500" y="2860.6" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa"></text>
+<text x="3500" y="2889.2" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa">Проекты</text>
+<text x="3500" y="2917.8" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa"></text>
+<text x="3500" y="2946.4" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa">AI-агенты</text>
+<text x="3500" y="2975.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa"></text>
+<text x="3500" y="3003.6" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa">Сайты и игры</text>
+<text x="3500" y="3032.2" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa"></text>
+<text x="3500" y="3060.8" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa">Боты</text>
+<text x="3500" y="3089.4" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa"></text>
+<text x="3500" y="3118.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa">Файлы</text>
+<text x="3500" y="3146.6" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa"></text>
+<text x="3500" y="3175.2" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa">Базы данных</text>
+<text x="3500" y="3203.8" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa"></text>
+<text x="3500" y="3232.4" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa">Деплои</text>
+<text x="3500" y="3261.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa"></text>
+<text x="3500" y="3289.6" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa">Логи</text>
+<text x="3500" y="3318.2" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa"></text>
+<text x="3500" y="3346.8" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#e8f1fa">Синхронизация</text>
+<rect x="3755" y="2715" width="1285" height="65" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3775" y="2756.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#a4b9ce">Поиск по проектам, файлам и задачам… Локально • Синхронизировать</text>
+<rect x="3755" y="2805" width="310" height="130" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3775" y="2845.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#88e0a0">GitHub</text>
+<text x="3775" y="2884.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">26 доступно</text>
+<rect x="4080" y="2805" width="310" height="130" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4100" y="2845.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#88e0a0">Содержимое</text>
+<text x="4100" y="2884.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">22 репозитория</text>
+<rect x="4405" y="2805" width="310" height="130" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4425" y="2845.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#88e0a0">Нулевой размер</text>
+<text x="4425" y="2884.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">4 репозитория</text>
+<rect x="4730" y="2805" width="310" height="130" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4750" y="2845.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">Runtime</text>
+<text x="4750" y="2884.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Не проверен</text>
+<rect x="3755" y="2960" width="860" height="450" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3780" y="3007.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" fill="#e8f1fa">Карта системы</text>
+<rect x="4025" y="3115" width="310" height="150" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4045" y="3155.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#88e0a0">SENTRA</text>
+<text x="4045" y="3194.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Реестр + связи + поиск</text>
+<rect x="3780" y="3050" width="235" height="110" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3800" y="3090.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">EEKLERA</text>
+<text x="3800" y="3127.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">Статус: неизвестен</text>
+<rect x="4350" y="3050" width="235" height="110" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4370" y="3090.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">Social</text>
+<text x="4370" y="3127.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">Статус: неизвестен</text>
+<rect x="3780" y="3250" width="235" height="110" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3800" y="3290.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">Games</text>
+<text x="3800" y="3327.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">Статус: неизвестен</text>
+<rect x="4350" y="3250" width="235" height="110" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4370" y="3290.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">AI / Bots</text>
+<text x="4370" y="3327.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#e8f1fa">Статус: неизвестен</text>
+<path d="M4015,3105 L4045,3135 M4033.4854044401827,3131.6215256262876 L4045,3135 L4041.6215256262876,3123.4854044401827" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<path d="M4350,3105 L4320,3135 M4323.378474373712,3123.4854044401827 L4320,3135 L4331.514595559817,3131.6215256262876" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<path d="M4015,3300 L4045,3255 M4043.945331294691,3266.9535632311895 L4045,3255 L4034.3715834424825,3260.57106466305" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<path d="M4350,3300 L4320,3255 M4330.628416557518,3260.57106466305 L4320,3255 L4321.054668705308,3266.9535632311895" fill="none" stroke="#75c9ef" stroke-width="2"/>
+<rect x="4640" y="2960" width="400" height="205" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4660" y="3000.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">Git / обновления</text>
+<text x="4660" y="3038.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Источник: GitHub API</text>
+<text x="4660" y="3063.2" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Последний импорт: 04.10.2026</text>
+<text x="4660" y="3087.9" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Head SHA — после синхронизации</text>
+<text x="4660" y="3112.6" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Не показывать выдуманные</text>
+<text x="4660" y="3137.3" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">коммиты</text>
+<rect x="4640" y="3185" width="400" height="225" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4660" y="3225.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">Состояние источников</text>
+<text x="4660" y="3264.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">VPS: не подключён</text>
+<text x="4660" y="3290.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Локальные БД: не подключены</text>
+<text x="4660" y="3316.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Облачные API: не проверены</text>
+<text x="4660" y="3342.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Online / offline / stale отдельно</text>
+<rect x="3755" y="3440" width="625" height="220" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3775" y="3480.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">Проекты</text>
+<text x="3775" y="3519.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">EEKLERA • Social • Kabluk • Terraria</text>
+<text x="3775" y="3545.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Orion • Sites • Streaming • Mini Apps</text>
+<text x="3775" y="3571.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Фильтры: домен / зрелость / runtime / источник</text>
+<text x="3775" y="3597.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Карточка → обзор, данные, код, логи, задачи</text>
+<rect x="4405" y="3440" width="635" height="220" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4425" y="3480.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">Задачи подключения</text>
+<text x="4425" y="3519.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">1. Инвентаризация текущего сервера</text>
+<text x="4425" y="3545.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">2. Подключить read-only адаптеры</text>
+<text x="4425" y="3571.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">3. Проверить базы и backups</text>
+<text x="4425" y="3597.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Показатели GB / uptime появятся после измерений</text>
+<rect x="0" y="3840" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="40" y="3908.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">10 Карточка проекта и контракт подключения</text>
+<text x="40" y="3950.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">Один интерфейс для работающего сайта, игры, архива и ещё не запущенной идеи</text>
+<text x="40" y="5013.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<rect x="40" y="3995" width="930" height="220" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="60" y="4035.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#88e0a0">KABLUK / КАБЛУКОВСК</text>
+<text x="60" y="4074.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Источник: V0van200/Kabluk • назначение: онлайн-город</text>
+<text x="60" y="4100.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">README: Three.js, Worker/D1; также есть self-host и локальная SQLite</text>
+<text x="60" y="4126.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Репозиторий подтверждён; текущий runtime не проверен</text>
+<text x="60" y="4152.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Вкладки: Обзор | Код | Данные | Логи | Деплои | Задачи | Связи</text>
+<rect x="1010" y="3995" width="590" height="220" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1030" y="4035.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">ДЕЙСТВИЯ</text>
+<text x="1030" y="4074.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Открыть репозиторий • обновить каталог</text>
+<text x="1030" y="4100.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Экспортировать снимок • посмотреть схему</text>
+<text x="1030" y="4126.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Деплой / перезапуск активны только после</text>
+<text x="1030" y="4152.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">настройки runner, прав и целевого сервиса.</text>
+<rect x="40" y="4265" width="740" height="460" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="60" y="4305.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">PROJECT MANIFEST / ПРЕДЛОЖЕНИЕ</text>
+<text x="60" y="4344.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">id: kabluk</text>
+<text x="60" y="4370.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">name: Каблуковск</text>
+<text x="60" y="4396.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">domain: games</text>
+<text x="60" y="4422.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">sources: [github:V0van200/Kabluk]</text>
+<text x="60" y="4448.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">runtime: worker-or-self-host</text>
+<text x="60" y="4474.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">authority: выбрать при подключении</text>
+<text x="60" y="4500.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">datasets: [game-db]</text>
+<text x="60" y="4526.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">health_adapter: не настроен</text>
+<text x="60" y="4552.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">capabilities: [repo.read]</text>
+<text x="60" y="4578.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">secret_refs: []</text>
+<text x="60" y="4604.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Не заполнять вымышленный health URL.</text>
+<rect x="820" y="4265" width="780" height="460" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="840" y="4305.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">ЕДИНЫЕ ПОЛЯ ДЛЯ КАЖДОГО ПРОЕКТА</text>
+<text x="840" y="4344.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Identity: устойчивый id, имя, домен, parent_id, владелец.</text>
+<text x="840" y="4370.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Sources: repository, branch, SHA, server_path / API, observed_at.</text>
+<text x="840" y="4396.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Maturity: idea / planned / development / production / archived.</text>
+<text x="840" y="4422.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Runtime: unknown / online / degraded / offline.</text>
+<text x="840" y="4448.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Data: dataset, engine, owner, sensitivity, retention, backup.</text>
+<text x="840" y="4474.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Freshness: live / snapshot / stale, last_success, последняя ошибка.</text>
+<text x="840" y="4500.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Relations: depends_on, derived_from, deploys_to, uses_dataset.</text>
+<text x="840" y="4526.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Capabilities: read, logs, export, deploy, restart — явный список.</text>
+<text x="840" y="4552.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Новое подключение по умолчанию даёт только чтение.</text>
+<rect x="40" y="4775" width="1560" height="170" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="60" y="4815.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">ПОЧЕМУ ЭТО РАБОТАЕТ ДЛЯ НЕЗАВЕРШЁННЫХ ПРОЕКТОВ</text>
+<text x="60" y="4854.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Даже без Git, домена или процесса карточка хранит замысел, папку, документы, задачи и связи. Поля могут быть unknown.</text>
+<text x="60" y="4880.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Для server-misc/shopper и других подпроектов — свои ID и родитель. Архив остаётся доступен для поиска без запуска сервиса.</text>
+<rect x="1720" y="3840" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="1760" y="3908.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">11 Размещение, репозитории и эксплуатация</text>
+<text x="1760" y="3950.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">Сначала собрать управляющий слой; перенос приложений и баз не является условием первой версии</text>
+<text x="1760" y="5013.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<rect x="1760" y="4000" width="740" height="380" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1780" y="4040.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">ЛОКАЛЬНЫЙ УЗЕЛ / SENTRA</text>
+<text x="1780" y="4079.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Reverse proxy → UI + Core API</text>
+<text x="1780" y="4105.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Identity → локальный пользователь и роли</text>
+<text x="1780" y="4131.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">PostgreSQL → каталог, sync, tasks, audit</text>
+<text x="1780" y="4157.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Storage → bind mount / NAS, пути вне исходников</text>
+<text x="1780" y="4183.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Workers → GitHub, imports, search, media</text>
+<text x="1780" y="4209.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Compose как начальный вариант, лимиты CPU / RAM / disk</text>
+<text x="1780" y="4235.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">LAN-доступ ограничен firewall; административные порты</text>
+<text x="1780" y="4261.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">закрыты</text>
+<text x="1780" y="4287.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Отказ WAN не блокирует вход и просмотр локальных данных.</text>
+<rect x="2540" y="4000" width="780" height="380" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2560" y="4040.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">VPS / ВНЕШНИЕ УЗЛЫ</text>
+<text x="2560" y="4079.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Существующие сервисы продолжают работу независимо.</text>
+<text x="2560" y="4105.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">VPS-адаптер отдаёт разрешённые метаданные / snapshots.</text>
+<text x="2560" y="4131.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Runner принимает только заранее заданные команды.</text>
+<text x="2560" y="4157.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Terraria: сохранить build → save world → restart → rollback.</text>
+<text x="2560" y="4183.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Kabluk: выбрать D1 или self-host; переносить данные отдельно.</text>
+<text x="2560" y="4209.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Телефон: Video2MD экспортирует результат при доступной сети.</text>
+<text x="2560" y="4235.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Telegram / Twitch / облачные AI требуют внешнего соединения.</text>
+<rect x="1760" y="4435" width="740" height="385" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="1780" y="4475.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">КОД ПЛАТФОРМЫ / ПРЕДЛОЖЕНИЕ</text>
+<text x="1780" y="4514.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">sentra/</text>
+<text x="1780" y="4540.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">apps/control-center</text>
+<text x="1780" y="4566.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">services/core-api • sync-worker • identity-adapter</text>
+<text x="1780" y="4592.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">packages/schemas • ui • connectors</text>
+<text x="1780" y="4618.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">registry/projects • registry/datasets</text>
+<text x="1780" y="4644.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">infra/compose • proxy • backup</text>
+<text x="1780" y="4670.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">docs/architecture • runbooks • migrations</text>
+<text x="1780" y="4696.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Репозитории приложений сначала остаются самостоятельными.</text>
+<text x="1780" y="4722.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Данные, ключи, uploads и дампы не входят в этот репозиторий.</text>
+<rect x="2540" y="4435" width="780" height="385" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="2560" y="4475.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#c3a5f4">ЖИЗНЕННЫЙ ЦИКЛ РЕЛИЗА</text>
+<text x="2560" y="4514.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Commit → CI checks → versioned artifact → staging</text>
+<text x="2560" y="4540.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">→ backup / migration plan → deploy → health → active.</text>
+<text x="2560" y="4566.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Ошибка → rollback приложения; БД — совместимые миграции</text>
+<text x="2560" y="4592.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">или восстановление по заранее проверенному плану.</text>
+<text x="2560" y="4618.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Логи по project_id / service_id / run_id, с удалением секретов.</text>
+<text x="2560" y="4644.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Сигналы: sync age, failed jobs, disk free, backup age, health.</text>
+<text x="2560" y="4670.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Сроки хранения логов и квоты защищают локальный диск.</text>
+<text x="2560" y="4696.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Центральная панель не должна быть условием работы игр и сайтов.</text>
+<text x="1760" y="4912.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="#ffd080">Публичный деплой этой схемой не выполняется. Ни репозитории, ни серверы, ни работающие базы в ходе работы не менялись.</text>
+<rect x="3440" y="3840" width="1640" height="1200" rx="12" fill="#101e2f" stroke="#36546d"/>
+<text x="3480" y="3908.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" fill="#88e0a0">12 Порядок реализации и доказательства</text>
+<text x="3480" y="3950.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#a4b9ce">Начальный результат — полезный локальный каталог; перенос данных — после инвентаризации и проверок</text>
+<text x="3480" y="5013.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#a4b9ce">VOVAN OS / SENTRA • 04.10.2026 • Архитектурный проект, не развёрнутая система</text>
+<rect x="3480" y="3990" width="760" height="205" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3500" y="4030.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">01 / ИНВЕНТАРИЗАЦИЯ</text>
+<text x="3500" y="4069.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Зафиксировать 26 repos и 13 подпроектов; описать текущие VPS и</text>
+<text x="3500" y="4095.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">папки без Git.</text>
+<text x="3500" y="4121.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Критерий: Готово, когда у каждого объекта есть source и</text>
+<text x="3500" y="4147.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">неизвестные поля отмечены.</text>
+<rect x="4270" y="3990" width="760" height="205" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4290" y="4030.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">02 / ЛОКАЛЬНЫЙ КАТАЛОГ</text>
+<text x="4290" y="4069.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">UI + Core + PostgreSQL + storage; импорт GitHub и ручные</text>
+<text x="4290" y="4095.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">карточки.</text>
+<text x="4290" y="4121.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Критерий: Каталог, поиск и вход работают при выключенном</text>
+<text x="4290" y="4147.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">интернете.</text>
+<rect x="3480" y="4215" width="760" height="205" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3500" y="4255.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">03 / СИНХРОНИЗАЦИЯ</text>
+<text x="3500" y="4294.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Read-only adapters, snapshots, retry, checkpoints, дата свежести.</text>
+<text x="3500" y="4320.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Критерий: Обрыв и повтор импорта не теряют данные и не</text>
+<text x="3500" y="4346.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">создают дубликаты.</text>
+<rect x="4270" y="4215" width="760" height="205" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4290" y="4255.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">04 / ЗНАНИЯ И ФАЙЛЫ</text>
+<text x="4290" y="4294.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Разобрать архивы, Video2MD, Orion; версии, hash, ACL, citations.</text>
+<text x="4290" y="4320.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Критерий: Поисковый результат ведёт к оригиналу; приватное</text>
+<text x="4290" y="4346.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">недоступно чужой роли.</text>
+<rect x="3480" y="4440" width="760" height="205" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3500" y="4480.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">05 / ПОДКЛЮЧЕНИЕ RUNTIME</text>
+<text x="3500" y="4519.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Health и логи; затем runner для выбранных сервисов.</text>
+<text x="3500" y="4545.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Критерий: Статусы измеряются; пробный deploy и rollback</text>
+<text x="3500" y="4571.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">проверены.</text>
+<rect x="4270" y="4440" width="760" height="205" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4290" y="4480.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#75c9ef">06 / КОНСОЛИДАЦИЯ</text>
+<text x="4290" y="4519.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Выбрать версии EEKLERA; перенести нужные функции и БД по</text>
+<text x="4290" y="4545.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">одной.</text>
+<text x="4290" y="4571.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Критерий: Сверены ID, counts, файлы и восстановление; архивы</text>
+<text x="4290" y="4597.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">сохранены.</text>
+<rect x="3480" y="4695" width="740" height="250" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="3500" y="4735.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#88e0a0">ИСТОЧНИКИ ЭТОЙ КАРТЫ</text>
+<text x="3500" y="4773.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">GitHub connector: полный список (26 + пустая следующая страница).</text>
+<text x="3500" y="4798.2" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Корневые contents: 22 доступны; 4 без содержимого, size = 0.</text>
+<text x="3500" y="4822.9" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">21 README: роли и исторические сведения; Eeklera_new_site — пути.</text>
+<text x="3500" y="4847.6" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Ссылки на repos встроены в карточки листов 04–05.</text>
+<text x="3500" y="4872.3" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" fill="#e8f1fa">Снимок метаданных и README: github-evidence.json.</text>
+<rect x="4260" y="4695" width="780" height="250" rx="12" fill="#172a3e" stroke="#36546d"/>
+<text x="4280" y="4735.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#ffd080">ЧТО НЕ ВЫДАЁТСЯ ЗА ПРОВЕРЕННЫЙ ФАКТ</text>
+<text x="4280" y="4774.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Проценты дублей 97,5% / 96% и оценка готовности 60–70%</text>
+<text x="4280" y="4800.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">из прошлого ответа здесь не подтверждались и не используются.</text>
+<text x="4280" y="4826.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Совпадение ряда корневых Git SHA Eeklera / eeklera-online видно;</text>
+<text x="4280" y="4852.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">выбор канонической версии требует сверки сервера и изменений.</text>
+<text x="4280" y="4878.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">Это архитектура и макет; production-данные и runtime не</text>
+<text x="4280" y="4904.5" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" fill="#e8f1fa">аудированы.</text>
+</svg>

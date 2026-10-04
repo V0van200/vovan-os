@@ -1,0 +1,15 @@
+# ChatGuard
+
+**Боты** · 🟡 не запущен — код есть на сервере, но не запущен
+
+Защита Telegram-чатов (Node + Telegraf). Сервис не запущен, база есть.
+
+## Базы данных
+
+| База | Сервер | Движок | Таблиц | Строк | Схема |
+|---|---|---|---|---|---|
+| /home/claude/apps/chatguard/db/chatguard.db | 78 | sqlite | 21 | 43 | [схема](../../docs/databases/78-home-claude-apps-chatguard-db-chatguard-db.md) |
+
+## Папки на серверах
+
+- `78:/home/claude/apps/chatguard` — 32.3 МБ, 61 файлов, изменена 2026-10-04, стек: node, express, telegraf, есть .env (значения не читались)

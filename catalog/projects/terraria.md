@@ -1,0 +1,53 @@
+# Terraria Server
+
+**Игры** · 🟢 работает — работает: terraria
+
+TShock в Docker, порт 7777. Плагины собираются из GitHub.
+
+## Ссылки
+
+- https://github.com/V0van200/terraria-server
+
+## Что запущено
+
+| Сервис | Сервер | Состояние | Порты | Память |
+|---|---|---|---|---|
+| 🐳 terraria | 78 | Up 3 days | — | — |
+
+## Базы данных
+
+| База | Сервер | Движок | Таблиц | Строк | Схема |
+|---|---|---|---|---|---|
+| /data/terraria/config/tshock.sqlite | 78 | sqlite | 11 | 10 | [схема](../../docs/databases/78-data-terraria-config-tshock-sqlite.md) |
+| /data/terraria/newconf/tshock.sqlite | 78 | sqlite | 11 | 8 | [схема](../../docs/databases/78-data-terraria-newconf-tshock-sqlite.md) |
+
+## Репозитории GitHub
+
+### terraria-server
+
+https://github.com/V0van200/terraria-server · private · 350.0 КБ · C# / TShock / Docker
+
+Плагины, конфиги, pull-deploy, rollback.
+
+> # Terraria server (TShock 6, Terraria 1.4.5.x)
+> Весь игровой проект лежит здесь. Пуш в `main` → сервер сам собирает плагины, применяет конфиги,
+> безопасно перезапускается; игроки видят новое при повторном заходе.
+> plugins/<Имя>/         C#-плагины TShock (каждая папка = один DLL). Папки на "_" не деплоятся.
+> config/config.patch.json   Точечные правки config.json TShock (мерж, не замена)
+> config/sscconfig.patch.json (необязательно) то же для sscconfig.json
+> config/motd.txt, rules.txt Копируются как есть
+> docs/                  Заметки к проекту (карта, дизайн, прототипы)
+> AGENTS.md              Инструкция для ИИ-агента (читать первой)
+> ## Как это работает
+> 1. Раз в минуту сервер делает `git fetch` ветки `main`.
+> 2. Каждый плагин собирается в изолированном Docker (без сети). Ошибка сборки → деплоя нет, старая версия продолжает работать.
+> 3. Если всё собралось: игрокам в чат «обновление через 15 с», мир сохраняется, сервер перезапускается с новыми плагинами.
+> 4. Если новый сервер не поднялся за 2 минуты → автоматический откат на прошлый рабочий релиз, этот коммит помечается
+
+## Папки на серверах
+
+- `78:/data/terraria` — 190.8 МБ, 529 файлов, изменена 2026-10-04
+
+## Регулярные задачи
+
+- terraria-deploy.timer (сервер 78): Terraria GitHub deploy every minute; последний запуск Sun 2026-10-04 18:22:20 UTC

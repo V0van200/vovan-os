@@ -1,0 +1,864 @@
+{
+ "_about": "Паспорт всех проектов владельца. Здесь вручную — из чего состоит проект (repos, paths 'сервер:путь', services, docker, domains, databases). Всё остальное (статус, размер, даты, стек, описание из README) заполняет collector/build_catalog.py из реального инвентаря. Новый проект = новая запись. Поле note — человеческое пояснение.",
+ "categories": {
+  "game": "Игры",
+  "site": "Сайты",
+  "platform": "Платформы",
+  "app": "Приложения",
+  "bot": "Боты",
+  "agents": "ИИ-агенты",
+  "tool": "Инструменты",
+  "admin": "Панели управления",
+  "content": "Контент и медиа",
+  "infra": "Инфраструктура",
+  "idea": "Идеи и архив"
+ },
+ "projects": [
+  {
+   "id": "kabluk",
+   "name": "Каблуковск",
+   "category": "game",
+   "tags": [
+    "telegram",
+    "3d",
+    "economy"
+   ],
+   "repos": [
+    "Kabluk"
+   ],
+   "paths": [
+    "78:/root/kabluk-repo",
+    "78:/data/kabluk",
+    "198:/root/kq"
+   ],
+   "services": [
+    "78:kabluk"
+   ],
+   "timers": [
+    "78:kabluk-deploy.timer",
+    "78:kabluk-backup.timer"
+   ],
+   "domains": [
+    "kabluk.78-17-19-43.sslip.io"
+   ],
+   "databases": [
+    "78:/var/lib/kabluk/kabluk.sqlite"
+   ],
+   "people": [
+    "Claude — механика, сервер",
+    "Astra 6 — графика, клиент"
+   ],
+   "note": "Онлайн 3D-город в Telegram (@Kablukgamebot): квесты, работа, банк и ЦБ, налоги, бизнесы, режим мэра (градостроительство в духе Cities: Skylines). Автодеплой из main с откатом."
+  },
+  {
+   "id": "kabluk-city",
+   "name": "Каблук-Сити",
+   "category": "game",
+   "tags": [
+    "telegram",
+    "city-builder"
+   ],
+   "repos": [
+    "Kabluk"
+   ],
+   "parent": "kabluk",
+   "services": [
+    "78:kabluk"
+   ],
+   "domains": [
+    "kabluk.78-17-19-43.sslip.io/pocket.html"
+   ],
+   "databases": [
+    "78:/var/lib/kabluk/kabluk.sqlite"
+   ],
+   "note": "Свой город у каждого игрока (в духе Pocket City). Таблица pc_cities в базе Каблука."
+  },
+  {
+   "id": "terraria",
+   "name": "Terraria Server",
+   "category": "game",
+   "repos": [
+    "terraria-server"
+   ],
+   "paths": [
+    "78:/data/terraria"
+   ],
+   "docker": [
+    "78:terraria"
+   ],
+   "timers": [
+    "78:terraria-deploy.timer"
+   ],
+   "databases": [
+    "78:/data/terraria/config/tshock.sqlite",
+    "78:/data/terraria/newconf/tshock.sqlite"
+   ],
+   "note": "TShock в Docker, порт 7777. Плагины собираются из GitHub."
+  },
+  {
+   "id": "beaver",
+   "name": "Beaver World",
+   "category": "game",
+   "tags": [
+    "telegram",
+    "3d",
+    "multiplayer"
+   ],
+   "paths": [
+    "78:/home/claude/apps/beaver"
+   ],
+   "services": [
+    "78:beaver-api",
+    "78:beaver-realtime"
+   ],
+   "databases": [
+    "78:postgres:beaver",
+    "78:postgres:beaver_test"
+   ],
+   "note": "Многопользовательская 3D-игра про бобров с входом через Telegram. Отдельного репозитория не найдено."
+  },
+  {
+   "id": "bday-quest",
+   "name": "Bday Quest",
+   "category": "game",
+   "paths": [
+    "78:/opt/bday-quest"
+   ],
+   "note": "Квест ко дню рождения. Папка удалена (ссылка в пустоту)."
+  },
+  {
+   "id": "sentra",
+   "name": "Sentra",
+   "category": "platform",
+   "tags": [
+    "telegram",
+    "community"
+   ],
+   "repos": [
+    "sentra"
+   ],
+   "paths": [
+    "78:/home/claude/apps/sentra",
+    "78:/home/claude/apps/sentra2",
+    "78:/root/test-sentra"
+   ],
+   "services": [
+    "78:sentra-api",
+    "78:sentra-worker",
+    "78:sentra2-api"
+   ],
+   "docker": [
+    "78:sentra-postgres",
+    "78:sentra-redis"
+   ],
+   "domains": [
+    "sentra.vovan20.ru",
+    "shop.eeklera.online"
+   ],
+   "databases": [
+    "78:postgres:sentra",
+    "78:postgres:sentra_test",
+    "78:redis:sentra-redis"
+   ],
+   "note": "Платформа управления Telegram-сообществами: модульный монолит + воркеры. Sentra V2 — пересборка на той же базе. Ежедневный дамп тянется на сервер 198."
+  },
+  {
+   "id": "exchange",
+   "name": "Exchange",
+   "category": "platform",
+   "repos": [
+    "exchange"
+   ],
+   "paths": [
+    "78:/home/claude/exchange"
+   ],
+   "services": [
+    "78:exchange"
+   ],
+   "note": "Обмен / API / платежи (по макету). Node + three.js."
+  },
+  {
+   "id": "eeklera-site",
+   "name": "EEKLERA — сайт",
+   "category": "site",
+   "tags": [
+    "lera",
+    "portfolio"
+   ],
+   "repos": [
+    "eeklera-online",
+    "Eeklera",
+    "Eeklera_new_site",
+    "eeklera-site-archive"
+   ],
+   "paths": [
+    "198:/data/sites/eeklera-online",
+    "198:/var/www/eeklera-online",
+    "198:/var/www/eeklera-online-redesign",
+    "78:/srv/eeklera-site",
+    "78:/eeklera/eeklera_new",
+    "78:/eeklera/eeklera_v2",
+    "78:/eeklera/eeklera_redesign",
+    "78:/home/claude/eeklera-site",
+    "78:/home/claude/eeklera-redesign",
+    "78:/home/claude/eeklera-artifact",
+    "78:/home/claude/redesign-backups",
+    "78:/home/claude/apps/eeklera",
+    "78:/home/claude/apps/agent-hub/projects/Eeklera",
+    "198:/root/gh/eeklera-main"
+   ],
+   "timers": [
+    "198:eeklera-deploy.timer",
+    "78:eeklera-deploy.timer"
+   ],
+   "domains": [
+    "eeklera.online",
+    "www.eeklera.online"
+   ],
+   "people": [
+    "Astra 6 — сайт"
+   ],
+   "note": "Сайт-портфолио Валерии Колягиной. Живой — на сервере 198 из GitHub eeklera-online (автодеплой, откат). Много версий и черновиков на 78."
+  },
+  {
+   "id": "eeklera-services",
+   "name": "EEKLERA — сервисы",
+   "category": "platform",
+   "tags": [
+    "lera"
+   ],
+   "repos": [
+    "Eeklera_new_site"
+   ],
+   "paths": [
+    "78:/home/claude/apps/eeklera-admin",
+    "78:/home/claude/apps/eeklera-analytics",
+    "78:/home/claude/apps/eeklera-inquiries",
+    "78:/eeklera/eeklera_site",
+    "78:/eeklera/eeklera-sub-bot"
+   ],
+   "services": [
+    "78:eeklera-admin",
+    "78:eeklera-analytics",
+    "78:eeklera-chat",
+    "78:eeklera-inquiries",
+    "78:eeklera-sub-bot"
+   ],
+   "databases": [
+    "78:/home/claude/apps/eeklera-admin/admin.db",
+    "78:/home/claude/apps/eeklera-analytics/analytics.db",
+    "78:/eeklera/eeklera_site/data/chat.db",
+    "78:/home/claude/apps/agent-hub/projects/Eeklera/site/eeklera_site/data/chat.db",
+    "78:postgres:eeklera",
+    "78:postgres:eeklera_test"
+   ],
+   "note": "Кабинет Леры (admin, порт 3505), аналитика посещений (3610), чат (3011), заявки (3504), бот подписки."
+  },
+  {
+   "id": "eeklera-os",
+   "name": "EEKLERA OS + база знаний /neuro",
+   "category": "site",
+   "tags": [
+    "lera",
+    "knowledge"
+   ],
+   "repos": [
+    "Eeklera_file",
+    "lera-vault-old",
+    "eeklera-obsidian",
+    "obsidian-systems"
+   ],
+   "paths": [
+    "198:/var/www/eeklera-os",
+    "198:/var/www/eeklera-neuro",
+    "198:/root/gh/vault",
+    "198:/root/gh/uzly",
+    "78:/var/www/eeklera-os",
+    "78:/var/www/eeklera-neuro",
+    "78:/home/claude/eeklera-neuro-web",
+    "78:/home/claude/apps/eeklera-os",
+    "78:/root/obsidian"
+   ],
+   "domains": [
+    "os.eeklera.online",
+    "os.vovan20.ru"
+   ],
+   "note": "Рабочий стол EEKLERA OS и зашифрованная база знаний о Лере (/neuro: файлы как в Obsidian + 3D-нейросеть). Собирается из Obsidian-vault в GitHub Eeklera_file. Работает в России без VPN."
+  },
+  {
+   "id": "lera-media",
+   "name": "Фильмы и видео о Лере",
+   "category": "content",
+   "tags": [
+    "lera",
+    "video"
+   ],
+   "paths": [
+    "78:/root/video",
+    "78:/srv/lera-dl",
+    "198:/root/ydisk-pending",
+    "198:/root/v2m"
+   ],
+   "note": "Монтаж фильмов и роликов о Лере (6,5 ГБ исходников и рендеров), страница скачивания, файлы с Яндекс Диска."
+  },
+  {
+   "id": "lera-app",
+   "name": "Lera App",
+   "category": "app",
+   "tags": [
+    "lera",
+    "telegram-mini-app"
+   ],
+   "repos": [
+    "lera-app"
+   ],
+   "paths": [
+    "78:/opt/lera-app"
+   ],
+   "note": "Telegram Mini App: сообщество, платежи, игры. Локальная папка удалена — код в GitHub. На 78 в nginx остался блок eeklera.online/app, указывающий на удалённую папку."
+  },
+  {
+   "id": "lera-assistant",
+   "name": "Lera Assistant",
+   "category": "bot",
+   "tags": [
+    "lera",
+    "ai"
+   ],
+   "repos": [
+    "lera-assistant"
+   ],
+   "note": "Telegram-ассистент: Gemini, видео, Google, база знаний. На серверах не запущен."
+  },
+  {
+   "id": "vovan-app",
+   "name": "Vovan App",
+   "category": "app",
+   "tags": [
+    "social"
+   ],
+   "repos": [
+    "vovan-app"
+   ],
+   "paths": [
+    "78:/home/claude/apps/agent-hub/projects/vovan-app",
+    "78:/opt/vovan-app"
+   ],
+   "databases": [
+    "78:/home/claude/apps/agent-hub/projects/vovan-app/backend/vovan.db",
+    "78:/home/claude/apps/agent-hub/projects/vovan-app/backend/demo.db",
+    "78:/home/claude/apps/agent-hub/projects/vovan-app/push_subscriptions.db"
+   ],
+   "note": "Соцсеть: чаты, посты, звонки, игры, роли (FastAPI + React). Сервис не запущен; база vovan.db — 80 таблиц."
+  },
+  {
+   "id": "agent-hub",
+   "name": "Agent Hub",
+   "category": "agents",
+   "repos": [
+    "server-misc"
+   ],
+   "paths": [
+    "78:/home/claude/apps/agent-hub",
+    "78:/opt/agent-hub",
+    "78:/home/claude/agents",
+    "78:/home/claude/team",
+    "78:/home/claude/tasker",
+    "78:/home/claude/apps/agent-hub/projects/123",
+    "78:/home/claude/apps/agent-hub/projects/GPT",
+    "78:/home/claude/apps/agent-hub/projects/Test",
+    "78:/home/claude/apps/agent-hub/projects/site",
+    "78:/home/claude/apps/agent-hub/projects/маршрут с мск до Питера на велике"
+   ],
+   "services": [
+    "78:agent-hub"
+   ],
+   "domains": [
+    "agents.vovan20.ru"
+   ],
+   "note": "Хаб агентов с проектами (vovan-app, Eeklera, GPT, тесты…). Вход через auth-gateway. Папки agents/team/tasker удалены."
+  },
+  {
+   "id": "orion",
+   "name": "Orion",
+   "category": "agents",
+   "tags": [
+    "memory",
+    "tasks"
+   ],
+   "repos": [
+    "orion"
+   ],
+   "paths": [
+    "78:/home/claude/orion"
+   ],
+   "note": "Агент: память, задачи, Moltbook, Telegram (pm2). Nginx ведёт /orion/ на порт 3459, но там ничего не запущено."
+  },
+  {
+   "id": "jarvis",
+   "name": "Jarvis",
+   "category": "agents",
+   "paths": [
+    "78:/opt/jarvis",
+    "78:/home/claude/jarvis"
+   ],
+   "services": [
+    "78:jarvis"
+   ],
+   "note": "Порт 7070, закрыт авторизацией nginx."
+  },
+  {
+   "id": "cloud-agent",
+   "name": "Telegram-ассистент @Vovan_cloudebot",
+   "category": "agents",
+   "paths": [
+    "78:/home/claude/agent"
+   ],
+   "note": "Круглосуточный ИИ-ассистент через OpenRouter. Не запущен."
+  },
+  {
+   "id": "codex",
+   "name": "Codex workspace",
+   "category": "agents",
+   "paths": [
+    "78:/srv/codex",
+    "78:/srv/sync",
+    "78:/home/claude/standby"
+   ],
+   "note": "Рабочие файлы Codex / Astra 6 и синхронизация; запасная сессия Claude."
+  },
+  {
+   "id": "pomoshnik-bot",
+   "name": "Помощник-бот",
+   "category": "bot",
+   "repos": [
+    "pomoshnik-bot"
+   ],
+   "paths": [
+    "78:/home/claude/apps/pomoshnik-bot",
+    "78:/opt/pomoshnik-bot"
+   ],
+   "services": [
+    "78:pomoshnik-bot"
+   ],
+   "databases": [
+    "78:/home/claude/apps/pomoshnik-bot/session.db"
+   ],
+   "note": "Задачи для Claude Code из Telegram, голосовые, Google OAuth."
+  },
+  {
+   "id": "modbot",
+   "name": "ModBot",
+   "category": "bot",
+   "tags": [
+    "twitch"
+   ],
+   "repos": [
+    "modbot"
+   ],
+   "paths": [
+    "78:/home/claude/modbot"
+   ],
+   "services": [
+    "78:modbot"
+   ],
+   "note": "Модерация Twitch: команды, таймеры, ИИ, логи."
+  },
+  {
+   "id": "twitch-manager",
+   "name": "Twitch Manager",
+   "category": "bot",
+   "tags": [
+    "twitch"
+   ],
+   "repos": [
+    "twitch-manager"
+   ],
+   "paths": [
+    "78:/home/claude/twitch_bot",
+    "78:/home/claude/twitch_manager"
+   ],
+   "note": "Панель агентов Twitch (README: IRC не доделан). Не запущен; папка twitch_manager удалена."
+  },
+  {
+   "id": "chatguard",
+   "name": "ChatGuard",
+   "category": "bot",
+   "tags": [
+    "telegram"
+   ],
+   "paths": [
+    "78:/home/claude/apps/chatguard"
+   ],
+   "databases": [
+    "78:/home/claude/apps/chatguard/db/chatguard.db"
+   ],
+   "note": "Защита Telegram-чатов (Node + Telegraf). Сервис не запущен, база есть."
+  },
+  {
+   "id": "auth-gateway",
+   "name": "Auth Gateway",
+   "category": "infra",
+   "repos": [
+    "auth-gateway"
+   ],
+   "paths": [
+    "78:/home/claude/auth-gateway"
+   ],
+   "services": [
+    "78:auth-gateway"
+   ],
+   "note": "Единый вход: закрывает agents.vovan20.ru и vovan20.ru (/__auth). Подходит и для панели Vovan OS."
+  },
+  {
+   "id": "studio",
+   "name": "Studio (vovan20.ru)",
+   "category": "site",
+   "repos": [
+    "studio"
+   ],
+   "paths": [
+    "78:/www-static/studio",
+    "78:/home/claude/studio"
+   ],
+   "domains": [
+    "vovan20.ru",
+    "www.vovan20.ru"
+   ],
+   "note": "Главный сайт vovan20.ru: контент, дизайн. Домен на 198 проксирует на 78."
+  },
+  {
+   "id": "graph",
+   "name": "Graph",
+   "category": "site",
+   "repos": [
+    "graph"
+   ],
+   "paths": [
+    "78:/www-static/graph",
+    "78:/home/claude/gate",
+    "78:/home/claude/graphify-out",
+    "78:/home/claude/graphs-merged"
+   ],
+   "services": [
+    "78:gate"
+   ],
+   "domains": [
+    "vovan20.ru/graph"
+   ],
+   "note": "Аналитика/визуализация. /graph/game, /fly, /live обслуживает сервис gate (3480)."
+  },
+  {
+   "id": "cools1s",
+   "name": "cools1s / kursis",
+   "category": "site",
+   "paths": [
+    "78:/www-static/www-misc/cools1s",
+    "78:/home/claude/cools1s"
+   ],
+   "domains": [
+    "cools1s.ru",
+    "cools1s.online",
+    "kursis.ru"
+   ],
+   "note": "Сайты cools1s.ru и kursis.ru (колесо /wheel)."
+  },
+  {
+   "id": "www-misc",
+   "name": "Мини-сайты vovan20.ru (3d, ai, hub)",
+   "category": "site",
+   "paths": [
+    "78:/www-static/www-misc/3d",
+    "78:/www-static/www-misc/ai",
+    "78:/www-static/www-misc/hub",
+    "78:/var/www/dl",
+    "78:/var/www/well-known"
+   ],
+   "note": "Небольшие страницы; архив /dl удалён."
+  },
+  {
+   "id": "shopper",
+   "name": "Shopper",
+   "category": "app",
+   "paths": [
+    "78:/www-static/shopper",
+    "78:/www-static/shopper-www",
+    "78:/opt/shopper"
+   ],
+   "note": "Магазин: статические страницы остались, приложение удалено."
+  },
+  {
+   "id": "video2md",
+   "name": "Video2MD",
+   "category": "tool",
+   "tags": [
+    "video",
+    "ai"
+   ],
+   "repos": [
+    "video2md-phone"
+   ],
+   "paths": [
+    "78:/opt/video2md-cloud"
+   ],
+   "services": [
+    "78:video2md-cloud"
+   ],
+   "note": "Видео → расшифровка → конспект в Markdown (FastAPI, порт 3515)."
+  },
+  {
+   "id": "webos",
+   "name": "WebOS",
+   "category": "app",
+   "paths": [
+    "78:/home/claude/apps/webos"
+   ],
+   "services": [
+    "78:webos"
+   ],
+   "note": "Веб-рабочий стол (порт 3502)."
+  },
+  {
+   "id": "blenderq",
+   "name": "BlenderQ",
+   "category": "tool",
+   "tags": [
+    "3d"
+   ],
+   "paths": [
+    "78:/home/claude/blenderq"
+   ],
+   "services": [
+    "78:blenderq"
+   ],
+   "note": "Очередь задач Blender (порт 3520)."
+  },
+  {
+   "id": "casting",
+   "name": "Casting",
+   "category": "tool",
+   "paths": [
+    "78:/home/claude/apps/casting-engine",
+    "78:/home/claude/apps/casting-dashboard"
+   ],
+   "services": [
+    "78:casting-engine"
+   ],
+   "note": "Кастинг-движок (3503) и панель."
+  },
+  {
+   "id": "drop",
+   "name": "Drop",
+   "category": "tool",
+   "paths": [
+    "78:/home/claude/drop"
+   ],
+   "services": [
+    "78:drop"
+   ],
+   "note": "Порт 3530."
+  },
+  {
+   "id": "strike",
+   "name": "Strike",
+   "category": "tool",
+   "paths": [
+    "78:/home/claude/strike"
+   ],
+   "services": [
+    "78:strike"
+   ],
+   "note": "Порт 3498."
+  },
+  {
+   "id": "streaming",
+   "name": "Стриминг (MediaMTX)",
+   "category": "infra",
+   "tags": [
+    "video"
+   ],
+   "paths": [
+    "78:/opt/mediamtx",
+    "78:/home/claude/backup-stream"
+   ],
+   "services": [
+    "78:mediamtx"
+   ],
+   "note": "RTMP 1935, WebRTC/HLS 8888–8892."
+  },
+  {
+   "id": "admin-panels",
+   "name": "Старые панели сервера",
+   "category": "admin",
+   "paths": [
+    "78:/home/claude/dashboard",
+    "78:/home/claude/server-control-center",
+    "78:/home/claude/status-app",
+    "78:/home/claude/monitor",
+    "78:/home/claude/server-admin",
+    "78:/root/server-admin"
+   ],
+   "note": "VOVAN20 Dashboard с CRM, Server Control Center, статус, монитор — прототипы, не запущены. Их роль забирает Vovan OS."
+  },
+  {
+   "id": "vovan-os",
+   "name": "Vovan OS",
+   "category": "admin",
+   "repos": [
+    "vovan-os"
+   ],
+   "paths": [
+    "78:/root/vovan-os",
+    "198:/root/vovan-os"
+   ],
+   "people": [
+    "Claude — данные и API",
+    "Astra 6 — сайт"
+   ],
+   "note": "Единая система всех проектов (этот репозиторий)."
+  },
+  {
+   "id": "vpn",
+   "name": "VPN",
+   "category": "infra",
+   "paths": [
+    "198:/root/amneziawg-go",
+    "198:/root/amneziawg-tools",
+    "78:/opt/amnezia",
+    "198:/root/amnezia-clients"
+   ],
+   "services": [
+    "198:xray",
+    "78:xray",
+    "78:wstunnel",
+    "78:stunnel4"
+   ],
+   "note": "AmneziaWG (Казахстан, 198) и Xray. Ключи выдаются по одному на устройство, хранятся только на сервере. Ключи клиентов (/root/amnezia-clients) никогда не выгружаются. MTProto-прокси Telegram (контейнер mtg) остановлен.",
+   "docker": [
+    "78:mtg"
+   ]
+  },
+  {
+   "id": "ops",
+   "name": "Бэкапы и защита серверов",
+   "category": "infra",
+   "paths": [
+    "198:/data/backups",
+    "78:/home/claude/backups",
+    "78:/data/backups",
+    "78:/root/hardening",
+    "198:/root/server-admin",
+    "198:/data/ghsync"
+   ],
+   "services": [
+    "198:fail2ban",
+    "78:fail2ban",
+    "198:watchdog",
+    "198:claude-rc",
+    "198:nginx",
+    "78:nginx",
+    "78:docker"
+   ],
+   "timers": [
+    "198:pull-backup-78.timer",
+    "78:srv-watch.timer"
+   ],
+   "note": "Ночные дампы, копии на 198, проверка сервера (srv-watch), fail2ban, nginx, рабочее место Claude."
+  },
+  {
+   "id": "tools-misc",
+   "name": "Мелкие инструменты",
+   "category": "tool",
+   "paths": [
+    "78:/home/claude/apps/hashtag-tracker",
+    "78:/home/claude/apps/mp3-converter",
+    "78:/home/claude/apps/linux-desktop-apk",
+    "78:/home/claude/apps/pc-src",
+    "78:/opt/google",
+    "78:/home/claude/ai-digest",
+    "78:/home/claude/threejs-project",
+    "78:/home/claude/scratch_update",
+    "78:/home/claude/recovery-upload",
+    "78:/home/claude/1231"
+   ],
+   "note": "Трекер хэштегов, конвертер mp3, APK рабочего стола, исходники ПК, Google-инструменты, ИИ-дайджест, three.js-заготовка."
+  },
+  {
+   "id": "airrock",
+   "name": "Airrock",
+   "category": "idea",
+   "repos": [
+    "airrock"
+   ],
+   "paths": [
+    "78:/opt/bdc-airrock"
+   ],
+   "note": "Маленький репозиторий; локальная папка удалена."
+  },
+  {
+   "id": "bot-panel",
+   "name": "Bot Panel",
+   "category": "admin",
+   "paths": [
+    "78:/opt/bot-panel"
+   ],
+   "note": "Панель ботов. Папка удалена."
+  },
+  {
+   "id": "the-weny",
+   "name": "The Weny",
+   "category": "idea",
+   "paths": [
+    "78:/home/claude/the_weny_bundle",
+    "78:/home/claude/apps/agent-hub/projects/the_weny"
+   ],
+   "note": "Проект в агент-хабе + пакет файлов."
+  },
+  {
+   "id": "nastya",
+   "name": "Настя: бизнес и заметки",
+   "category": "content",
+   "paths": [
+    "78:/home/claude/nastya-business",
+    "78:/home/claude/nastya-vault"
+   ],
+   "note": "Заметки (vault) и бизнес-материалы."
+  },
+  {
+   "id": "osint",
+   "name": "OSINT-заметки",
+   "category": "content",
+   "paths": [
+    "78:/home/claude/OSINT_i_poisk_po_telefonu"
+   ],
+   "note": "Конспект «поиск по телефону»."
+  },
+  {
+   "id": "business-ideas",
+   "name": "Бизнес-идеи",
+   "category": "idea",
+   "repos": [
+    "business-ideas"
+   ],
+   "note": "Идеи без кода."
+  },
+  {
+   "id": "server-misc",
+   "name": "server-misc (сборник подпроектов)",
+   "category": "idea",
+   "repos": [
+    "server-misc"
+   ],
+   "note": "13 подпроектов сервера 78 — агент-хаб и мелкие сервисы."
+  },
+  {
+   "id": "coin-bot",
+   "name": "Telegram-бот с монетами",
+   "category": "bot",
+   "databases": [
+    "78:/root/data.db"
+   ],
+   "note": "Старый бот (июнь 2026): пользователи, монеты, ежедневный бонус, лог чата. Код не найден — осталась только база /root/data.db."
+  }
+ ]
+}

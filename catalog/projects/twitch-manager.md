@@ -4,6 +4,10 @@
 
 Панель агентов Twitch (README: IRC не доделан). Не запущен; папка twitch_manager удалена.
 
+## Со слов владельца
+
+- **Сейчас:** не используется
+
 ## ⚠ Проблемы
 
 - папка /home/claude/twitch_manager удалена (была /srv/projects/twitch_manager)

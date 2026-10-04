@@ -55,7 +55,7 @@ def routes_for(domain):
 used = {'folders': set(), 'services': set(), 'dbs': set(), 'repos': set(), 'docker': set()}
 projects = []
 for p in spec['projects']:
-    e = {k: p.get(k) for k in ('id', 'name', 'category', 'tags', 'parent', 'note', 'people') if p.get(k) is not None}
+    e = {k: p.get(k) for k in ('id', 'name', 'category', 'tags', 'parent', 'note', 'people', 'owner') if p.get(k) is not None}
     e['category_name'] = spec['categories'][p['category']]
     e['repos'] = []
     for r in p.get('repos', []):
@@ -133,7 +133,7 @@ un['docker'] = [r for r in dock if r not in used['docker']]
 
 STATUS = {'running': '🟢 работает', 'live': '🌐 сайт онлайн', 'stopped': '🟡 не запущен', 'repo-only': '📦 только GitHub', 'lost': '🔴 файлы потеряны', 'idea': '💡 идея/архив', 'empty': '⚪ пусто'}
 summary = {k: sum(1 for p in projects if p['status'] == k) for k in STATUS}
-json.dump({'generated_from': {s: d['collected_at'] for s, d in servers.items()}, 'statuses': STATUS, 'categories': spec['categories'], 'summary': summary,
+json.dump({'owner_notes': spec.get('_owner'), 'generated_from': {s: d['collected_at'] for s, d in servers.items()}, 'statuses': STATUS, 'categories': spec['categories'], 'summary': summary,
            'projects': projects, 'unassigned': un}, open(CAT / 'projects.json', 'w'), ensure_ascii=False, indent=1)
 
 md = ['# Все проекты', '', f"**{len(projects)} проектов**: " + ', '.join(f"{STATUS[k]} — {v}" for k, v in summary.items() if v) + '.', '',
@@ -152,6 +152,8 @@ for p in projects:
     c = [f"# {p['name']}", '', f"**{p['category_name']}** · {STATUS[p['status']]} — {p['status_reason']}" + (f" · часть проекта [{p['parent']}]({p['parent']}.md)" if p.get('parent') else ''), '']
     if p.get('note'): c += [p['note'], '']
     if p.get('people'): c += ['**Кто работает:** ' + '; '.join(p['people']), '']
+    if p.get('owner'):
+        o = p['owner']; c += ['## Со слов владельца', ''] + [f"- **{t}:** {o[k]}" for k, t in (('when', 'Когда'), ('use', 'Для чего'), ('now', 'Сейчас'), ('plan', 'Планы'), ('extra', 'Ещё')) if o.get(k)] + ([f"- **Приоритет в хабе:** {o['priority']}"] if o.get('priority') else []) + ['']
     if p['problems']: c += ['## ⚠ Проблемы', ''] + [f'- {x}' for x in p['problems']] + ['']
     if p['links']['web'] or p['links']['github']: c += ['## Ссылки', ''] + [f'- {u}' for u in p['links']['web'] + p['links']['github']] + ['']
     if p['services'] or p['docker']:

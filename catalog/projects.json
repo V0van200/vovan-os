@@ -6,8 +6,8 @@
   "answered": "2026-10-04"
  },
  "generated_from": {
-  "78": "2026-10-04T18:22:33+0000",
-  "198": "2026-10-04T18:21:08+0000"
+  "78": "2026-10-05T13:37:30+0000",
+  "198": "2026-10-05T13:37:29+0000"
  },
  "statuses": {
   "running": "🟢 работает",
@@ -60,6 +60,47 @@
     "plan": "главный проект",
     "priority": 1
    },
+   "facts": [
+    "Последний деплой: b83c2cf «Каблук-Сити» (04.10.2026 07:32), все выкладки 03–04.10 прошли без откатов",
+    "Игроков в базе: 4 (экономика сброшена 02.10, каждому стартовые 1 500 ₽)",
+    "Бэкапов базы: 40, последний — ежедневный 05.10 в 04:30 (/data/kabluk/backups)",
+    "Роли: Claude — сервер, экономика, базы, деплой; Astra 6 — 3D-графика и клиент"
+   ],
+   "history": [
+    {
+     "date": "2026-10-01",
+     "text": "Игра перенесена на свой сервер 78, бот @Kablukgamebot, автодеплой из GitHub main с автооткатом"
+    },
+    {
+     "date": "2026-10-01",
+     "text": "Экономика (кошельки, бизнесы, участки), квесты «Путь жителя», доставка еды, цепочка ферма → права → фургон → магазин"
+    },
+    {
+     "date": "2026-10-02",
+     "text": "Банковская экономика: ЦБ, казна, налоги, наличные и карта; управление бизнесом только рядом со зданием, наёмные рабочие"
+    },
+    {
+     "date": "2026-10-03",
+     "text": "Astra: PBR-графика и SSAO, 3D-редактор персонажа, профессии (электрик, автомеханик, садовник), 3D-редактор города"
+    },
+    {
+     "date": "2026-10-03",
+     "text": "Claude: симуляция города как в Cities: Skylines — зоны R/C/I, свет и вода, рост и упадок, налоги"
+    },
+    {
+     "date": "2026-10-04",
+     "text": "Astra: сетка участков, полноэкранная карта стройки, CC0-модели Kenney"
+    },
+    {
+     "date": "2026-10-04",
+     "text": "Claude: зонирование клетками вдоль дорог, тест-кнопки владельца (1 млрд ₽, «Стать мэром»), компактная панель редактора, «Каблук-Сити»"
+    }
+   ],
+   "next": [
+    "Экономика: проценты ЦБ, налог на имущество, спрос жителей в магазинах игроков, кредиты и вклады, бюджет мэра",
+    "Механики по типам зданий (ферма, мельница, магазин, склад), найм игроков",
+    "Astra: 3D-здания на участках, кисть зон и слои в редакторе (docs/CITY-SIM.md, docs/CITY-ZONING.md)"
+   ],
    "category_name": "Игры",
    "repos": [
     {
@@ -95,7 +136,7 @@
      "server": "78",
      "path": "/root/kabluk-repo",
      "real_path": null,
-     "size": 10722393,
+     "size": 10762476,
      "files": 227,
      "last_change": "2026-10-04",
      "stack": [
@@ -132,9 +173,9 @@
      "server": "78",
      "path": "/data/kabluk",
      "real_path": null,
-     "size": 319911241,
+     "size": 320029231,
      "files": 2736,
-     "last_change": "2026-10-04",
+     "last_change": "2026-10-05",
      "stack": [],
      "package": null,
      "description": null,
@@ -193,7 +234,7 @@
      "ports": [
       8091
      ],
-     "memory": 91672576,
+     "memory": 66351104,
      "since": "Sun 2026-10-04 07:32:38 UTC",
      "restarts": 0
     }
@@ -203,13 +244,13 @@
     {
      "server": "78",
      "timer": "kabluk-deploy.timer",
-     "last": "Sun 2026-10-04 18:22:20 UTC",
+     "last": "Mon 2026-10-05 13:36:46 UTC",
      "description": "Kabluk deploy poll"
     },
     {
      "server": "78",
      "timer": "kabluk-backup.timer",
-     "last": "Sun 2026-10-04 04:30:01 UTC",
+     "last": "Mon 2026-10-05 04:30:01 UTC",
      "description": "Kabluk daily DB backup"
     }
    ],
@@ -236,13 +277,13 @@
      "engine": "sqlite",
      "name": "/var/lib/kabluk/kabluk.sqlite",
      "tables": 49,
-     "rows": 1703,
+     "rows": 1721,
      "size": 1138688,
      "doc": "docs/databases/78-var-lib-kabluk-kabluk-sqlite.md"
     }
    ],
-   "size_total": 337270800,
-   "last_change": "2026-10-04",
+   "size_total": 337428873,
+   "last_change": "2026-10-05",
    "stack": [
     "Worker / D1 / Three.js",
     "drizzle-orm",
@@ -250,7 +291,9 @@
    ],
    "status": "running",
    "status_reason": "работает: kabluk",
-   "problems": [],
+   "problems": [
+    "После PBR/SSAO-графики игра заметно тяжелее на слабых телефонах (в тестах headless-браузер очень медленный)"
+   ],
    "links": {
     "github": [
      "https://github.com/V0van200/Kabluk"
@@ -275,6 +318,15 @@
     "plan": "пока оставить, решить позже, развивать ли",
     "priority": 3
    },
+   "facts": [
+    "Сохранённых городов игроков: 1"
+   ],
+   "history": [
+    {
+     "date": "2026-10-04",
+     "text": "Сделана отдельная игра /pocket.html, вторая кнопка в /start бота; сервер догоняет время до 1 часа"
+    }
+   ],
    "category_name": "Игры",
    "repos": [
     {
@@ -314,7 +366,7 @@
      "ports": [
       8091
      ],
-     "memory": 91672576,
+     "memory": 66351104,
      "since": "Sun 2026-10-04 07:32:38 UTC",
      "restarts": 0
     }
@@ -344,7 +396,7 @@
      "engine": "sqlite",
      "name": "/var/lib/kabluk/kabluk.sqlite",
      "tables": 49,
-     "rows": 1703,
+     "rows": 1721,
      "size": 1138688,
      "doc": "docs/databases/78-var-lib-kabluk-kabluk-sqlite.md"
     }
@@ -377,6 +429,38 @@
     "priority": 1,
     "extra": "Замок LeraSpawn — постройка в этом мире."
    },
+   "facts": [
+    "Мир «Forsaken Realm»: Large 8400×2400, режим Master, сид «for the worthy»; до 8 игроков",
+    "Включены серверные персонажи (SSC): каждый новый игрок начинает с нуля, вход через /register и /login",
+    "Контейнер terraria работает с 30.09, лимит памяти 1 400 МБ",
+    "Последний деплой плагинов: 811c91e (30.09), бэкапы мира перед каждым рестартом (хранится 15)"
+   ],
+   "history": [
+    {
+     "date": "2026-09-28",
+     "text": "TShock 6.2.1 в Docker на 78:7777, плагин LeraSpawn (замок на спавне, /buildspawn, /castle)"
+    },
+    {
+     "date": "2026-09-29",
+     "text": "Подключён GitHub terraria-server: Astra пушит плагины, сервер сам собирает и выкатывает, при падении — откат"
+    },
+    {
+     "date": "2026-09-29",
+     "text": "Канал команд ops/*.txt в репозитории: backup / restart / rollback / unpin"
+    },
+    {
+     "date": "2026-09-29",
+     "text": "Новый мир Large/Master, включён SSC, старый мир удалён (остался в бэкапах)"
+    },
+    {
+     "date": "2026-09-30",
+     "text": "Последний деплой плагинов (811c91e)"
+    }
+   ],
+   "next": [
+    "Найти и исправить баг сохранения",
+    "Идея на будущее: порталы в личные миры игроков (несколько серверов + прокси)"
+   ],
    "category_name": "Игры",
    "repos": [
     {
@@ -409,7 +493,7 @@
      "real_path": null,
      "size": 200075255,
      "files": 529,
-     "last_change": "2026-10-04",
+     "last_change": "2026-10-05",
      "stack": [],
      "package": null,
      "description": null,
@@ -441,14 +525,14 @@
      "server": "78",
      "name": "terraria",
      "image": "ghcr.io/pryaxis/tshock:latest",
-     "status": "Up 3 days"
+     "status": "Up 4 days"
     }
    ],
    "timers": [
     {
      "server": "78",
      "timer": "terraria-deploy.timer",
-     "last": "Sun 2026-10-04 18:22:20 UTC",
+     "last": "Mon 2026-10-05 13:36:46 UTC",
      "description": "Terraria GitHub deploy every minute"
     }
    ],
@@ -474,13 +558,16 @@
     }
    ],
    "size_total": 200075255,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [
     "C# / TShock / Docker"
    ],
    "status": "running",
    "status_reason": "работает: terraria",
-   "problems": [],
+   "problems": [
+    "Со слов владельца: предметы и сундуки пропадают после выхода с сервера. Проверить связь с SSC и сохранением мира при рестартах",
+    "Плагины TShock 5.x (Essentials, экономика, InfiniteChests, Multiverse и др.) не грузятся на 6.x — нужен перенос из исходников"
+   ],
    "links": {
     "github": [
      "https://github.com/V0van200/terraria-server"
@@ -549,7 +636,7 @@
      "ports": [
       3701
      ],
-     "memory": 2920448,
+     "memory": 2846720,
      "since": "Mon 2026-09-28 13:40:15 UTC",
      "restarts": 1
     },
@@ -560,7 +647,7 @@
      "ports": [
       3702
      ],
-     "memory": 25509888,
+     "memory": 26968064,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -770,7 +857,7 @@
      "ports": [
       3600
      ],
-     "memory": 22687744,
+     "memory": 26251264,
      "since": "Mon 2026-09-28 13:50:36 UTC",
      "restarts": 0
     },
@@ -779,7 +866,7 @@
      "name": "sentra-worker",
      "state": "active",
      "ports": [],
-     "memory": 48066560,
+     "memory": 48500736,
      "since": "Mon 2026-09-28 13:50:35 UTC",
      "restarts": 0
     },
@@ -790,7 +877,7 @@
      "ports": [
       3601
      ],
-     "memory": 13029376,
+     "memory": 13103104,
      "since": "Mon 2026-09-28 13:40:16 UTC",
      "restarts": 1
     }
@@ -800,13 +887,13 @@
      "server": "78",
      "name": "sentra-postgres",
      "image": "postgres:16-alpine",
-     "status": "Up 6 days (healthy)"
+     "status": "Up 7 days (healthy)"
     },
     {
      "server": "78",
      "name": "sentra-redis",
      "image": "redis:7-alpine",
-     "status": "Up 6 days (healthy)"
+     "status": "Up 7 days (healthy)"
     }
    ],
    "timers": [],
@@ -848,7 +935,7 @@
      "engine": "postgres",
      "name": "sentra",
      "tables": 102,
-     "rows": 5910,
+     "rows": 5911,
      "size": 17972247,
      "doc": "docs/databases/78-postgres-sentra.md"
     },
@@ -967,7 +1054,7 @@
      "ports": [
       3497
      ],
-     "memory": 1740800,
+     "memory": 2326528,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -1011,6 +1098,20 @@
     "priority": 1,
     "extra": "Версия v2 на сервере 78 (с 3D/JS) сделана и пока забыта, но есть."
    },
+   "facts": [
+    "На сайте релиз 08e3bf1 (28.09.2026): правила для Astra 6 (ASTRA.md)",
+    "Автовыкладка из eeklera-online main каждую минуту, 10 релизов для отката"
+   ],
+   "history": [
+    {
+     "date": "2026-09-29",
+     "text": "Живой сайт переведён на GitHub eeklera-online: автодеплой с откатом (eeklera-deploy status / rollback / unpin)"
+    },
+    {
+     "date": "2026-09-28",
+     "text": "Последний коммит в main — правила для Astra 6"
+    }
+   ],
    "category_name": "Сайты",
    "repos": [
     {
@@ -1122,7 +1223,7 @@
      "real_path": null,
      "size": 545065800,
      "files": 1222,
-     "last_change": "2026-10-04",
+     "last_change": "2026-10-05",
      "stack": [],
      "package": null,
      "description": null,
@@ -1466,7 +1567,7 @@
      "real_path": null,
      "size": 715636953,
      "files": 568,
-     "last_change": "2026-10-04",
+     "last_change": "2026-10-05",
      "stack": [],
      "package": null,
      "description": null,
@@ -1492,7 +1593,7 @@
      "server": "198",
      "path": "/root/gh/eeklera-main",
      "real_path": null,
-     "size": 52168512,
+     "size": 52169002,
      "files": 0,
      "last_change": null,
      "stack": [],
@@ -1516,13 +1617,13 @@
     {
      "server": "198",
      "timer": "eeklera-deploy.timer",
-     "last": "Sun 2026-10-04 18:20:42 UTC",
+     "last": "Mon 2026-10-05 13:36:53 UTC",
      "description": "Проверять main каждую минуту"
     },
     {
      "server": "78",
      "timer": "eeklera-deploy.timer",
-     "last": "Sun 2026-10-04 18:22:20 UTC",
+     "last": "Mon 2026-10-05 13:36:46 UTC",
      "description": "Проверять git на новые коммиты раз в минуту"
     }
    ],
@@ -1849,8 +1950,8 @@
     }
    ],
    "databases": [],
-   "size_total": 2201094686,
-   "last_change": "2026-10-04",
+   "size_total": 2201095176,
+   "last_change": "2026-10-05",
    "stack": [
     "HTML / CSS / JS",
     "Статика / медиа / SQLite"
@@ -1921,7 +2022,7 @@
      "real_path": null,
      "size": 34150053,
      "files": 25,
-     "last_change": "2026-10-04",
+     "last_change": "2026-10-05",
      "stack": [
       "node"
      ],
@@ -2004,7 +2105,7 @@
      "real_path": null,
      "size": 434957299,
      "files": 385,
-     "last_change": "2026-10-04",
+     "last_change": "2026-10-05",
      "stack": [],
      "package": null,
      "description": null,
@@ -2037,9 +2138,9 @@
      "server": "78",
      "path": "/eeklera/eeklera-sub-bot",
      "real_path": null,
-     "size": 579860403,
+     "size": 580886571,
      "files": 5,
-     "last_change": "2026-10-04",
+     "last_change": "2026-10-05",
      "stack": [],
      "package": null,
      "description": null,
@@ -2064,7 +2165,7 @@
      "ports": [
       3505
      ],
-     "memory": 12914688,
+     "memory": 13271040,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     },
@@ -2075,7 +2176,7 @@
      "ports": [
       3610
      ],
-     "memory": 2072576,
+     "memory": 1880064,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     },
@@ -2086,7 +2187,7 @@
      "ports": [
       3011
      ],
-     "memory": 2174976,
+     "memory": 3018752,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     },
@@ -2097,7 +2198,7 @@
      "ports": [
       3504
      ],
-     "memory": 1667072,
+     "memory": 2117632,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     },
@@ -2106,7 +2207,7 @@
      "name": "eeklera-sub-bot",
      "state": "active",
      "ports": [],
-     "memory": 14290944,
+     "memory": 14364672,
      "since": "Wed 2026-09-30 06:32:26 UTC",
      "restarts": 0
     }
@@ -2120,7 +2221,7 @@
      "engine": "sqlite",
      "name": "/home/claude/apps/eeklera-admin/admin.db",
      "tables": 5,
-     "rows": 514,
+     "rows": 515,
      "size": 823296,
      "doc": "docs/databases/78-home-claude-apps-eeklera-admin-admin-db.md"
     },
@@ -2170,8 +2271,8 @@
      "doc": "docs/databases/78-postgres-eeklera_test.md"
     }
    ],
-   "size_total": 1082375065,
-   "last_change": "2026-10-04",
+   "size_total": 1083401233,
+   "last_change": "2026-10-05",
    "stack": [
     "HTML / CSS / JS",
     "node"
@@ -2200,6 +2301,16 @@
     "now": "остановлено",
     "plan": "возможно продолжить; /neuro можно выключить (по решению владельца)"
    },
+   "history": [
+    {
+     "date": "2026-09-24",
+     "text": "База знаний: «00 Узлы» — 8 сфер, 51 узел, пересборка rebuild.sh"
+    },
+    {
+     "date": "2026-10-02",
+     "text": "/neuro работает в России без VPN: библиотеки 3D-графа перенесены на свой сервер вместо CDN"
+    }
+   ],
    "category_name": "Сайты",
    "repos": [
     {
@@ -2308,9 +2419,9 @@
      "has_env_file": false,
      "top": [
       "data.enc",
-      "dl-7aaiDRSAzqKCNlOhamxTJOh5",
-      "dl-_rR1nsxXpPq1cRye",
-      "dl-kRzjSISOwiSQRPGUd8",
+      "dl-***",
+      "dl-***",
+      "dl-***",
       "files.html",
       "graph.html",
       "index.html",
@@ -2324,7 +2435,7 @@
      "server": "198",
      "path": "/root/gh/vault",
      "real_path": null,
-     "size": 137490960,
+     "size": 137491052,
      "files": 3095,
      "last_change": "2026-10-02",
      "stack": [],
@@ -2612,7 +2723,7 @@
     }
    ],
    "databases": [],
-   "size_total": 1003945856,
+   "size_total": 1003945948,
    "last_change": "2026-10-02",
    "stack": [
     "Markdown / Obsidian",
@@ -2649,6 +2760,20 @@
     "plan": "владелец сам посмотрит, что удалить; часть стримов/видео сохранена для Obsidian",
     "extra": "/srv/lera-dl — владелец не знает, что это."
    },
+   "history": [
+    {
+     "date": "2026-09-29",
+     "text": "Фильм #1 (68 с, трек «Знаю») и фильм #2 «Воспоминания» (42 с, трек «Трабы»)"
+    },
+    {
+     "date": "2026-09-29",
+     "text": "План длинного фильма 4–8 мин: корпус расшифровок 19 стримов, правила монтажа"
+    },
+    {
+     "date": "2026-10-01",
+     "text": "Ещё 4 ролика (n1–n4) по правилам фильма v3"
+    }
+   ],
    "category_name": "Контент и медиа",
    "repos": [],
    "folders": [
@@ -2931,7 +3056,7 @@
      "real_path": null,
      "size": 331410241,
      "files": 357,
-     "last_change": "2026-10-04",
+     "last_change": "2026-10-05",
      "stack": [],
      "package": null,
      "description": null,
@@ -2999,7 +3124,7 @@
     }
    ],
    "size_total": 331410241,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [
     "FastAPI / React / SQLite"
    ],
@@ -3056,7 +3181,7 @@
      "real_path": null,
      "size": 1053044273,
      "files": 1023,
-     "last_change": "2026-10-04",
+     "last_change": "2026-10-05",
      "stack": [],
      "package": null,
      "description": null,
@@ -3210,7 +3335,7 @@
      "ports": [
       3495
      ],
-     "memory": 1695744,
+     "memory": 2207744,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -3236,7 +3361,7 @@
    ],
    "databases": [],
    "size_total": 1054820928,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [
     "Python / Node / HTML"
    ],
@@ -3413,7 +3538,7 @@
      "ports": [
       7070
      ],
-     "memory": 1630208,
+     "memory": 2179072,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -3622,9 +3747,9 @@
      "server": "78",
      "path": "/home/claude/apps/pomoshnik-bot",
      "real_path": null,
-     "size": 754777244,
+     "size": 755804036,
      "files": 63,
-     "last_change": "2026-10-04",
+     "last_change": "2026-10-05",
      "stack": [],
      "package": null,
      "description": null,
@@ -3661,7 +3786,7 @@
      "name": "pomoshnik-bot",
      "state": "active",
      "ports": [],
-     "memory": 13254656,
+     "memory": 13549568,
      "since": "Wed 2026-09-30 06:32:27 UTC",
      "restarts": 0
     }
@@ -3680,8 +3805,8 @@
      "doc": "docs/databases/78-home-claude-apps-pomoshnik-bot-session-db.md"
     }
    ],
-   "size_total": 754777244,
-   "last_change": "2026-10-04",
+   "size_total": 755804036,
+   "last_change": "2026-10-05",
    "stack": [
     "Python / Telegram"
    ],
@@ -3793,7 +3918,7 @@
      "ports": [
       3485
      ],
-     "memory": 10285056,
+     "memory": 10465280,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -3931,7 +4056,7 @@
      "real_path": null,
      "size": 33832201,
      "files": 61,
-     "last_change": "2026-10-04",
+     "last_change": "2026-10-05",
      "stack": [
       "node",
       "express",
@@ -3976,7 +4101,7 @@
     }
    ],
    "size_total": 33832201,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [
     "express",
     "node",
@@ -4066,7 +4191,7 @@
      "ports": [
       3481
      ],
-     "memory": 3428352,
+     "memory": 4337664,
      "since": "Wed 2026-09-30 06:32:18 UTC",
      "restarts": 0
     }
@@ -5539,7 +5664,7 @@
      "ports": [
       3480
      ],
-     "memory": 2699264,
+     "memory": 5812224,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -6565,7 +6690,7 @@
      "ports": [
       3515
      ],
-     "memory": 3420160,
+     "memory": 3715072,
      "since": "Wed 2026-09-30 06:32:19 UTC",
      "restarts": 0
     }
@@ -6637,7 +6762,7 @@
      "ports": [
       3502
      ],
-     "memory": 1736704,
+     "memory": 2211840,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -6705,7 +6830,7 @@
      "ports": [
       3520
      ],
-     "memory": 2957312,
+     "memory": 3211264,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -6784,7 +6909,7 @@
      "ports": [
       3503
      ],
-     "memory": 174465024,
+     "memory": 25640960,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -6840,7 +6965,7 @@
      "ports": [
       3530
      ],
-     "memory": 1708032,
+     "memory": 2166784,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -6907,7 +7032,7 @@
      "ports": [
       3498
      ],
-     "memory": 1630208,
+     "memory": 2277376,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -6998,7 +7123,7 @@
       8892,
       8892
      ],
-     "memory": 24809472,
+     "memory": 27148288,
      "since": "Mon 2026-09-28 13:40:04 UTC",
      "restarts": 0
     }
@@ -7186,6 +7311,36 @@
     "Claude — данные и API",
     "Astra 6 — сайт"
    ],
+   "facts": [
+    "Хаб Astra 6 лежит в hub/ и открыт по адресу vovan20.ru/admin/hub/ (вход через админку)",
+    "Данные хаба — снимок из этого репозитория (hub/site/snapshot.json, пересобирается collector/build_hub.py)"
+   ],
+   "history": [
+    {
+     "date": "2026-10-04",
+     "text": "Инвентарь обоих серверов, схемы всех баз, граф связей"
+    },
+    {
+     "date": "2026-10-04",
+     "text": "Каталог 49 проектов, включая остановленные и потерянные"
+    },
+    {
+     "date": "2026-10-04",
+     "text": "Ответы владельца на 56 вопросов о проектах"
+    },
+    {
+     "date": "2026-10-05",
+     "text": "Astra 6 собрала локальный хаб (ZIP, запуск на Android через Termux); добавлен в репозиторий и выложен на vovan20.ru/admin/hub/"
+    },
+    {
+     "date": "2026-10-05",
+     "text": "Инвентарь пересобран, в каталог добавлены «Сейчас», «История», «Проблемы», «Что дальше»"
+    }
+   ],
+   "next": [
+    "Живой API только на чтение (/api/os/*): посетители EEKLERA, онлайн Terraria, задачи Video2MD, состояние серверов",
+    "Перенести в хаб всю админку vovan20.ru/admin"
+   ],
    "category_name": "Панели управления",
    "repos": [
     {
@@ -7205,23 +7360,24 @@
      "server": "78",
      "path": "/root/vovan-os",
      "real_path": null,
-     "size": 12858288,
-     "files": 55,
+     "size": 13699392,
+     "files": 115,
      "last_change": "2026-10-04",
      "stack": [],
      "package": null,
      "description": null,
-     "readme": "# Vovan OS — единая система всех проектов ⏎ Здесь собрано **всё, что работает на серверах владельца**: сервисы, сайты, боты, игры, базы данных, деплои, бэкапы, VPN. Связи с 26 репозиториями GitHub. ⏎ По этим данным Astra 6 строит сайт-панель «Vovan OS» (макет — `design/reference-dashboard.png`). ⏎ ## Что где ⏎ | Папка / файл | Что внутри | ⏎ | `docs/SYSTEM-MAP.md` | Карта обоих серверов: железо, сервисы и порты, домены и маршруты, Docker, таймеры, сертификаты, бэкапы, VPN | ⏎ | `docs/PROJECTS.md` | Проекты: что из какого репозитория реально работает, где и на каких доменах | ⏎ | `docs/DATABASES.md` + `docs/databases/` | Все базы (Postgres, SQLite, Redis): таблицы, поля, связи, число строк. **Без данных** | ⏎ | `docs/FOR-ASTRA.md` | Как строить сайт: экраны → откуда брать каждую цифру | ⏎ | `docs/SECURITY.md` | Что никогда не попадает в репозиторий и как это проверяется | ⏎ | `inventory/s",
+     "readme": "# Vovan OS — единая система всех проектов ⏎ Здесь собрано **всё, что работает на серверах владельца**: сервисы, сайты, боты, игры, базы данных, деплои, бэкапы, VPN. Связи с 26 репозиториями GitHub. ⏎ По этим данным Astra 6 строит сайт-панель «Vovan OS» (макет — `design/reference-dashboard.png`). ⏎ ## Что где ⏎ | Папка / файл | Что внутри | ⏎ | **`catalog/`** | **База всех проектов (49): `projects.json` для хаба, оглавление `README.md`, карточки `projects/<id>.md`, формат `SCHEMA.md`** | ⏎ | `docs/SYSTEM-MAP.md` | Карта обоих серверов: железо, сервисы и порты, домены и маршруты, Docker, таймеры, сертификаты, бэкапы, VPN | ⏎ | `docs/PROJECTS.md` | Проекты: что из какого репозитория реально работает, где и на каких доменах | ⏎ | `docs/DATABASES.md` + `docs/databases/` | Все базы (Postgres, SQLite, Redis): таблицы, поля, связи, число строк. **Без данных** | ⏎ | `docs/FOR-ASTRA.md` | Как стро",
      "git": {
       "remote": "git@github-vovan-os:V0van200/vovan-os.git",
       "branch": "main",
-      "last_commit": "2495cf2 2026-10-04T18:26:18+00:00 Vovan OS: инвентарь серверов, проекты, схемы всех баз, граф связей, документы для Astra 6",
+      "last_commit": "744b41d 2026-10-04T19:47:34+00:00 Vovan OS: ответы владельца по проектам — когда, зачем, используется ли сейчас, планы, приоритеты хаба",
       "dirty_files": 0
      },
      "docker": false,
      "has_env_file": false,
      "top": [
       "README.md",
+      "catalog",
       "collector",
       "design",
       "docs",
@@ -7233,18 +7389,19 @@
      "server": "198",
      "path": "/root/vovan-os",
      "real_path": null,
-     "size": 7166886,
-     "files": 57,
+     "size": 7702775,
+     "files": 115,
      "last_change": "2026-10-04",
      "stack": [],
      "package": null,
      "description": null,
-     "readme": "# Vovan OS — единая система всех проектов ⏎ Здесь собрано **всё, что работает на серверах владельца**: сервисы, сайты, боты, игры, базы данных, деплои, бэкапы, VPN. Связи с 26 репозиториями GitHub. ⏎ По этим данным Astra 6 строит сайт-панель «Vovan OS» (макет — `design/reference-dashboard.png`). ⏎ ## Что где ⏎ | Папка / файл | Что внутри | ⏎ | `docs/SYSTEM-MAP.md` | Карта обоих серверов: железо, сервисы и порты, домены и маршруты, Docker, таймеры, сертификаты, бэкапы, VPN | ⏎ | `docs/PROJECTS.md` | Проекты: что из какого репозитория реально работает, где и на каких доменах | ⏎ | `docs/DATABASES.md` + `docs/databases/` | Все базы (Postgres, SQLite, Redis): таблицы, поля, связи, число строк. **Без данных** | ⏎ | `docs/FOR-ASTRA.md` | Как строить сайт: экраны → откуда брать каждую цифру | ⏎ | `docs/SECURITY.md` | Что никогда не попадает в репозиторий и как это проверяется | ⏎ | `inventory/s",
+     "readme": "# Vovan OS — единая система всех проектов ⏎ Здесь собрано **всё, что работает на серверах владельца**: сервисы, сайты, боты, игры, базы данных, деплои, бэкапы, VPN. Связи с 26 репозиториями GitHub. ⏎ По этим данным Astra 6 строит сайт-панель «Vovan OS» (макет — `design/reference-dashboard.png`). ⏎ ## Что где ⏎ | Папка / файл | Что внутри | ⏎ | **`catalog/`** | **База всех проектов (49): `projects.json` для хаба, оглавление `README.md`, карточки `projects/<id>.md`, формат `SCHEMA.md`** | ⏎ | `docs/SYSTEM-MAP.md` | Карта обоих серверов: железо, сервисы и порты, домены и маршруты, Docker, таймеры, сертификаты, бэкапы, VPN | ⏎ | `docs/PROJECTS.md` | Проекты: что из какого репозитория реально работает, где и на каких доменах | ⏎ | `docs/DATABASES.md` + `docs/databases/` | Все базы (Postgres, SQLite, Redis): таблицы, поля, связи, число строк. **Без данных** | ⏎ | `docs/FOR-ASTRA.md` | Как стро",
      "git": null,
      "docker": false,
      "has_env_file": false,
      "top": [
       "README.md",
+      "catalog",
       "collector",
       "design",
       "docs",
@@ -7258,7 +7415,7 @@
    "timers": [],
    "domains": [],
    "databases": [],
-   "size_total": 20025174,
+   "size_total": 21402167,
    "last_change": "2026-10-04",
    "stack": [],
    "status": "stopped",
@@ -7278,6 +7435,20 @@
     "use": "сервер 198 (Алматы) — VPN и часть сайтов",
     "now": "работает"
    },
+   "facts": [
+    "AmneziaWG awg0 (udp 51820) на сервере 198 — рабочий; выдано 5 ключей, следующий свободный адрес 10.9.0.7",
+    "Новый ключ — скриптом mk-key.py: добавляется без перезапуска, проверяется тестовым клиентом"
+   ],
+   "history": [
+    {
+     "date": "2026-09-29",
+     "text": "Ключ key-3"
+    },
+    {
+     "date": "2026-10-04",
+     "text": "Ключи key-4 и key-5 с QR-кодами"
+    }
+   ],
    "category_name": "Инфраструктура",
    "repos": [],
    "folders": [
@@ -7415,7 +7586,7 @@
       2087,
       8443
      ],
-     "memory": 19607552,
+     "memory": 12636160,
      "since": "Tue 2026-09-29 14:42:50 UTC",
      "restarts": 0
     },
@@ -7426,7 +7597,7 @@
      "ports": [
       2053
      ],
-     "memory": 17457152,
+     "memory": 18223104,
      "since": "Mon 2026-09-28 13:40:05 UTC",
      "restarts": 0
     },
@@ -7437,7 +7608,7 @@
      "ports": [
       8087
      ],
-     "memory": 6529024,
+     "memory": 4464640,
      "since": "Mon 2026-09-28 13:40:05 UTC",
      "restarts": 0
     },
@@ -7446,7 +7617,7 @@
      "name": "stunnel4",
      "state": "active",
      "ports": [],
-     "memory": 2088960,
+     "memory": 3309568,
      "since": "Wed 2026-09-30 06:32:20 UTC",
      "restarts": 0
     }
@@ -7470,7 +7641,10 @@
    ],
    "status": "running",
    "status_reason": "работает: xray, xray, wstunnel, stunnel4",
-   "problems": [],
+   "problems": [
+    "Два выданных ключа ни разу не подключались — решить, удалять ли",
+    "Второй интерфейс awg1 (udp 443) не проверен в работе"
+   ],
    "links": {
     "github": [],
     "web": []
@@ -7481,6 +7655,16 @@
    "name": "Бэкапы и защита серверов",
    "category": "infra",
    "note": "Ночные дампы, копии на 198, проверка сервера (srv-watch), fail2ban, nginx, рабочее место Claude.",
+   "facts": [
+    "Сервер 78: 2 CPU, 2 ГБ RAM (свободно ~850 МБ), диск 58 ГБ (занято 61%)",
+    "srv-watch каждые 5 минут, srv-doctor — полный отчёт, ночной бэкап 78 тянется на 198"
+   ],
+   "history": [
+    {
+     "date": "2026-09-28",
+     "text": "Защита 78: ufw снова включён, исходящий порт 25 закрыт (причина попадания в Spamhaus), fail2ban, обновления"
+    }
+   ],
    "category_name": "Инфраструктура",
    "repos": [],
    "folders": [
@@ -7488,9 +7672,9 @@
      "server": "198",
      "path": "/data/backups",
      "real_path": null,
-     "size": 1288190291,
-     "files": 24635,
-     "last_change": "2026-10-03",
+     "size": 1296103890,
+     "files": 30143,
+     "last_change": "2026-10-04",
      "stack": [],
      "package": null,
      "description": null,
@@ -7624,7 +7808,7 @@
      "name": "fail2ban",
      "state": "active",
      "ports": [],
-     "memory": 25473024,
+     "memory": 26251264,
      "since": "Tue 2026-09-29 14:42:49 UTC",
      "restarts": 0
     },
@@ -7633,7 +7817,7 @@
      "name": "fail2ban",
      "state": "active",
      "ports": [],
-     "memory": 24563712,
+     "memory": 44974080,
      "since": "Wed 2026-09-30 06:32:21 UTC",
      "restarts": 0
     },
@@ -7651,7 +7835,7 @@
      "name": "claude-rc",
      "state": "active",
      "ports": [],
-     "memory": 619130880,
+     "memory": 523862016,
      "since": "Tue 2026-09-29 14:42:49 UTC",
      "restarts": 0
     },
@@ -7663,7 +7847,7 @@
       80,
       443
      ],
-     "memory": 18210816,
+     "memory": 16748544,
      "since": "Tue 2026-09-29 14:42:52 UTC",
      "restarts": 0
     },
@@ -7676,7 +7860,7 @@
       443,
       7443
      ],
-     "memory": 9482240,
+     "memory": 11554816,
      "since": "Wed 2026-09-30 06:32:20 UTC",
      "restarts": 0
     },
@@ -7689,8 +7873,17 @@
       6380,
       7777
      ],
-     "memory": 60219392,
+     "memory": 51654656,
      "since": "Mon 2026-09-28 13:40:14 UTC",
+     "restarts": 0
+    },
+    {
+     "server": "78",
+     "name": "srv-watch",
+     "state": "activating",
+     "ports": [],
+     "memory": 1351680,
+     "since": null,
      "restarts": 0
     }
    ],
@@ -7699,24 +7892,28 @@
     {
      "server": "198",
      "timer": "pull-backup-78.timer",
-     "last": "Sat 2026-10-03 22:35:53 UTC",
+     "last": "Sun 2026-10-04 22:31:15 UTC",
      "description": "Каждую ночь в 03:30 по Алматы"
     },
     {
      "server": "78",
      "timer": "srv-watch.timer",
-     "last": "Sun 2026-10-04 18:22:03 UTC",
+     "last": "Mon 2026-10-05 13:37:30 UTC",
      "description": "Сторож сервера каждые 5 минут"
     }
    ],
    "domains": [],
    "databases": [],
-   "size_total": 1452058561,
-   "last_change": "2026-10-03",
+   "size_total": 1459972160,
+   "last_change": "2026-10-04",
    "stack": [],
    "status": "running",
    "status_reason": "работает: fail2ban, fail2ban, watchdog, claude-rc, nginx, nginx, docker",
-   "problems": [],
+   "problems": [
+    "UFW-логи забивают syslog на 78 — стоит выключить ufw logging",
+    "Диск на 198 почти полный — следить",
+    "сервис srv-watch не работает (activating)"
+   ],
    "links": {
     "github": [],
     "web": []

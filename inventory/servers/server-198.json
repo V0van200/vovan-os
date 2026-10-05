@@ -1,30 +1,30 @@
 {
- "collected_at": "2026-10-04T18:21:08+0000",
+ "collected_at": "2026-10-05T13:37:29+0000",
  "host": {
   "hostname": "server",
   "os": "Ubuntu 24.04.4 LTS",
   "kernel": "6.8.0-142-generic",
   "cpus": 1,
   "ram_total": 1008189440,
-  "ram_available": 215298048,
+  "ram_available": 304734208,
   "load": [
-   0.1162109375,
-   0.13623046875,
-   0.068359375
+   0.20068359375,
+   0.08935546875,
+   0.02001953125
   ],
-  "uptime_s": 445116,
+  "uptime_s": 514497,
   "disks": [
    {
     "mount": "/",
     "size": 5203439616,
-    "used": 4465729536,
-    "avail": 495603712
+    "used": 4515684352,
+    "avail": 445648896
    },
    {
     "mount": "/data",
     "size": 5196382208,
-    "used": 1911844864,
-    "avail": 2999324672
+    "used": 1929773056,
+    "avail": 2981396480
    }
   ],
   "public_ip": "198.13.184.145"
@@ -40,7 +40,7 @@
    "user": "root",
    "workdir": "/root/server-admin",
    "exec": "/root/.local/bin/claude remote-control --name server-198",
-   "memory": 619130880,
+   "memory": 523862016,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/claude-rc.service",
    "ports": []
@@ -55,7 +55,7 @@
    "user": "root",
    "workdir": null,
    "exec": "/usr/bin/fail2ban-server -xf start",
-   "memory": 25473024,
+   "memory": 26251264,
    "restarts": 0,
    "unit_file": "/usr/lib/systemd/system/fail2ban.service",
    "ports": []
@@ -70,7 +70,7 @@
    "user": "root",
    "workdir": null,
    "exec": "/usr/sbin/nginx -g daemon on",
-   "memory": 18210816,
+   "memory": 16748544,
    "restarts": 0,
    "unit_file": "/usr/lib/systemd/system/nginx.service",
    "ports": [
@@ -109,7 +109,7 @@
    "user": "nobody",
    "workdir": null,
    "exec": "/usr/local/bin/xray run -config /usr/local/etc/xray/config.json",
-   "memory": 19607552,
+   "memory": 12636160,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/xray.service",
    "ports": [
@@ -133,22 +133,22 @@
    "timer": "eeklera-deploy.timer",
    "runs": "eeklera-deploy.service",
    "description": "Проверять main каждую минуту",
-   "last": "Sun 2026-10-04 18:20:42 UTC",
+   "last": "Mon 2026-10-05 13:36:53 UTC",
    "next": null
-  },
-  {
-   "timer": "pull-backup-78.timer",
-   "runs": "pull-backup-78.service",
-   "description": "Каждую ночь в 03:30 по Алматы",
-   "last": "Sat 2026-10-03 22:35:53 UTC",
-   "next": "Sun 2026-10-04 22:31:02 UTC"
   },
   {
    "timer": "certbot.timer",
    "runs": "certbot.service",
    "description": "Run certbot twice daily",
-   "last": "Sun 2026-10-04 10:43:53 UTC",
-   "next": "Sun 2026-10-04 23:25:51 UTC"
+   "last": "Mon 2026-10-05 08:46:53 UTC",
+   "next": "Mon 2026-10-05 21:24:09 UTC"
+  },
+  {
+   "timer": "pull-backup-78.timer",
+   "runs": "pull-backup-78.service",
+   "description": "Каждую ночь в 03:30 по Алматы",
+   "last": "Sun 2026-10-04 22:31:15 UTC",
+   "next": "Mon 2026-10-05 22:30:46 UTC"
   }
  ],
  "docker": [],
@@ -585,10 +585,10 @@
  "backups": [
   {
    "dir": "/data/backups",
-   "files": 24887,
-   "size": 5076295242,
-   "latest": "sentra-2026-10-03.sql.gz",
-   "latest_at": "2026-10-03T22:36:04"
+   "files": 30439,
+   "size": 6017777269,
+   "latest": "sentra-2026-10-04.sql.gz",
+   "latest_at": "2026-10-04T22:31:26"
   }
  ],
  "vpn": {
@@ -598,8 +598,8 @@
    "port": "443"
   },
   "awg0": {
-   "peers": 4,
-   "active_24h": 2,
+   "peers": 5,
+   "active_24h": 3,
    "port": "51820"
   },
   "xray": {

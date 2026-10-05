@@ -55,7 +55,7 @@ def routes_for(domain):
 used = {'folders': set(), 'services': set(), 'dbs': set(), 'repos': set(), 'docker': set()}
 projects = []
 for p in spec['projects']:
-    e = {k: p.get(k) for k in ('id', 'name', 'category', 'tags', 'parent', 'note', 'people', 'owner') if p.get(k) is not None}
+    e = {k: p.get(k) for k in ('id', 'name', 'category', 'tags', 'parent', 'note', 'people', 'owner', 'facts', 'history', 'next') if p.get(k) is not None}
     e['category_name'] = spec['categories'][p['category']]
     e['repos'] = []
     for r in p.get('repos', []):
@@ -113,7 +113,7 @@ for p in spec['projects']:
     if p['category'] == 'idea' and e['status'] in ('repo-only', 'empty'): e['status'] = 'idea'
     e['status_reason'] = why
     stopped_svcs = [x for x in e['services'] if x['state'] != 'active']
-    e['problems'] = ([f"сервис {x['name']} не работает ({x['state']})" for x in stopped_svcs] +
+    e['problems'] = (list(p.get('issues', [])) + [f"сервис {x['name']} не работает ({x['state']})" for x in stopped_svcs] +
                      [f"папка {f['path']} удалена (была {f['was']})" for f in broken] +
                      [f"база {d['ref']} не найдена" for d in e['databases'] if d.get('missing')] +
                      [f"домен {d['name']} не настроен на серверах" for d in e['domains'] if not d['routes'] and '(' not in d['name']])
@@ -154,7 +154,10 @@ for p in projects:
     if p.get('people'): c += ['**Кто работает:** ' + '; '.join(p['people']), '']
     if p.get('owner'):
         o = p['owner']; c += ['## Со слов владельца', ''] + [f"- **{t}:** {o[k]}" for k, t in (('when', 'Когда'), ('use', 'Для чего'), ('now', 'Сейчас'), ('plan', 'Планы'), ('extra', 'Ещё')) if o.get(k)] + ([f"- **Приоритет в хабе:** {o['priority']}"] if o.get('priority') else []) + ['']
+    if p.get('facts'): c += ['## Сейчас', ''] + [f'- {x}' for x in p['facts']] + ['']
     if p['problems']: c += ['## ⚠ Проблемы', ''] + [f'- {x}' for x in p['problems']] + ['']
+    if p.get('history'): c += ['## История', ''] + [f"- **{h['date']}** — {h['text']}" for h in p['history']] + ['']
+    if p.get('next'): c += ['## Что дальше', ''] + [f'- {x}' for x in p['next']] + ['']
     if p['links']['web'] or p['links']['github']: c += ['## Ссылки', ''] + [f'- {u}' for u in p['links']['web'] + p['links']['github']] + ['']
     if p['services'] or p['docker']:
         c += ['## Что запущено', '', '| Сервис | Сервер | Состояние | Порты | Память |', '|---|---|---|---|---|']

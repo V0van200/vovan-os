@@ -18,4 +18,4 @@
 
 ## Папки на серверах
 
-- `78:/home/claude/apps/chatguard` — 32.3 МБ, 61 файлов, изменена 2026-10-04, стек: node, express, telegraf, есть .env (значения не читались)
+- `78:/home/claude/apps/chatguard` — 32.3 МБ, 61 файлов, изменена 2026-10-05, стек: node, express, telegraf, есть .env (значения не читались)

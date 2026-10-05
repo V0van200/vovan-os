@@ -1,7 +1,7 @@
 {
  "generated_from": {
-  "198": "2026-10-04T18:21:08+0000",
-  "78": "2026-10-04T18:22:33+0000"
+  "198": "2026-10-05T13:37:29+0000",
+  "78": "2026-10-05T13:37:30+0000"
  },
  "nodes": [
   {
@@ -18,7 +18,7 @@
    "label": "claude-rc",
    "state": "active",
    "ports": [],
-   "memory": 619130880
+   "memory": 523862016
   },
   {
    "id": "service:198:fail2ban",
@@ -26,7 +26,7 @@
    "label": "fail2ban",
    "state": "active",
    "ports": [],
-   "memory": 25473024
+   "memory": 26251264
   },
   {
    "id": "service:198:nginx",
@@ -37,7 +37,7 @@
     80,
     443
    ],
-   "memory": 18210816
+   "memory": 16748544
   },
   {
    "id": "service:198:watchdog",
@@ -57,7 +57,7 @@
     2087,
     8443
    ],
-   "memory": 19607552
+   "memory": 12636160
   },
   {
    "id": "domain:eeklera.online",
@@ -123,7 +123,7 @@
    "ports": [
     3495
    ],
-   "memory": 1695744
+   "memory": 2207744
   },
   {
    "id": "service:78:auth-gateway",
@@ -133,7 +133,7 @@
    "ports": [
     3481
    ],
-   "memory": 3428352
+   "memory": 4337664
   },
   {
    "id": "service:78:beaver-api",
@@ -143,7 +143,7 @@
    "ports": [
     3701
    ],
-   "memory": 2920448
+   "memory": 2846720
   },
   {
    "id": "service:78:beaver-realtime",
@@ -153,7 +153,7 @@
    "ports": [
     3702
    ],
-   "memory": 25509888
+   "memory": 26968064
   },
   {
    "id": "service:78:blenderq",
@@ -163,7 +163,7 @@
    "ports": [
     3520
    ],
-   "memory": 2957312
+   "memory": 3211264
   },
   {
    "id": "service:78:casting-engine",
@@ -173,7 +173,7 @@
    "ports": [
     3503
    ],
-   "memory": 174465024
+   "memory": 25640960
   },
   {
    "id": "service:78:docker",
@@ -185,7 +185,7 @@
     6380,
     7777
    ],
-   "memory": 60219392
+   "memory": 51654656
   },
   {
    "id": "service:78:drop",
@@ -195,7 +195,7 @@
    "ports": [
     3530
    ],
-   "memory": 1708032
+   "memory": 2166784
   },
   {
    "id": "service:78:eeklera-admin",
@@ -205,7 +205,7 @@
    "ports": [
     3505
    ],
-   "memory": 12914688
+   "memory": 13271040
   },
   {
    "id": "service:78:eeklera-analytics",
@@ -215,7 +215,7 @@
    "ports": [
     3610
    ],
-   "memory": 2072576
+   "memory": 1880064
   },
   {
    "id": "service:78:eeklera-chat",
@@ -225,7 +225,7 @@
    "ports": [
     3011
    ],
-   "memory": 2174976
+   "memory": 3018752
   },
   {
    "id": "service:78:eeklera-inquiries",
@@ -235,7 +235,7 @@
    "ports": [
     3504
    ],
-   "memory": 1667072
+   "memory": 2117632
   },
   {
    "id": "service:78:eeklera-sub-bot",
@@ -243,7 +243,7 @@
    "label": "eeklera-sub-bot",
    "state": "active",
    "ports": [],
-   "memory": 14290944
+   "memory": 14364672
   },
   {
    "id": "service:78:exchange",
@@ -253,7 +253,7 @@
    "ports": [
     3497
    ],
-   "memory": 1740800
+   "memory": 2326528
   },
   {
    "id": "service:78:fail2ban",
@@ -261,7 +261,7 @@
    "label": "fail2ban",
    "state": "active",
    "ports": [],
-   "memory": 24563712
+   "memory": 44974080
   },
   {
    "id": "service:78:gate",
@@ -271,7 +271,7 @@
    "ports": [
     3480
    ],
-   "memory": 2699264
+   "memory": 5812224
   },
   {
    "id": "service:78:jarvis",
@@ -281,7 +281,7 @@
    "ports": [
     7070
    ],
-   "memory": 1630208
+   "memory": 2179072
   },
   {
    "id": "service:78:kabluk",
@@ -291,7 +291,7 @@
    "ports": [
     8091
    ],
-   "memory": 91672576
+   "memory": 66351104
   },
   {
    "id": "service:78:mediamtx",
@@ -310,7 +310,7 @@
     8892,
     8892
    ],
-   "memory": 24809472
+   "memory": 27148288
   },
   {
    "id": "service:78:modbot",
@@ -320,7 +320,7 @@
    "ports": [
     3485
    ],
-   "memory": 10285056
+   "memory": 10465280
   },
   {
    "id": "service:78:nginx",
@@ -332,7 +332,7 @@
     443,
     7443
    ],
-   "memory": 9482240
+   "memory": 11554816
   },
   {
    "id": "service:78:pomoshnik-bot",
@@ -340,7 +340,7 @@
    "label": "pomoshnik-bot",
    "state": "active",
    "ports": [],
-   "memory": 13254656
+   "memory": 13549568
   },
   {
    "id": "service:78:sentra-api",
@@ -350,7 +350,7 @@
    "ports": [
     3600
    ],
-   "memory": 22687744
+   "memory": 26251264
   },
   {
    "id": "service:78:sentra-worker",
@@ -358,7 +358,7 @@
    "label": "sentra-worker",
    "state": "active",
    "ports": [],
-   "memory": 48066560
+   "memory": 48500736
   },
   {
    "id": "service:78:sentra2-api",
@@ -368,7 +368,15 @@
    "ports": [
     3601
    ],
-   "memory": 13029376
+   "memory": 13103104
+  },
+  {
+   "id": "service:78:srv-watch",
+   "type": "service",
+   "label": "srv-watch",
+   "state": "activating",
+   "ports": [],
+   "memory": 1351680
   },
   {
    "id": "service:78:strike",
@@ -378,7 +386,7 @@
    "ports": [
     3498
    ],
-   "memory": 1630208
+   "memory": 2277376
   },
   {
    "id": "service:78:stunnel4",
@@ -386,7 +394,7 @@
    "label": "stunnel4",
    "state": "active",
    "ports": [],
-   "memory": 2088960
+   "memory": 3309568
   },
   {
    "id": "service:78:video2md-cloud",
@@ -396,7 +404,7 @@
    "ports": [
     3515
    ],
-   "memory": 3420160
+   "memory": 3715072
   },
   {
    "id": "service:78:webos",
@@ -406,7 +414,7 @@
    "ports": [
     3502
    ],
-   "memory": 1736704
+   "memory": 2211840
   },
   {
    "id": "service:78:wstunnel",
@@ -416,7 +424,7 @@
    "ports": [
     8087
    ],
-   "memory": 6529024
+   "memory": 4464640
   },
   {
    "id": "service:78:xray",
@@ -426,13 +434,13 @@
    "ports": [
     2053
    ],
-   "memory": 17457152
+   "memory": 18223104
   },
   {
    "id": "docker:78:terraria",
    "type": "container",
    "label": "terraria",
-   "state": "Up 3 days"
+   "state": "Up 4 days"
   },
   {
    "id": "docker:78:mtg",
@@ -444,13 +452,13 @@
    "id": "docker:78:sentra-postgres",
    "type": "container",
    "label": "sentra-postgres",
-   "state": "Up 6 days (healthy)"
+   "state": "Up 7 days (healthy)"
   },
   {
    "id": "docker:78:sentra-redis",
    "type": "container",
    "label": "sentra-redis",
-   "state": "Up 6 days (healthy)"
+   "state": "Up 7 days (healthy)"
   },
   {
    "id": "domain:agents.vovan20.ru",
@@ -582,7 +590,7 @@
    "engine": "sqlite",
    "label": "admin.db",
    "tables": 5,
-   "rows": 514
+   "rows": 515
   },
   {
    "id": "db:78-home-claude-apps-eeklera-analytics-analytics-db",
@@ -614,7 +622,7 @@
    "engine": "sqlite",
    "label": "kabluk.sqlite",
    "tables": 49,
-   "rows": 1703
+   "rows": 1721
   },
   {
    "id": "db:78-postgres-sentra",
@@ -622,7 +630,7 @@
    "engine": "postgres",
    "label": "sentra",
    "tables": 102,
-   "rows": 5910
+   "rows": 5911
   },
   {
    "id": "db:78-postgres-sentra_test",
@@ -1086,6 +1094,11 @@
   {
    "from": "server:78",
    "to": "service:78:sentra2-api",
+   "kind": "runs"
+  },
+  {
+   "from": "server:78",
+   "to": "service:78:srv-watch",
    "kind": "runs"
   },
   {

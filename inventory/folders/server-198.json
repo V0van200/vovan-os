@@ -1,5 +1,5 @@
 {
- "collected_at": "2026-10-04T19:20:14+0000",
+ "collected_at": "2026-10-05T13:39:01+0000",
  "folders": [
   {
    "path": "/var/www/eeklera-neuro",
@@ -17,9 +17,9 @@
    "services": [],
    "top": [
     "data.enc",
-    "dl-7aaiDRSAzqKCNlOhamxTJOh5",
-    "dl-_rR1nsxXpPq1cRye",
-    "dl-kRzjSISOwiSQRPGUd8",
+    "dl-***",
+    "dl-***",
+    "dl-***",
     "files.html",
     "graph.html",
     "index.html",
@@ -323,19 +323,20 @@
   {
    "path": "/root/vovan-os",
    "name": "vovan-os",
-   "size": 7166886,
-   "files": 57,
+   "size": 7702775,
+   "files": 115,
    "last_change": "2026-10-04",
    "stack": [],
    "package": null,
    "readme_file": "README.md",
-   "readme": "# Vovan OS — единая система всех проектов ⏎ Здесь собрано **всё, что работает на серверах владельца**: сервисы, сайты, боты, игры, базы данных, деплои, бэкапы, VPN. Связи с 26 репозиториями GitHub. ⏎ По этим данным Astra 6 строит сайт-панель «Vovan OS» (макет — `design/reference-dashboard.png`). ⏎ ## Что где ⏎ | Папка / файл | Что внутри | ⏎ | `docs/SYSTEM-MAP.md` | Карта обоих серверов: железо, сервисы и порты, домены и маршруты, Docker, таймеры, сертификаты, бэкапы, VPN | ⏎ | `docs/PROJECTS.md` | Проекты: что из какого репозитория реально работает, где и на каких доменах | ⏎ | `docs/DATABASES.md` + `docs/databases/` | Все базы (Postgres, SQLite, Redis): таблицы, поля, связи, число строк. **Без данных** | ⏎ | `docs/FOR-ASTRA.md` | Как строить сайт: экраны → откуда брать каждую цифру | ⏎ | `docs/SECURITY.md` | Что никогда не попадает в репозиторий и как это проверяется | ⏎ | `inventory/s",
+   "readme": "# Vovan OS — единая система всех проектов ⏎ Здесь собрано **всё, что работает на серверах владельца**: сервисы, сайты, боты, игры, базы данных, деплои, бэкапы, VPN. Связи с 26 репозиториями GitHub. ⏎ По этим данным Astra 6 строит сайт-панель «Vovan OS» (макет — `design/reference-dashboard.png`). ⏎ ## Что где ⏎ | Папка / файл | Что внутри | ⏎ | **`catalog/`** | **База всех проектов (49): `projects.json` для хаба, оглавление `README.md`, карточки `projects/<id>.md`, формат `SCHEMA.md`** | ⏎ | `docs/SYSTEM-MAP.md` | Карта обоих серверов: железо, сервисы и порты, домены и маршруты, Docker, таймеры, сертификаты, бэкапы, VPN | ⏎ | `docs/PROJECTS.md` | Проекты: что из какого репозитория реально работает, где и на каких доменах | ⏎ | `docs/DATABASES.md` + `docs/databases/` | Все базы (Postgres, SQLite, Redis): таблицы, поля, связи, число строк. **Без данных** | ⏎ | `docs/FOR-ASTRA.md` | Как стро",
    "git": null,
    "has_env_file": false,
    "docker": false,
    "services": [],
    "top": [
     "README.md",
+    "catalog",
     "collector",
     "design",
     "docs",
@@ -367,7 +368,7 @@
   {
    "path": "/root/gh/eeklera-main",
    "name": "eeklera-main",
-   "size": 52168512,
+   "size": 52169002,
    "files": 0,
    "last_change": null,
    "stack": [],
@@ -418,7 +419,7 @@
   {
    "path": "/root/gh/vault",
    "name": "vault",
-   "size": 137490960,
+   "size": 137491052,
    "files": 3095,
    "last_change": "2026-10-02",
    "stack": [],
@@ -442,9 +443,9 @@
   {
    "path": "/data/backups",
    "name": "backups",
-   "size": 1288190291,
-   "files": 24635,
-   "last_change": "2026-10-03",
+   "size": 1296103890,
+   "files": 30143,
+   "last_change": "2026-10-04",
    "stack": [],
    "package": null,
    "readme_file": null,
@@ -478,7 +479,7 @@
    "name": "eeklera-online",
    "size": 545065800,
    "files": 1222,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [],
    "package": null,
    "readme_file": null,

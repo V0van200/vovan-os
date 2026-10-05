@@ -1,5 +1,5 @@
 {
- "collected_at": "2026-10-04T19:19:59+0000",
+ "collected_at": "2026-10-05T13:38:23+0000",
  "folders": [
   {
    "path": "/home/claude/1231",
@@ -997,7 +997,7 @@
    "name": "agent-hub",
    "size": 1053044273,
    "files": 1023,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [],
    "package": null,
    "readme_file": null,
@@ -1126,7 +1126,7 @@
    "name": "chatguard",
    "size": 33832201,
    "files": 61,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [
     "node",
     "express",
@@ -1193,7 +1193,7 @@
    "name": "eeklera-admin",
    "size": 34150053,
    "files": 25,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [
     "node"
    ],
@@ -1428,9 +1428,9 @@
   {
    "path": "/home/claude/apps/pomoshnik-bot",
    "name": "pomoshnik-bot",
-   "size": 754777244,
+   "size": 755804036,
    "files": 63,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [],
    "package": null,
    "readme_file": null,
@@ -1653,7 +1653,7 @@
    "name": "Eeklera",
    "size": 715636953,
    "files": 568,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [],
    "package": null,
    "readme_file": "README.md",
@@ -1765,7 +1765,7 @@
    "name": "vovan-app",
    "size": 331410241,
    "files": 357,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [],
    "package": null,
    "readme_file": "README.md",
@@ -2255,9 +2255,9 @@
   {
    "path": "/eeklera/eeklera-sub-bot",
    "name": "eeklera-sub-bot",
-   "size": 579860403,
+   "size": 580886571,
    "files": 5,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [],
    "package": null,
    "readme_file": null,
@@ -2347,7 +2347,7 @@
    "name": "eeklera_site",
    "size": 434957299,
    "files": 385,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [],
    "package": null,
    "readme_file": null,
@@ -2527,7 +2527,7 @@
   {
    "path": "/root/kabluk-repo",
    "name": "kabluk-repo",
-   "size": 10722393,
+   "size": 10762476,
    "files": 227,
    "last_change": "2026-10-04",
    "stack": [
@@ -2659,17 +2659,17 @@
   {
    "path": "/root/vovan-os",
    "name": "vovan-os",
-   "size": 12858288,
-   "files": 55,
+   "size": 13699392,
+   "files": 115,
    "last_change": "2026-10-04",
    "stack": [],
    "package": null,
    "readme_file": "README.md",
-   "readme": "# Vovan OS — единая система всех проектов ⏎ Здесь собрано **всё, что работает на серверах владельца**: сервисы, сайты, боты, игры, базы данных, деплои, бэкапы, VPN. Связи с 26 репозиториями GitHub. ⏎ По этим данным Astra 6 строит сайт-панель «Vovan OS» (макет — `design/reference-dashboard.png`). ⏎ ## Что где ⏎ | Папка / файл | Что внутри | ⏎ | `docs/SYSTEM-MAP.md` | Карта обоих серверов: железо, сервисы и порты, домены и маршруты, Docker, таймеры, сертификаты, бэкапы, VPN | ⏎ | `docs/PROJECTS.md` | Проекты: что из какого репозитория реально работает, где и на каких доменах | ⏎ | `docs/DATABASES.md` + `docs/databases/` | Все базы (Postgres, SQLite, Redis): таблицы, поля, связи, число строк. **Без данных** | ⏎ | `docs/FOR-ASTRA.md` | Как строить сайт: экраны → откуда брать каждую цифру | ⏎ | `docs/SECURITY.md` | Что никогда не попадает в репозиторий и как это проверяется | ⏎ | `inventory/s",
+   "readme": "# Vovan OS — единая система всех проектов ⏎ Здесь собрано **всё, что работает на серверах владельца**: сервисы, сайты, боты, игры, базы данных, деплои, бэкапы, VPN. Связи с 26 репозиториями GitHub. ⏎ По этим данным Astra 6 строит сайт-панель «Vovan OS» (макет — `design/reference-dashboard.png`). ⏎ ## Что где ⏎ | Папка / файл | Что внутри | ⏎ | **`catalog/`** | **База всех проектов (49): `projects.json` для хаба, оглавление `README.md`, карточки `projects/<id>.md`, формат `SCHEMA.md`** | ⏎ | `docs/SYSTEM-MAP.md` | Карта обоих серверов: железо, сервисы и порты, домены и маршруты, Docker, таймеры, сертификаты, бэкапы, VPN | ⏎ | `docs/PROJECTS.md` | Проекты: что из какого репозитория реально работает, где и на каких доменах | ⏎ | `docs/DATABASES.md` + `docs/databases/` | Все базы (Postgres, SQLite, Redis): таблицы, поля, связи, число строк. **Без данных** | ⏎ | `docs/FOR-ASTRA.md` | Как стро",
    "git": {
     "remote": "git@github-vovan-os:V0van200/vovan-os.git",
     "branch": "main",
-    "last_commit": "2495cf2 2026-10-04T18:26:18+00:00 Vovan OS: инвентарь серверов, проекты, схемы всех баз, граф связей, документы для Astra 6",
+    "last_commit": "744b41d 2026-10-04T19:47:34+00:00 Vovan OS: ответы владельца по проектам — когда, зачем, используется ли сейчас, планы, приоритеты хаба",
     "dirty_files": 0
    },
    "has_env_file": false,
@@ -2677,6 +2677,7 @@
    "services": [],
    "top": [
     "README.md",
+    "catalog",
     "collector",
     "design",
     "docs",
@@ -2705,9 +2706,9 @@
   {
    "path": "/data/kabluk",
    "name": "kabluk",
-   "size": 319911241,
+   "size": 320029231,
    "files": 2736,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [],
    "package": null,
    "readme_file": null,
@@ -2736,7 +2737,7 @@
    "name": "terraria",
    "size": 200075255,
    "files": 529,
-   "last_change": "2026-10-04",
+   "last_change": "2026-10-05",
    "stack": [],
    "package": null,
    "readme_file": null,

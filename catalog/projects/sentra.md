@@ -22,11 +22,11 @@
 
 | Сервис | Сервер | Состояние | Порты | Память |
 |---|---|---|---|---|
-| sentra-api | 78 | active | 3600 | 21.6 МБ |
-| sentra-worker | 78 | active | — | 45.8 МБ |
-| sentra2-api | 78 | active | 3601 | 12.4 МБ |
-| 🐳 sentra-postgres | 78 | Up 6 days (healthy) | — | — |
-| 🐳 sentra-redis | 78 | Up 6 days (healthy) | — | — |
+| sentra-api | 78 | active | 3600 | 25.0 МБ |
+| sentra-worker | 78 | active | — | 46.3 МБ |
+| sentra2-api | 78 | active | 3601 | 12.5 МБ |
+| 🐳 sentra-postgres | 78 | Up 7 days (healthy) | — | — |
+| 🐳 sentra-redis | 78 | Up 7 days (healthy) | — | — |
 
 ## Домены
 
@@ -41,7 +41,7 @@
 
 | База | Сервер | Движок | Таблиц | Строк | Схема |
 |---|---|---|---|---|---|
-| sentra | 78 | postgres | 102 | 5910 | [схема](../../docs/databases/78-postgres-sentra.md) |
+| sentra | 78 | postgres | 102 | 5911 | [схема](../../docs/databases/78-postgres-sentra.md) |
 | sentra_test | 78 | postgres | 103 | 84646 | [схема](../../docs/databases/78-postgres-sentra_test.md) |
 | sentra-redis | 78 | redis | 0 | 0 | [схема](../../docs/databases/78-redis-sentra-redis.md) |
 

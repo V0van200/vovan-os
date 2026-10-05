@@ -17,7 +17,7 @@
 
 | Сервис | Сервер | Состояние | Порты | Память |
 |---|---|---|---|---|
-| pomoshnik-bot | 78 | active | — | 12.6 МБ |
+| pomoshnik-bot | 78 | active | — | 12.9 МБ |
 
 ## Базы данных
 
@@ -45,5 +45,5 @@ https://github.com/V0van200/pomoshnik-bot · private · 1.8 МБ · Python / Tel
 
 ## Папки на серверах
 
-- `78:/home/claude/apps/pomoshnik-bot` — 719.8 МБ, 63 файлов, изменена 2026-10-04, есть .env (значения не читались)
+- `78:/home/claude/apps/pomoshnik-bot` — 720.8 МБ, 63 файлов, изменена 2026-10-05, есть .env (значения не читались)
 - ⚪ `78:/opt/pomoshnik-bot` — не найдена при сканировании

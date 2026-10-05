@@ -1,24 +1,24 @@
 {
- "collected_at": "2026-10-04T18:22:33+0000",
+ "collected_at": "2026-10-05T13:37:30+0000",
  "host": {
   "hostname": "VM-379167",
   "os": "Ubuntu 24.04.5 LTS",
   "kernel": "6.8.0-139-generic",
   "cpus": 2,
   "ram_total": 2066169856,
-  "ram_available": 869171200,
+  "ram_available": 898674688,
   "load": [
-   1.49658203125,
-   1.07666015625,
-   0.884765625
+   0.48974609375,
+   0.6416015625,
+   0.6748046875
   ],
-  "uptime_s": 535360,
+  "uptime_s": 604658,
   "disks": [
    {
     "mount": "/",
     "size": 61285326848,
-    "used": 37061103616,
-    "avail": 24207446016
+    "used": 37038321664,
+    "avail": 24230227968
    },
    {
     "mount": "/boot",
@@ -46,7 +46,7 @@
    "user": "claude",
    "workdir": "/opt/agent-hub",
    "exec": "/usr/bin/node /opt/agent-hub/server.cjs",
-   "memory": 1695744,
+   "memory": 2207744,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/agent-hub.service",
    "ports": [
@@ -66,7 +66,7 @@
    "user": "claude",
    "workdir": "/home/claude/auth-gateway",
    "exec": "/usr/bin/python3 /home/claude/auth-gateway/auth-gateway.py",
-   "memory": 3428352,
+   "memory": 4337664,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/auth-gateway.service",
    "ports": [
@@ -86,7 +86,7 @@
    "user": "claude",
    "workdir": "/home/claude/apps/beaver",
    "exec": "/usr/bin/node /home/claude/apps/beaver/src/api/server.js",
-   "memory": 2920448,
+   "memory": 2846720,
    "restarts": 1,
    "unit_file": "/etc/systemd/system/beaver-api.service",
    "ports": [
@@ -106,7 +106,7 @@
    "user": "claude",
    "workdir": "/home/claude/apps/beaver",
    "exec": "/usr/bin/node /home/claude/apps/beaver/src/realtime/server.js",
-   "memory": 25509888,
+   "memory": 26968064,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/beaver-realtime.service",
    "ports": [
@@ -126,7 +126,7 @@
    "user": "claude",
    "workdir": "/home/claude/blenderq",
    "exec": "/usr/bin/node /home/claude/blenderq/server.cjs",
-   "memory": 2957312,
+   "memory": 3211264,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/blenderq.service",
    "ports": [
@@ -146,7 +146,7 @@
    "user": "claude",
    "workdir": "/home/claude/apps/casting-engine",
    "exec": "/usr/bin/node /home/claude/apps/casting-engine/server.cjs",
-   "memory": 174465024,
+   "memory": 25640960,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/casting-engine.service",
    "ports": [
@@ -166,7 +166,7 @@
    "user": "root",
    "workdir": null,
    "exec": "/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock",
-   "memory": 60219392,
+   "memory": 51654656,
    "restarts": 0,
    "unit_file": "/usr/lib/systemd/system/docker.service",
    "ports": [
@@ -194,7 +194,7 @@
    "user": "claude",
    "workdir": null,
    "exec": "/usr/bin/node /home/claude/drop/server.cjs",
-   "memory": 1708032,
+   "memory": 2166784,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/drop.service",
    "ports": [
@@ -214,7 +214,7 @@
    "user": "claude",
    "workdir": "/home/claude/apps/eeklera-admin",
    "exec": "/usr/bin/node /home/claude/apps/eeklera-admin/server.cjs",
-   "memory": 12914688,
+   "memory": 13271040,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/eeklera-admin.service",
    "ports": [
@@ -234,7 +234,7 @@
    "user": "claude",
    "workdir": "/home/claude/apps/eeklera-analytics",
    "exec": "/usr/bin/node /home/claude/apps/eeklera-analytics/server.cjs",
-   "memory": 2072576,
+   "memory": 1880064,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/eeklera-analytics.service",
    "ports": [
@@ -254,7 +254,7 @@
    "user": "www-data",
    "workdir": "/var/www/eeklera_site/chat",
    "exec": "/usr/bin/node /var/www/eeklera_site/chat/chat-server.js",
-   "memory": 2174976,
+   "memory": 3018752,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/eeklera-chat.service",
    "ports": [
@@ -274,7 +274,7 @@
    "user": "claude",
    "workdir": "/home/claude/apps/eeklera-inquiries",
    "exec": "/usr/bin/node /home/claude/apps/eeklera-inquiries/server.cjs",
-   "memory": 1667072,
+   "memory": 2117632,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/eeklera-inquiries.service",
    "ports": [
@@ -294,7 +294,7 @@
    "user": "claude",
    "workdir": "/opt/eeklera-sub-bot",
    "exec": "/opt/eeklera-sub-bot/venv/bin/python /opt/eeklera-sub-bot/bot.py",
-   "memory": 14290944,
+   "memory": 14364672,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/eeklera-sub-bot.service",
    "ports": []
@@ -309,7 +309,7 @@
    "user": "claude",
    "workdir": "/home/claude/exchange",
    "exec": "/usr/bin/node /home/claude/exchange/server.cjs",
-   "memory": 1740800,
+   "memory": 2326528,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/exchange.service",
    "ports": [
@@ -329,7 +329,7 @@
    "user": "root",
    "workdir": null,
    "exec": "/usr/bin/fail2ban-server -xf start",
-   "memory": 24563712,
+   "memory": 44974080,
    "restarts": 0,
    "unit_file": "/usr/lib/systemd/system/fail2ban.service",
    "ports": []
@@ -344,7 +344,7 @@
    "user": "claude",
    "workdir": "/home/claude/gate",
    "exec": "/usr/bin/node /home/claude/gate/server.cjs",
-   "memory": 2699264,
+   "memory": 5812224,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/gate.service",
    "ports": [
@@ -364,7 +364,7 @@
    "user": "root",
    "workdir": "/opt/jarvis",
    "exec": "/usr/bin/node /opt/jarvis/server.cjs",
-   "memory": 1630208,
+   "memory": 2179072,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/jarvis.service",
    "ports": [
@@ -384,7 +384,7 @@
    "user": "root",
    "workdir": "/data/kabluk/current",
    "exec": "/opt/node24/bin/node scripts/self-host.mjs",
-   "memory": 91672576,
+   "memory": 66351104,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/kabluk.service",
    "ports": [
@@ -404,7 +404,7 @@
    "user": "claude",
    "workdir": "/opt/mediamtx",
    "exec": "/opt/mediamtx/mediamtx /opt/mediamtx/mediamtx.yml",
-   "memory": 24809472,
+   "memory": 27148288,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/mediamtx.service",
    "ports": [
@@ -460,7 +460,7 @@
    "user": "claude",
    "workdir": "/home/claude/modbot",
    "exec": "/usr/bin/node /home/claude/modbot/server.cjs",
-   "memory": 10285056,
+   "memory": 10465280,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/modbot.service",
    "ports": [
@@ -480,7 +480,7 @@
    "user": "root",
    "workdir": null,
    "exec": "/usr/sbin/nginx -g daemon on",
-   "memory": 9482240,
+   "memory": 11554816,
    "restarts": 0,
    "unit_file": "/usr/lib/systemd/system/nginx.service",
    "ports": [
@@ -508,7 +508,7 @@
    "user": "claude",
    "workdir": "/opt/pomoshnik-bot",
    "exec": "/opt/pomoshnik-bot/venv/bin/python3 bot.py",
-   "memory": 13254656,
+   "memory": 13549568,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/pomoshnik-bot.service",
    "ports": []
@@ -523,7 +523,7 @@
    "user": "claude",
    "workdir": "/home/claude/apps/sentra",
    "exec": "/usr/bin/node /home/claude/apps/sentra/src/index.js",
-   "memory": 22687744,
+   "memory": 26251264,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/sentra-api.service",
    "ports": [
@@ -543,7 +543,7 @@
    "user": "claude",
    "workdir": "/home/claude/apps/sentra",
    "exec": "/usr/bin/node /home/claude/apps/sentra/src/worker.js",
-   "memory": 48066560,
+   "memory": 48500736,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/sentra-worker.service",
    "ports": []
@@ -558,7 +558,7 @@
    "user": "claude",
    "workdir": "/home/claude/apps/sentra2",
    "exec": "/usr/bin/node /home/claude/apps/sentra2/src/server.js",
-   "memory": 13029376,
+   "memory": 13103104,
    "restarts": 1,
    "unit_file": "/etc/systemd/system/sentra2-api.service",
    "ports": [
@@ -567,6 +567,21 @@
      "tcp"
     ]
    ]
+  },
+  {
+   "name": "srv-watch",
+   "description": "Сторож сервера (srv-watch)",
+   "enabled": "static",
+   "state": "activating",
+   "sub": "start",
+   "since": null,
+   "user": "root",
+   "workdir": null,
+   "exec": "/usr/local/sbin/srv-watch",
+   "memory": 1351680,
+   "restarts": 0,
+   "unit_file": "/etc/systemd/system/srv-watch.service",
+   "ports": []
   },
   {
    "name": "strike",
@@ -578,7 +593,7 @@
    "user": "claude",
    "workdir": "/home/claude/strike",
    "exec": "/usr/bin/node /home/claude/strike/server.cjs",
-   "memory": 1630208,
+   "memory": 2277376,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/strike.service",
    "ports": [
@@ -598,7 +613,7 @@
    "user": "root",
    "workdir": null,
    "exec": "/etc/init.d/stunnel4 start",
-   "memory": 2088960,
+   "memory": 3309568,
    "restarts": 0,
    "unit_file": "/run/systemd/generator.late/stunnel4.service",
    "ports": []
@@ -613,7 +628,7 @@
    "user": "claude",
    "workdir": "/opt/video2md-cloud",
    "exec": "/opt/video2md-cloud/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 3515 --workers 1",
-   "memory": 3420160,
+   "memory": 3715072,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/video2md-cloud.service",
    "ports": [
@@ -633,7 +648,7 @@
    "user": "claude",
    "workdir": "/home/claude/apps/webos",
    "exec": "/usr/bin/node /home/claude/apps/webos/server.cjs",
-   "memory": 1736704,
+   "memory": 2211840,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/webos.service",
    "ports": [
@@ -653,7 +668,7 @@
    "user": "claude",
    "workdir": null,
    "exec": "/usr/local/bin/wstunnel server --restrict-to 127.0.0.1:8443 --*** bf2f49708c138f52 ws://127.0.0.1:8087",
-   "memory": 6529024,
+   "memory": 4464640,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/wstunnel.service",
    "ports": [
@@ -673,7 +688,7 @@
    "user": "nobody",
    "workdir": null,
    "exec": "/usr/local/bin/xray run -config /usr/local/etc/xray/config.json",
-   "memory": 17457152,
+   "memory": 18223104,
    "restarts": 0,
    "unit_file": "/etc/systemd/system/xray.service",
    "ports": [
@@ -689,50 +704,50 @@
    "timer": "eeklera-deploy.timer",
    "runs": "eeklera-deploy.service",
    "description": "Проверять git на новые коммиты раз в минуту",
-   "last": "Sun 2026-10-04 18:22:20 UTC",
+   "last": "Mon 2026-10-05 13:36:46 UTC",
    "next": null
   },
   {
    "timer": "terraria-deploy.timer",
    "runs": "terraria-deploy.service",
    "description": "Terraria GitHub deploy every minute",
-   "last": "Sun 2026-10-04 18:22:20 UTC",
+   "last": "Mon 2026-10-05 13:36:46 UTC",
    "next": null
   },
   {
    "timer": "kabluk-deploy.timer",
    "runs": "kabluk-deploy.service",
    "description": "Kabluk deploy poll",
-   "last": "Sun 2026-10-04 18:22:20 UTC",
-   "next": null
-  },
-  {
-   "timer": "srv-watch.timer",
-   "runs": "srv-watch.service",
-   "description": "Сторож сервера каждые 5 минут",
-   "last": "Sun 2026-10-04 18:22:03 UTC",
+   "last": "Mon 2026-10-05 13:36:46 UTC",
    "next": null
   },
   {
    "timer": "certbot.timer",
    "runs": "certbot.service",
    "description": "Run certbot twice daily",
-   "last": "Sun 2026-10-04 01:58:31 UTC",
-   "next": "Sun 2026-10-04 21:59:46 UTC"
+   "last": "Mon 2026-10-05 05:10:51 UTC",
+   "next": "Mon 2026-10-05 16:39:27 UTC"
   },
   {
    "timer": "kabluk-backup.timer",
    "runs": "kabluk-backup.service",
    "description": "Kabluk daily DB backup",
-   "last": "Sun 2026-10-04 04:30:01 UTC",
-   "next": "Mon 2026-10-05 04:30:00 UTC"
+   "last": "Mon 2026-10-05 04:30:01 UTC",
+   "next": "Tue 2026-10-06 04:30:00 UTC"
+  },
+  {
+   "timer": "srv-watch.timer",
+   "runs": "srv-watch.service",
+   "description": "Сторож сервера каждые 5 минут",
+   "last": "Mon 2026-10-05 13:37:30 UTC",
+   "next": null
   }
  ],
  "docker": [
   {
    "name": "terraria",
    "image": "ghcr.io/pryaxis/tshock:latest",
-   "status": "Up 3 days",
+   "status": "Up 4 days",
    "ports": "0.0.0.0:7777->7777/tcp, [::]:7777->7777/tcp, 7878/tcp",
    "created": "2026-09-29 16:47:57 +0000 UTC"
   },
@@ -746,14 +761,14 @@
   {
    "name": "sentra-postgres",
    "image": "postgres:16-alpine",
-   "status": "Up 6 days (healthy)",
+   "status": "Up 7 days (healthy)",
    "ports": "127.0.0.1:5433->5432/tcp",
    "created": "2026-09-07 10:44:25 +0000 UTC"
   },
   {
    "name": "sentra-redis",
    "image": "redis:7-alpine",
-   "status": "Up 6 days (healthy)",
+   "status": "Up 7 days (healthy)",
    "ports": "127.0.0.1:6380->6379/tcp",
    "created": "2026-09-07 10:44:25 +0000 UTC"
   }
@@ -2499,7 +2514,7 @@
   {
    "path": "/home/claude/apps/pomoshnik-bot",
    "name": "pomoshnik-bot",
-   "size": 754723892,
+   "size": 755803412,
    "stack": [],
    "git": null,
    "has_env_file": true,
@@ -10964,7 +10979,7 @@
     },
     {
      "table": "notifications",
-     "rows": 22,
+     "rows": 23,
      "columns": [
       {
        "name": "id",
@@ -11405,7 +11420,7 @@
     },
     {
      "table": "actions",
-     "rows": 485,
+     "rows": 486,
      "columns": [
       {
        "name": "id",
@@ -12246,7 +12261,7 @@
     },
     {
      "table": "econ_jobs",
-     "rows": 19,
+     "rows": 21,
      "columns": [
       {
        "name": "key",
@@ -12665,7 +12680,7 @@
     },
     {
      "table": "ledger",
-     "rows": 498,
+     "rows": 512,
      "columns": [
       {
        "name": "id",
@@ -13734,7 +13749,7 @@
     },
     {
      "table": "tax_charges",
-     "rows": 0,
+     "rows": 1,
      "columns": [
       {
        "name": "key",
@@ -14486,7 +14501,7 @@
     },
     {
      "table": "public.chat_members",
-     "rows": 265,
+     "rows": 268,
      "columns": [
       {
        "name": "chat_id",
@@ -16220,7 +16235,7 @@
     },
     {
      "table": "public.message_stats",
-     "rows": 225,
+     "rows": 230,
      "columns": [
       {
        "name": "chat_id",
@@ -16256,7 +16271,7 @@
     },
     {
      "table": "public.mod_actions",
-     "rows": 17,
+     "rows": 18,
      "columns": [
       {
        "name": "id",
@@ -17105,7 +17120,7 @@
     },
     {
      "table": "public.scheduled_tasks",
-     "rows": 2124,
+     "rows": 2095,
      "columns": [
       {
        "name": "id",
@@ -17872,7 +17887,7 @@
     },
     {
      "table": "public.tg_users",
-     "rows": 318,
+     "rows": 321,
      "columns": [
       {
        "name": "tg_user_id",
@@ -17913,7 +17928,7 @@
     },
     {
      "table": "public.user_messages",
-     "rows": 592,
+     "rows": 610,
      "columns": [
       {
        "name": "id",
@@ -25391,9 +25406,9 @@
   {
    "dir": "/data/kabluk/backups",
    "files": 40,
-   "size": 2527071,
-   "latest": "db-20261004-073237-pre-b83c2cf.sqlite.gz",
-   "latest_at": "2026-10-04T07:32:38"
+   "size": 2644957,
+   "latest": "db-20261005-043002-daily.sqlite.gz",
+   "latest_at": "2026-10-05T04:30:02"
   }
  ],
  "vpn": {

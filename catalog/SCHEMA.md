@@ -21,8 +21,12 @@
 | parent | id? | Если это часть другого проекта (Каблук-Сити → kabluk) |
 | note | текст | Что это за проект, человеческим языком |
 | people[] | строки | Кто им занимается |
+| owner | {when, use, now, plan, extra, priority} | Ответы владельца: когда, зачем, что сейчас, планы, приоритет в хабе (1 — главный) |
+| facts[] | строки? | Свежие факты: версия, число игроков, бэкапы, конфигурация |
+| history[] | {date, text}? | Что и когда менялось (по возрастанию дат) |
+| next[] | строки? | Что дальше по проекту |
 | status, status_reason | | Статус (см. statuses) и почему |
-| problems[] | строки | Что сломано: упавший сервис, удалённая папка, ненастроенный домен |
+| problems[] | строки | Что сломано: известные баги (вручную) + упавший сервис, удалённая папка, ненастроенный домен (автоматически) |
 | links.web[], links.github[] | URL | Куда перейти |
 | repos[] | {name, url, visibility, size, stack, description, readme, root_files[], exists} | Репозитории GitHub |
 | folders[] | {server, path, real_path, size, files, last_change, stack[], package, description, readme, git, docker, has_env_file, top[]} или {broken, was} / {missing} | Папки на серверах |

@@ -265,7 +265,7 @@ erDiagram
 | text | text | да |  |
 | created_at | timestamp with time zone | да |  |
 
-## public.chat_members — 265 строк
+## public.chat_members — 268 строк
 
 | Поле | Тип | Обязательное | Ключ |
 |---|---|---|---|
@@ -779,7 +779,7 @@ erDiagram
 | created_at | timestamp with time zone | да |  |
 | resolved_at | timestamp with time zone |  |  |
 
-## public.message_stats — 225 строк
+## public.message_stats — 230 строк
 
 | Поле | Тип | Обязательное | Ключ |
 |---|---|---|---|
@@ -790,7 +790,7 @@ erDiagram
 | username | text |  |  |
 | full_name | text |  |  |
 
-## public.mod_actions — 17 строк
+## public.mod_actions — 18 строк
 
 | Поле | Тип | Обязательное | Ключ |
 |---|---|---|---|
@@ -1032,7 +1032,7 @@ erDiagram
 | option | text | да |  |
 | created_at | timestamp with time zone | да |  |
 
-## public.scheduled_tasks — 2124 строк
+## public.scheduled_tasks — 2095 строк
 
 | Поле | Тип | Обязательное | Ключ |
 |---|---|---|---|
@@ -1250,7 +1250,7 @@ erDiagram
 | delivered_at | timestamp with time zone |  |  |
 | read_at | timestamp with time zone |  |  |
 
-## public.tg_users — 318 строк
+## public.tg_users — 321 строк
 
 | Поле | Тип | Обязательное | Ключ |
 |---|---|---|---|
@@ -1262,7 +1262,7 @@ erDiagram
 | first_seen | timestamp with time zone | да |  |
 | last_seen | timestamp with time zone | да |  |
 
-## public.user_messages — 592 строк
+## public.user_messages — 610 строк
 
 | Поле | Тип | Обязательное | Ключ |
 |---|---|---|---|

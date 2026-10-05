@@ -55,6 +55,6 @@ https://github.com/V0van200/vovan-app · private · 693.0 КБ · FastAPI / Reac
 
 ## Папки на серверах
 
-- `78:/home/claude/apps/agent-hub/projects/vovan-app` — 316.1 МБ, 357 файлов, изменена 2026-10-04
+- `78:/home/claude/apps/agent-hub/projects/vovan-app` — 316.1 МБ, 357 файлов, изменена 2026-10-05
   - README: # vovan-app · Проект агентной системы.
 - 🔴 `78:/opt/vovan-app` — **удалена** (вела в `/srv/projects/vovan-app`)

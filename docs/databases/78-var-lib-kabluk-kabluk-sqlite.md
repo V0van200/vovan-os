@@ -14,7 +14,7 @@
 | allow_negative | INTEGER | да |  |
 | created_at | INTEGER | да |  |
 
-## actions — 485 строк
+## actions — 486 строк
 
 | Поле | Тип | Обязательное | Ключ |
 |---|---|---|---|
@@ -204,7 +204,7 @@
 | status | TEXT | да |  |
 | created_at | INTEGER | да |  |
 
-## econ_jobs — 19 строк
+## econ_jobs — 21 строк
 
 | Поле | Тип | Обязательное | Ключ |
 |---|---|---|---|
@@ -310,7 +310,7 @@
 | resource | TEXT | да | PK |
 | qty | INTEGER | да |  |
 
-## ledger — 498 строк
+## ledger — 512 строк
 
 | Поле | Тип | Обязательное | Ключ |
 |---|---|---|---|
@@ -537,7 +537,7 @@
 | created_at | INTEGER | да |  |
 | updated_at | INTEGER | да |  |
 
-## tax_charges — 0 строк
+## tax_charges — 1 строк
 
 | Поле | Тип | Обязательное | Ключ |
 |---|---|---|---|

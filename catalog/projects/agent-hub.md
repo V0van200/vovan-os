@@ -19,7 +19,7 @@
 
 | Сервис | Сервер | Состояние | Порты | Память |
 |---|---|---|---|---|
-| agent-hub | 78 | active | 3495 | 1.6 МБ |
+| agent-hub | 78 | active | 3495 | 2.1 МБ |
 
 ## Домены
 
@@ -49,7 +49,7 @@ https://github.com/V0van200/server-misc · private · 706.0 КБ · Python / Nod
 
 ## Папки на серверах
 
-- `78:/home/claude/apps/agent-hub` — 1004.3 МБ, 1023 файлов, изменена 2026-10-04
+- `78:/home/claude/apps/agent-hub` — 1004.3 МБ, 1023 файлов, изменена 2026-10-05
 - ⚪ `78:/opt/agent-hub` — не найдена при сканировании
 - 🔴 `78:/home/claude/agents` — **удалена** (вела в `/srv/projects/agents`)
 - 🔴 `78:/home/claude/team` — **удалена** (вела в `/srv/projects/team`)

@@ -4,19 +4,19 @@
 
 ## Сервер 198 — 198.13.184.145 (server)
 
-- Система: Ubuntu 24.04.4 LTS, ядро 6.8.0-142-generic; CPU: 1; RAM: 961.5 МБ (свободно 205.3 МБ); нагрузка 0.12, 0.14, 0.07
-- Диски: / 4.2 ГБ из 4.8 ГБ (85%); /data 1.8 ГБ из 4.8 ГБ (36%)
-- Снимок: 2026-10-04T18:21:08+0000
+- Система: Ubuntu 24.04.4 LTS, ядро 6.8.0-142-generic; CPU: 1; RAM: 961.5 МБ (свободно 290.6 МБ); нагрузка 0.20, 0.09, 0.02
+- Диски: / 4.2 ГБ из 4.8 ГБ (86%); /data 1.8 ГБ из 4.8 ГБ (37%)
+- Снимок: 2026-10-05T13:37:29+0000
 
 ### Сервисы
 
 | Сервис | Состояние | Порты | Память | Папка | Описание |
 |---|---|---|---|---|---|
-| claude-rc | active/running | — | 590.4 МБ | /root/server-admin | Claude Code Remote Control (server-198) |
-| fail2ban | active/running | — | 24.3 МБ | — | Fail2Ban Service |
-| nginx | active/running | 80, 443 | 17.4 МБ | — | A high performance web server and a reverse proxy server |
+| claude-rc | active/running | — | 499.6 МБ | /root/server-admin | Claude Code Remote Control (server-198) |
+| fail2ban | active/running | — | 25.0 МБ | — | Fail2Ban Service |
+| nginx | active/running | 80, 443 | 16.0 МБ | — | A high performance web server and a reverse proxy server |
 | watchdog | active/running | — | 580.0 КБ | — | watchdog daemon |
-| xray | active/running | 2053, 2087, 8443 | 18.7 МБ | — | Xray Service |
+| xray | active/running | 2053, 2087, 8443 | 12.1 МБ | — | Xray Service |
 
 ### Домены и маршруты (nginx)
 
@@ -61,9 +61,9 @@
 
 ### Таймеры (регулярные задачи)
 
-- **eeklera-deploy.timer** → eeklera-deploy.service: Проверять main каждую минуту; последний запуск Sun 2026-10-04 18:20:42 UTC
-- **pull-backup-78.timer** → pull-backup-78.service: Каждую ночь в 03:30 по Алматы; последний запуск Sat 2026-10-03 22:35:53 UTC
-- **certbot.timer** → certbot.service: Run certbot twice daily; последний запуск Sun 2026-10-04 10:43:53 UTC
+- **eeklera-deploy.timer** → eeklera-deploy.service: Проверять main каждую минуту; последний запуск Mon 2026-10-05 13:36:53 UTC
+- **certbot.timer** → certbot.service: Run certbot twice daily; последний запуск Mon 2026-10-05 08:46:53 UTC
+- **pull-backup-78.timer** → pull-backup-78.service: Каждую ночь в 03:30 по Алматы; последний запуск Sun 2026-10-04 22:31:15 UTC
 
 ### Сертификаты HTTPS
 
@@ -73,55 +73,56 @@
 
 ### Бэкапы
 
-- `/data/backups`: 24887 файлов, 4.7 ГБ; последний `sentra-2026-10-03.sql.gz` (2026-10-03T22:36:04)
+- `/data/backups`: 30439 файлов, 5.6 ГБ; последний `sentra-2026-10-04.sql.gz` (2026-10-04T22:31:26)
 
 ### VPN (только счётчики, без ключей)
 
 - awg1: {"peers": 1, "active_24h": 0, "port": "443"}
-- awg0: {"peers": 4, "active_24h": 2, "port": "51820"}
+- awg0: {"peers": 5, "active_24h": 3, "port": "51820"}
 - xray: {"running": true}
 
 ## Сервер 78 — 78.17.19.43 (VM-379167)
 
-- Система: Ubuntu 24.04.5 LTS, ядро 6.8.0-139-generic; CPU: 2; RAM: 1.9 ГБ (свободно 828.9 МБ); нагрузка 1.50, 1.08, 0.88
+- Система: Ubuntu 24.04.5 LTS, ядро 6.8.0-139-generic; CPU: 2; RAM: 1.9 ГБ (свободно 857.0 МБ); нагрузка 0.49, 0.64, 0.67
 - Диски: / 34.5 ГБ из 57.1 ГБ (60%); /boot 116.6 МБ из 880.4 МБ (13%); /boot/efi 6.1 МБ из 104.3 МБ (5%)
-- Снимок: 2026-10-04T18:22:33+0000
+- Снимок: 2026-10-05T13:37:30+0000
 
 ### Сервисы
 
 | Сервис | Состояние | Порты | Память | Папка | Описание |
 |---|---|---|---|---|---|
-| agent-hub | active/running | 3495 | 1.6 МБ | /opt/agent-hub | Vovan Claude - агентная система (веб поверх Claude Code) |
-| auth-gateway | active/running | 3481 | 3.3 МБ | /home/claude/auth-gateway | Auth Gateway Service |
-| beaver-api | active/running | 3701 | 2.8 МБ | /home/claude/apps/beaver | Beaver API (HTTP, вход и статика) |
-| beaver-realtime | active/running | 3702 | 24.3 МБ | /home/claude/apps/beaver | Beaver Realtime (WebSocket, такт мира) |
-| blenderq | active/running | 3520 | 2.8 МБ | /home/claude/blenderq | Blender job queue (agent on owner PC pulls jobs over HTTPS) |
-| casting-engine | active/running | 3503 | 166.4 МБ | /home/claude/apps/casting-engine | Casting opportunities monitoring engine for Valeria Kolyagina |
-| docker | active/running | 5433, 6380, 7777 | 57.4 МБ | — | Docker Application Container Engine |
-| drop | active/running | 3530 | 1.6 МБ | — | Drop - simplest file upload for Vovan |
-| eeklera-admin | active/running | 3505 | 12.3 МБ | /home/claude/apps/eeklera-admin | EEKLERA admin — кабинет Валерии Колягиной |
-| eeklera-analytics | active/running | 3610 | 2.0 МБ | /home/claude/apps/eeklera-analytics | EEKLERA analytics (self-hosted stats for eeklera.online) |
-| eeklera-chat | active/running | 3011 | 2.1 МБ | /var/www/eeklera_site/chat | EEKLERA Team Chat Backend |
-| eeklera-inquiries | active/running | 3504 | 1.6 МБ | /home/claude/apps/eeklera-inquiries | EEKLERA spheres — inquiry form backend (acting/modeling/streaming) |
-| eeklera-sub-bot | active/running | — | 13.6 МБ | /opt/eeklera-sub-bot | EEKLERA Subscription Bot (Telegram private channel sales) |
-| exchange | active/running | 3497 | 1.7 МБ | /home/claude/exchange | Exchange - file/chat drop between Vovan and Claude |
-| fail2ban | active/running | — | 23.4 МБ | — | Fail2Ban Service |
-| gate | active/running | 3480 | 2.6 МБ | /home/claude/gate | GATE — WireGuard VPN management panel |
-| jarvis | active/running | 7070 | 1.6 МБ | /opt/jarvis | JARVIS — обзорная панель сервера |
-| kabluk | active/running | 8091 | 87.4 МБ | /data/kabluk/current | Kabluk game |
-| mediamtx | active/running | 1935, 8000, 8001, 8189, 8554, 8888, 8889, 8890, 8892, 8892 | 23.7 МБ | /opt/mediamtx | MediaMTX streaming ingest server (Lera stream relay) |
-| modbot | active/running | 3485 | 9.8 МБ | /home/claude/modbot | ModBot - Twitch moderator bots site |
-| nginx | active/running | 80, 443, 7443 | 9.0 МБ | — | A high performance web server and a reverse proxy server |
-| pomoshnik-bot | active/running | — | 12.6 МБ | /opt/pomoshnik-bot | Помощник — Personal AI Telegram Bot |
-| sentra-api | active/running | 3600 | 21.6 МБ | /home/claude/apps/sentra | Sentra API |
-| sentra-worker | active/running | — | 45.8 МБ | /home/claude/apps/sentra | Sentra worker (авто-подключение чатов) |
-| sentra2-api | active/running | 3601 | 12.4 МБ | /home/claude/apps/sentra2 | Sentra2 API (rebuild) |
-| strike | active/running | 3498 | 1.6 МБ | /home/claude/strike | Strike - маленький FPS-мультиплеер для друзей |
-| stunnel4 | active/running | — | 2.0 МБ | — | LSB: Start or stop stunnel 4.x (TLS tunnel for network daemons) |
-| video2md-cloud | active/running | 3515 | 3.3 МБ | /opt/video2md-cloud | Video2MD Cloud (vovan20.ru/admin/video2md) |
-| webos | active/running | 3502 | 1.7 МБ | /home/claude/apps/webos | VOVAN OS — web desktop admin shell |
-| wstunnel | active/running | 8087 | 6.2 МБ | — | wstunnel (WireGuard внутри HTTPS — обход фильтрации по типу трафика) |
-| xray | active/running | 2053 | 16.6 МБ | — | Xray Service |
+| agent-hub | active/running | 3495 | 2.1 МБ | /opt/agent-hub | Vovan Claude - агентная система (веб поверх Claude Code) |
+| auth-gateway | active/running | 3481 | 4.1 МБ | /home/claude/auth-gateway | Auth Gateway Service |
+| beaver-api | active/running | 3701 | 2.7 МБ | /home/claude/apps/beaver | Beaver API (HTTP, вход и статика) |
+| beaver-realtime | active/running | 3702 | 25.7 МБ | /home/claude/apps/beaver | Beaver Realtime (WebSocket, такт мира) |
+| blenderq | active/running | 3520 | 3.1 МБ | /home/claude/blenderq | Blender job queue (agent on owner PC pulls jobs over HTTPS) |
+| casting-engine | active/running | 3503 | 24.5 МБ | /home/claude/apps/casting-engine | Casting opportunities monitoring engine for Valeria Kolyagina |
+| docker | active/running | 5433, 6380, 7777 | 49.3 МБ | — | Docker Application Container Engine |
+| drop | active/running | 3530 | 2.1 МБ | — | Drop - simplest file upload for Vovan |
+| eeklera-admin | active/running | 3505 | 12.7 МБ | /home/claude/apps/eeklera-admin | EEKLERA admin — кабинет Валерии Колягиной |
+| eeklera-analytics | active/running | 3610 | 1.8 МБ | /home/claude/apps/eeklera-analytics | EEKLERA analytics (self-hosted stats for eeklera.online) |
+| eeklera-chat | active/running | 3011 | 2.9 МБ | /var/www/eeklera_site/chat | EEKLERA Team Chat Backend |
+| eeklera-inquiries | active/running | 3504 | 2.0 МБ | /home/claude/apps/eeklera-inquiries | EEKLERA spheres — inquiry form backend (acting/modeling/streaming) |
+| eeklera-sub-bot | active/running | — | 13.7 МБ | /opt/eeklera-sub-bot | EEKLERA Subscription Bot (Telegram private channel sales) |
+| exchange | active/running | 3497 | 2.2 МБ | /home/claude/exchange | Exchange - file/chat drop between Vovan and Claude |
+| fail2ban | active/running | — | 42.9 МБ | — | Fail2Ban Service |
+| gate | active/running | 3480 | 5.5 МБ | /home/claude/gate | GATE — WireGuard VPN management panel |
+| jarvis | active/running | 7070 | 2.1 МБ | /opt/jarvis | JARVIS — обзорная панель сервера |
+| kabluk | active/running | 8091 | 63.3 МБ | /data/kabluk/current | Kabluk game |
+| mediamtx | active/running | 1935, 8000, 8001, 8189, 8554, 8888, 8889, 8890, 8892, 8892 | 25.9 МБ | /opt/mediamtx | MediaMTX streaming ingest server (Lera stream relay) |
+| modbot | active/running | 3485 | 10.0 МБ | /home/claude/modbot | ModBot - Twitch moderator bots site |
+| nginx | active/running | 80, 443, 7443 | 11.0 МБ | — | A high performance web server and a reverse proxy server |
+| pomoshnik-bot | active/running | — | 12.9 МБ | /opt/pomoshnik-bot | Помощник — Personal AI Telegram Bot |
+| sentra-api | active/running | 3600 | 25.0 МБ | /home/claude/apps/sentra | Sentra API |
+| sentra-worker | active/running | — | 46.3 МБ | /home/claude/apps/sentra | Sentra worker (авто-подключение чатов) |
+| sentra2-api | active/running | 3601 | 12.5 МБ | /home/claude/apps/sentra2 | Sentra2 API (rebuild) |
+| srv-watch | activating/start | — | 1.3 МБ | — | Сторож сервера (srv-watch) |
+| strike | active/running | 3498 | 2.2 МБ | /home/claude/strike | Strike - маленький FPS-мультиплеер для друзей |
+| stunnel4 | active/running | — | 3.2 МБ | — | LSB: Start or stop stunnel 4.x (TLS tunnel for network daemons) |
+| video2md-cloud | active/running | 3515 | 3.5 МБ | /opt/video2md-cloud | Video2MD Cloud (vovan20.ru/admin/video2md) |
+| webos | active/running | 3502 | 2.1 МБ | /home/claude/apps/webos | VOVAN OS — web desktop admin shell |
+| wstunnel | active/running | 8087 | 4.3 МБ | — | wstunnel (WireGuard внутри HTTPS — обход фильтрации по типу трафика) |
+| xray | active/running | 2053 | 17.4 МБ | — | Xray Service |
 
 ### Домены и маршруты (nginx)
 
@@ -333,19 +334,19 @@
 
 | Контейнер | Образ | Состояние | Порты |
 |---|---|---|---|
-| terraria | ghcr.io/pryaxis/tshock:latest | Up 3 days | 0.0.0.0:7777->7777/tcp, [::]:7777->7777/tcp, 7878/tcp |
+| terraria | ghcr.io/pryaxis/tshock:latest | Up 4 days | 0.0.0.0:7777->7777/tcp, [::]:7777->7777/tcp, 7878/tcp |
 | mtg | nineseconds/mtg:2 | Exited (0) 11 days ago |  |
-| sentra-postgres | postgres:16-alpine | Up 6 days (healthy) | 127.0.0.1:5433->5432/tcp |
-| sentra-redis | redis:7-alpine | Up 6 days (healthy) | 127.0.0.1:6380->6379/tcp |
+| sentra-postgres | postgres:16-alpine | Up 7 days (healthy) | 127.0.0.1:5433->5432/tcp |
+| sentra-redis | redis:7-alpine | Up 7 days (healthy) | 127.0.0.1:6380->6379/tcp |
 
 ### Таймеры (регулярные задачи)
 
-- **eeklera-deploy.timer** → eeklera-deploy.service: Проверять git на новые коммиты раз в минуту; последний запуск Sun 2026-10-04 18:22:20 UTC
-- **terraria-deploy.timer** → terraria-deploy.service: Terraria GitHub deploy every minute; последний запуск Sun 2026-10-04 18:22:20 UTC
-- **kabluk-deploy.timer** → kabluk-deploy.service: Kabluk deploy poll; последний запуск Sun 2026-10-04 18:22:20 UTC
-- **srv-watch.timer** → srv-watch.service: Сторож сервера каждые 5 минут; последний запуск Sun 2026-10-04 18:22:03 UTC
-- **certbot.timer** → certbot.service: Run certbot twice daily; последний запуск Sun 2026-10-04 01:58:31 UTC
-- **kabluk-backup.timer** → kabluk-backup.service: Kabluk daily DB backup; последний запуск Sun 2026-10-04 04:30:01 UTC
+- **eeklera-deploy.timer** → eeklera-deploy.service: Проверять git на новые коммиты раз в минуту; последний запуск Mon 2026-10-05 13:36:46 UTC
+- **terraria-deploy.timer** → terraria-deploy.service: Terraria GitHub deploy every minute; последний запуск Mon 2026-10-05 13:36:46 UTC
+- **kabluk-deploy.timer** → kabluk-deploy.service: Kabluk deploy poll; последний запуск Mon 2026-10-05 13:36:46 UTC
+- **certbot.timer** → certbot.service: Run certbot twice daily; последний запуск Mon 2026-10-05 05:10:51 UTC
+- **kabluk-backup.timer** → kabluk-backup.service: Kabluk daily DB backup; последний запуск Mon 2026-10-05 04:30:01 UTC
+- **srv-watch.timer** → srv-watch.service: Сторож сервера каждые 5 минут; последний запуск Mon 2026-10-05 13:37:30 UTC
 
 ### Сертификаты HTTPS
 
@@ -360,7 +361,7 @@
 ### Бэкапы
 
 - `/data/backups`: 1 файлов, 668.0 КБ; последний `kabluk-before-bank-reset-20261002-181841.sqlite` (2026-10-02T18:18:42)
-- `/data/kabluk/backups`: 40 файлов, 2.4 МБ; последний `db-20261004-073237-pre-b83c2cf.sqlite.gz` (2026-10-04T07:32:38)
+- `/data/kabluk/backups`: 40 файлов, 2.5 МБ; последний `db-20261005-043002-daily.sqlite.gz` (2026-10-05T04:30:02)
 
 ### VPN (только счётчики, без ключей)
 

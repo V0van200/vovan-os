@@ -26,3 +26,28 @@
 .vl-preview a{display:inline-block;margin-top:6px;font-size:12.5px;color:var(--cyan,#39e4de)}
 .vl-stale{filter:saturate(.4)}
 @media (max-width:760px){.vl-body.vl-with-preview{grid-template-columns:1fr}.vl-preview iframe{height:260px}.vl-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Главная: блок Terraria */
+.vl-home{margin:14px 0;padding:16px;border:1px solid rgba(138,255,90,.3);border-radius:10px;background:linear-gradient(135deg,rgba(20,52,30,.6),rgba(5,15,20,.92));box-shadow:0 0 22px rgba(138,255,90,.07)}
+.vl-home-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;align-items:flex-start}
+.vl-home-head h2{margin:0;font-size:19px;color:var(--text,#e6edf6)}
+.vl-home-head p{margin:4px 0 0;font-size:12.5px;color:var(--muted,#899bb3)}
+.vl-home-status{font-size:13px;font-weight:600;text-align:right}
+.vl-home-status small{display:block;font-weight:400;font-size:11.5px;color:var(--muted,#899bb3)}
+.vl-home-status.vl-ok{color:var(--green,#8aff5a)}.vl-home-status.vl-bad{color:#ff7b8f}
+.vl-home-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:12px 0}
+.vl-home-stats>div{padding:10px;border:1px solid var(--border,#2a3a44);border-radius:8px;background:rgba(6,16,21,.65);min-width:0}
+.vl-home-stats span{display:block;font-size:11.5px;color:var(--muted,#899bb3)}
+.vl-home-stats strong{display:block;margin-top:3px;font-size:18px;color:var(--text,#e6edf6);overflow-wrap:anywhere}
+.vl-home-stats small{display:block;margin-top:2px;font-size:11px;color:var(--muted,#899bb3);overflow-wrap:anywhere}
+.vl-home-cols{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px}
+.vl-home-cols h4{margin:6px 0;font-size:12.5px;color:var(--cyan,#39e4de);font-weight:600}
+.vl-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.vl-table th{text-align:left;font-weight:500;color:var(--muted,#899bb3);padding:5px 6px;border-bottom:1px solid var(--border,#2a3a44)}
+.vl-table td{padding:6px;border-bottom:1px solid rgba(135,173,195,.08);color:#c5d3e2;white-space:nowrap}
+.vl-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#56636f;margin-right:6px;vertical-align:middle}
+.vl-dot.vl-on{background:var(--green,#8aff5a);box-shadow:0 0 6px var(--green,#8aff5a)}
+.vl-feed{margin:0;padding-left:16px;font-size:12.5px;line-height:1.55;color:#c5d3e2}
+.vl-feed li{overflow-wrap:anywhere}
+.vl-home-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-top:10px;font-size:12px;color:var(--muted,#899bb3)}
+.vl-home-foot code{color:var(--green,#8aff5a)}
+@media (max-width:860px){.vl-home-cols{grid-template-columns:1fr}.vl-table{display:block;overflow-x:auto}}

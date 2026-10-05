@@ -218,38 +218,94 @@ def c_kabluk_city(p, ctx):
     return {'summary': f'{len(rows)} городов', 'metrics': [M('Городов игроков', len(rows)), M('Самый большой', f'{rows[0][1]} жителей' if rows else '—')],
             'lists': [{'title': 'Города', 'items': [f'{n}: {pop} жителей, уровень {lv}, был {ago(t / 1000)}' for n, pop, lv, t in rows]}]}
 
+def _wld_header(path):
+    """Шапка файла мира Terraria: имя, сид, размер, режим, особые миры. Только чтение начала файла."""
+    import struct
+    with open(path, 'rb') as f:
+        ver = struct.unpack('<i', f.read(4))[0]
+        f.read(8 + 4 + 8)                                   # relogic + тип, ревизия, избранное
+        n = struct.unpack('<h', f.read(2))[0]; pos = struct.unpack(f'<{n}i', f.read(4 * n))
+        f.seek(pos[0])
+        def s():
+            ln, shift = 0, 0
+            while True:
+                b = f.read(1)[0]; ln |= (b & 0x7F) << shift; shift += 7
+                if b < 0x80: break
+            return f.read(ln).decode('utf-8', 'replace')
+        name, seed = s(), s(); f.read(8 + 16); wid = struct.unpack('<i', f.read(4))[0]; f.read(16)
+        h, w, mode = struct.unpack('<iii', f.read(12))
+        flags = list(f.read(8))
+    special = [n for n, v in zip(['пьяный мир', 'for the worthy', '10-летие', "don't starve", 'not the bees', 'remix', 'без ловушек', 'zenith'], flags) if v == 1]
+    size = {4200: 'маленький', 6400: 'средний', 8400: 'большой'}.get(w, 'свой')
+    return {'version': ver, 'name': name, 'seed': seed, 'id': wid, 'width': w, 'height': h, 'size': size,
+            'mode': {0: 'обычная', 1: 'эксперт', 2: 'мастер', 3: 'путешествие'}.get(mode, str(mode)), 'special': special}
+
 def c_terraria(p, ctx):
     started = sh("docker inspect -f '{{.State.StartedAt}}' terraria")
-    logs = sh(f"docker logs --timestamps --since '{started}' terraria 2>&1 | grep -aE 'has joined|has left|on .* @ 0.0.0.0' | tail -n 4000", timeout=40)
-    online = {}; last_join = None; title = None
+    running = sh("docker inspect -f '{{.State.Running}}' terraria") == 'true'
+    logs = sh(f"docker logs --timestamps --since '{started}' terraria 2>&1 | grep -aE 'has joined|has left|authenticated successfully|registered an account|on .* @ 0.0.0.0' | tail -n 4000", timeout=40) if running else ''
+    online = {}; last_join = None; acct = {}; events = []
     for raw in logs.splitlines():
         ts = raw.split(' ', 1)[0]
         clean = re.sub(r'\x1b\[[0-9;]*m|[\x07\r]', '', raw.split(' ', 1)[-1])
-        for tt in re.findall(r'(\S+) - (\d+)/(\d+) on (.+?) @ 0\.0\.0\.0', clean): title = tt
         for seg in re.split(r'\x1b?\]0;.*?\(TShock for Terraria v[\d.]+\)', clean):
-            m = re.match(r'\s*(.+?)(?: \([^()]*\))? has (joined|left)\.\s*$', seg)
-            if not m: continue
-            who, act = m.groups()
-            if act == 'joined': online[who] = ts; last_join = ts
-            else: online.pop(who, None)
-    world = '/data/terraria/worlds/Lera.wld'; saved = mtime(world)
+            seg = seg.strip()
+            m = re.match(r'(.+?)(?: \([^()]*\))? has (joined|left)\.$', seg)
+            if m:
+                who, act = m.groups()
+                if act == 'joined': online[who] = ts; last_join = ts; events.append((ts, f'{who} зашёл'))
+                else: online.pop(who, None); acct.pop(who, None); events.append((ts, f'{who} вышел'))
+                continue
+            m = re.match(r'(.+?) authenticated successfully as user: (.+?)\.$', seg)
+            if m: acct[m.group(1)] = m.group(2); events.append((ts, f'{m.group(1)} вошёл в аккаунт {m.group(2)}')); continue
+            m = re.match(r'(.+?) registered an account: "(.+?)"\.?$', seg)
+            if m: events.append((ts, f'{m.group(1)} зарегистрировал аккаунт {m.group(2)}'))
+    world_file = '/data/terraria/worlds/Lera.wld'; saved = mtime(world_file)
+    try: w = _wld_header(world_file)
+    except Exception: w = {}
     nb, lb = files_info('/data/terraria/backups/*')
-    users = chars = None
+    cfg = {}
+    try: cfg = json.loads(Path('/data/terraria/config/config.json').read_text())['Settings']
+    except Exception: pass
+    accounts = []
     try:
         tdb = ro('/data/terraria/config/tshock.sqlite')
-        users = tdb.execute('select count(*) from Users').fetchone()[0]
-        chars = tdb.execute('select count(*) from tsCharacter').fetchone()[0]
+        prof = {}
+        try: prof = json.loads(Path(f"/data/terraria/config/lera-adventure-{w.get('id')}.json").read_text()).get('Profiles', {})
+        except Exception: pass
+        for uid, name, grp, reg, last, hp, mhp, mana, mmana, deaths in tdb.execute(
+                'select u.ID, u.Username, u.Usergroup, u.Registered, u.LastAccessed, c.Health, c.MaxHealth, c.Mana, c.MaxMana, c.deathsPVE '
+                'from Users u left join tsCharacter c on c.Account = u.ID order by u.LastAccessed desc'):
+            pr = prof.get(str(uid)) or {}
+            accounts.append({'name': name, 'group': grp, 'registered': reg, 'last': last, 'hp': hp, 'max_hp': mhp, 'mana': mana, 'max_mana': mmana,
+                             'deaths': deaths, 'xp': pr.get('Experience'), 'expeditions': pr.get('Completed'),
+                             'online': name in acct.values(), 'ssc_bypass': grp == 'superadmin'})
     except Exception: pass
     hist = deploy_history('/data/terraria/deploy/history.txt')
+    pinned = os.path.exists('/data/terraria/deploy/PINNED')
+    al = [] if not hist or hist[0]['state'] == 'OK' else [f"последний деплой: {hist[0]['state']}"]
+    if not running: al.append('сервер Terraria остановлен')
+    if pinned: al.append('автодеплой плагинов заморожен (terraria-deploy unpin)')
+    for a in accounts:
+        if a['ssc_bypass']: al.append(f"аккаунт {a['name']} в группе superadmin — его вещи не сохраняются (SSC обходится)")
+    world = {'name': w.get('name'), 'seed': w.get('seed'), 'size': f"{w.get('size')} {w.get('width')}×{w.get('height')}" if w else None,
+             'mode': w.get('mode'), 'special': w.get('special'), 'saved': iso(saved) if saved else None,
+             'spawn_protection': cfg.get('SpawnProtectionRadius') if cfg.get('SpawnProtection') else 0,
+             'require_login': cfg.get('RequireLogin'), 'address': '78.17.19.43:7777', 'max_players': cfg.get('MaxSlots') or 8}
     count = len(online)
-    return {'summary': f'{count} онлайн' + (f' · мир «{title[3]}»' if title else ''),
-            'alerts': [] if not hist or hist[0]['state'] == 'OK' else [f"последний деплой: {hist[0]['state']}"],
-            'metrics': [M('Онлайн сейчас', f"{count} / {title[2] if title else 8}", ', '.join(online) or None, 'ok' if count else None),
+    return {'summary': f'{count} онлайн' + (f" · мир «{w['name']}»" if w.get('name') else ''), 'alerts': al, 'world': world, 'accounts': accounts,
+            'online_names': [f"{k} ({acct[k]})" if k in acct else k for k in online],
+            'metrics': [M('Онлайн сейчас', f"{count} / {world['max_players']}", ', '.join(online) or None, 'ok' if count else None),
+                        M('Мир', w.get('name') or '—', f"{world['size']} · сложность {w.get('mode')}" + (f" · {', '.join(w['special'])}" if w.get('special') else '') if w else None),
+                        M('Сид', w.get('seed') or '—'),
                         M('Последний вход', ago(_ts(last_join)) if last_join else 'с запуска не было'),
-                        M('Сохранение мира', ago(saved), 'мир пишется при выходе игрока и автосохранении'),
-                        M('Бэкапы', nb, f'последний {ago(lb)}'), M('Аккаунтов', users if users is not None else '—'),
-                        M('Серверных персонажей (SSC)', chars if chars is not None else '—'), M('Сервер запущен', ago(_ts(started)))],
-            'lists': [{'title': 'Сейчас в игре', 'items': [f'{w} — с {ago(_ts(t))}' for w, t in online.items()] or ['никого']},
+                        M('Сохранение мира', ago(saved), 'при выходе игрока и автосохранении'),
+                        M('Аккаунтов', len(accounts)), M('Защита спавна', f"{world['spawn_protection']} блоков" if world['spawn_protection'] else 'выключена'),
+                        M('Вход по паролю', 'обязателен' if cfg.get('RequireLogin') else 'нет', level='ok' if cfg.get('RequireLogin') else 'warn'),
+                        M('Бэкапы', nb, f'последний {ago(lb)}'), M('Сервер запущен', ago(_ts(started)) if running else 'остановлен', level=None if running else 'bad')],
+            'lists': [{'title': 'Сейчас в игре', 'items': [f'{w_} — с {ago(_ts(t_))}' for w_, t_ in online.items()] or ['никого']},
+                      {'title': 'Игроки', 'items': [f"{a['name']} · {a['group']} · ❤ {a['hp']}/{a['max_hp']} · ★ {a['mana']}/{a['max_mana']} · смертей {a['deaths'] or 0} · был {ago(_ts(a['last']))}" for a in accounts]},
+                      {'title': 'События с запуска сервера', 'items': [f"{t_[5:16].replace('T', ' ')} · {e_}" for t_, e_ in events[-12:][::-1]]},
                       {'title': 'Последние деплои плагинов', 'items': dl(hist)}]}
 
 def _ts(s):

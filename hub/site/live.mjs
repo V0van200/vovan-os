@@ -11,7 +11,7 @@ async function load() {
     if (!r.ok) throw Error(r.status);
     live = await r.json(); loadedAt = new Date();
   } catch { live = null; }
-  badge(); refreshOpen();
+  badge(); refreshOpen(); home();
 }
 
 const hhmm = iso => { const d = new Date(iso); return Number.isNaN(d.valueOf()) ? '' : d.toLocaleTimeString('ru', { hour: '2-digit', minute: '2-digit' }); };
@@ -53,6 +53,52 @@ function panel(id) {
   </section>`;
 }
 
+// ── Главная: блок Terraria и счётчик ошибок ──
+const isHome = () => ['', '#', '#home', '#/home'].includes(location.hash);
+function homeTerraria() {
+  const t = live?.projects?.terraria;
+  if (!t) return '';
+  const w = t.world || {}, accs = t.accounts || [], on = (t.online_names || []);
+  const m = l => (t.metrics || []).find(x => x.label === l)?.value ?? '—';
+  const running = !(t.alerts || []).some(a => a.includes('остановлен'));
+  const row = a => `<tr><td>${a.online ? '<i class="vl-dot vl-on"></i>' : '<i class="vl-dot"></i>'}${esc(a.name)}</td><td>${esc(a.group)}</td><td>❤ ${esc(a.hp ?? '—')}/${esc(a.max_hp ?? '—')}</td><td>★ ${esc(a.mana ?? '—')}/${esc(a.max_mana ?? '—')}</td><td>${esc(a.deaths ?? 0)}</td><td>${esc(a.last ? new Date(a.last + 'Z').toLocaleString('ru', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '—')}</td></tr>`;
+  const list = title => (t.lists || []).find(l => l.title === title)?.items || [];
+  return `<section class="vl-home" data-vl-home>
+    <div class="vl-home-head">
+      <div><h2>Terraria · ${esc(w.name || 'мир')}</h2><p>${esc(w.size || '')}${w.mode ? ' · сложность ' + esc(w.mode) : ''}${w.special?.length ? ' · ' + esc(w.special.join(', ')) : ''}${w.seed ? ' · сид ' + esc(w.seed) : ''}</p></div>
+      <div class="vl-home-status ${running ? 'vl-ok' : 'vl-bad'}">${running ? '● Сервер работает' : '● Сервер остановлен'}<small>${esc(w.address || '')} · обновлено ${esc(hhmm(t.updated))}</small></div>
+    </div>
+    ${(t.alerts || []).map(a => `<div class="vl-alert">⚠ ${esc(a)}</div>`).join('')}
+    <div class="vl-home-stats">
+      <div><span>Онлайн</span><strong>${esc(m('Онлайн сейчас'))}</strong><small>${esc(on.join(', ') || 'никого')}</small></div>
+      <div><span>Аккаунтов</span><strong>${esc(accs.length)}</strong><small>вход по паролю: ${w.require_login ? 'да' : 'нет'}</small></div>
+      <div><span>Последний вход</span><strong>${esc(m('Последний вход'))}</strong></div>
+      <div><span>Мир сохранён</span><strong>${esc(m('Сохранение мира'))}</strong></div>
+      <div><span>Защита спавна</span><strong>${w.spawn_protection ? esc(w.spawn_protection) + ' блоков' : 'нет'}</strong><small>нельзя ломать и строить</small></div>
+      <div><span>Бэкапы</span><strong>${esc(m('Бэкапы'))}</strong></div>
+    </div>
+    <div class="vl-home-cols">
+      <div><h4>Игроки</h4>${accs.length ? `<table class="vl-table"><thead><tr><th>Аккаунт</th><th>Группа</th><th>Здоровье</th><th>Мана</th><th>Смертей</th><th>Был</th></tr></thead><tbody>${accs.map(row).join('')}</tbody></table>` : '<p class="vl-note">Пока никто не зарегистрировался.</p>'}</div>
+      <div><h4>События</h4><ul class="vl-feed">${(list('События с запуска сервера').length ? list('События с запуска сервера') : ['с запуска сервера событий нет']).map(i => `<li>${esc(i)}</li>`).join('')}</ul>
+           <h4>Деплои плагинов</h4><ul class="vl-feed">${list('Последние деплои плагинов').slice(0, 4).map(i => `<li>${esc(i)}</li>`).join('')}</ul></div>
+    </div>
+    <div class="vl-home-foot"><span>Вход в игре: <code>/register пароль</code> · <code>/login пароль</code> · другим героем: <code>/login Аккаунт пароль</code></span><button class="text-button" data-project="terraria">Паспорт проекта →</button></div>
+  </section>`;
+}
+function home() {
+  if (!isHome() || !live) return;
+  const grid = document.querySelector('.stats-grid');
+  if (!grid) return;
+  const old = document.querySelector('[data-vl-home]');
+  if (old && old.dataset.at === live.updated) return;
+  const html = homeTerraria();
+  if (old) old.outerHTML = html; else grid.insertAdjacentHTML('afterend', html);
+  const el = document.querySelector('[data-vl-home]'); if (el) el.dataset.at = live.updated;
+  const alerts = Object.values(live.projects || {}).flatMap(p => p.alerts || []);
+  const card = document.querySelector('.stat-card[data-route="alerts"]');
+  if (card) { const s = card.querySelector('strong'), sm = card.querySelector('small'); if (s) s.textContent = alerts.length; if (sm) sm.textContent = alerts.length ? 'живые проверки · есть предупреждения' : 'живые проверки · всё в порядке'; }
+}
+
 function inject() {
   const box = document.querySelector('#dialog-content');
   if (!box || !lastId || !box.querySelector('.project-detail-top')) return;
@@ -72,7 +118,7 @@ document.addEventListener('click', ev => {
   if (t?.dataset.project) lastId = t.dataset.project;
 }, true);
 new MutationObserver(() => { inject(); }).observe(document.querySelector('#dialog-content') || document.body, { childList: true, subtree: true });
-new MutationObserver(() => { if (!document.querySelector('[data-vl-badge]')) badge(); }).observe(document.querySelector('#app') || document.body, { childList: true, subtree: true });
+new MutationObserver(() => { if (!document.querySelector('[data-vl-badge]')) badge(); if (isHome() && !document.querySelector('[data-vl-home]')) home(); }).observe(document.querySelector('#app') || document.body, { childList: true, subtree: true });
 
 const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = './live.css'; document.head.append(css);
 load(); setInterval(load, 60e3);

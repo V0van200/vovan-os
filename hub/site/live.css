@@ -1,0 +1,28 @@
+/* Vovan OS — блок живых данных (live.mjs). Префикс vl-, стили Astra не меняются. */
+.vl-panel{margin:16px 0;padding:14px 14px 10px;border:1px solid rgba(138,255,90,.28);border-radius:10px;background:linear-gradient(135deg,rgba(18,46,30,.55),rgba(5,15,20,.9));box-shadow:0 0 18px rgba(138,255,90,.06)}
+.vl-panel.vl-muted{border-color:var(--border,#2a3a44);background:rgba(9,19,26,.6);color:var(--muted,#899bb3)}
+.vl-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px;margin-bottom:8px}
+.vl-head h3{margin:0;font-size:15px;color:var(--text,#e6edf6)}
+.vl-time{font-size:12px;color:var(--green,#8aff5a)}
+.vl-time.vl-old{color:#e3c993}
+.vl-alert{margin:6px 0;padding:8px 10px;border-left:2px solid #ff6b81;background:#4a1d2644;color:#ffb3bf;border-radius:0 5px 5px 0;font-size:13px;line-height:1.45}
+.vl-body.vl-with-preview{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,38%);gap:14px}
+.vl-metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:8px 0}
+.vl-metric{padding:9px 10px;border:1px solid var(--border,#2a3a44);border-radius:8px;background:rgba(6,16,21,.65);min-width:0}
+.vl-metric span{display:block;font-size:11.5px;color:var(--muted,#899bb3);line-height:1.3}
+.vl-metric strong{display:block;margin-top:3px;font-size:17px;color:var(--text,#e6edf6);overflow-wrap:anywhere}
+.vl-metric small{display:block;margin-top:2px;font-size:11px;color:var(--muted,#899bb3);overflow-wrap:anywhere}
+.vl-metric.vl-ok strong{color:var(--green,#8aff5a)}
+.vl-metric.vl-warn strong{color:#ffd27a}
+.vl-metric.vl-bad strong{color:#ff7b8f}
+.vl-series,.vl-list,.vl-preview{margin:10px 0}
+.vl-series h4,.vl-list h4,.vl-preview h4{margin:0 0 6px;font-size:12.5px;color:var(--cyan,#39e4de);font-weight:600}
+.vl-spark{width:100%;height:70px;display:block;fill:var(--green,#8aff5a);opacity:.85}
+.vl-spark-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--muted,#899bb3)}
+.vl-list ul{margin:0;padding-left:18px;font-size:13px;line-height:1.55;color:#c5d3e2}
+.vl-list li{overflow-wrap:anywhere}
+.vl-note{font-size:12px;color:var(--muted,#899bb3);margin:6px 0}
+.vl-preview iframe{width:100%;height:340px;border:1px solid var(--border,#2a3a44);border-radius:8px;background:#000}
+.vl-preview a{display:inline-block;margin-top:6px;font-size:12.5px;color:var(--cyan,#39e4de)}
+.vl-stale{filter:saturate(.4)}
+@media (max-width:760px){.vl-body.vl-with-preview{grid-template-columns:1fr}.vl-preview iframe{height:260px}.vl-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}

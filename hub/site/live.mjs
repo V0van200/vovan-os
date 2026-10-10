@@ -1,3 +1,4 @@
+import { icon } from './icons.mjs';
 // Vovan OS — живые данные в хабе (Claude). Отдельный модуль: код Astra не меняет.
 // Источник: ./live/projects.json (collector/live.py, обновляется каждую минуту на сервере 78).
 // Что делает: 1) значок «ЖИВЫЕ ДАННЫЕ · чч:мм» вместо «ЛОКАЛЬНО»; 2) блок «Сейчас» в паспорте проекта;
@@ -53,50 +54,14 @@ function panel(id) {
   </section>`;
 }
 
-// ── Главная: блок Terraria и счётчик ошибок ──
+// ── Главная: счётчик проблем в карточке «Предупреждения» ──
 const isHome = () => ['', '#', '#home', '#/home'].includes(location.hash);
-function homeTerraria() {
-  const t = live?.projects?.terraria;
-  if (!t) return '';
-  const w = t.world || {}, accs = t.accounts || [], on = (t.online_names || []);
-  const m = l => (t.metrics || []).find(x => x.label === l)?.value ?? '—';
-  const running = !(t.alerts || []).some(a => a.includes('остановлен'));
-  const row = a => `<tr><td>${a.online ? '<i class="vl-dot vl-on"></i>' : '<i class="vl-dot"></i>'}${esc(a.name)}</td><td>${esc(a.group)}</td><td>❤ ${esc(a.hp ?? '—')}/${esc(a.max_hp ?? '—')}</td><td>★ ${esc(a.mana ?? '—')}/${esc(a.max_mana ?? '—')}</td><td>${esc(a.deaths ?? 0)}</td><td>${esc(a.last ? new Date(a.last + 'Z').toLocaleString('ru', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '—')}</td></tr>`;
-  const list = title => (t.lists || []).find(l => l.title === title)?.items || [];
-  return `<section class="vl-home" data-vl-home>
-    <div class="vl-home-head">
-      <div><h2>Terraria · ${esc(w.name || 'мир')}</h2><p>${esc(w.size || '')}${w.mode ? ' · сложность ' + esc(w.mode) : ''}${w.special?.length ? ' · ' + esc(w.special.join(', ')) : ''}${w.seed ? ' · сид ' + esc(w.seed) : ''}</p></div>
-      <div class="vl-home-status ${running ? 'vl-ok' : 'vl-bad'}">${running ? '● Сервер работает' : '● Сервер остановлен'}<small>${esc(w.address || '')} · обновлено ${esc(hhmm(t.updated))}</small></div>
-    </div>
-    ${(t.alerts || []).map(a => `<div class="vl-alert">⚠ ${esc(a)}</div>`).join('')}
-    <div class="vl-home-stats">
-      <div><span>Онлайн</span><strong>${esc(m('Онлайн сейчас'))}</strong><small>${esc(on.join(', ') || 'никого')}</small></div>
-      <div><span>Аккаунтов</span><strong>${esc(accs.length)}</strong><small>вход по паролю: ${w.require_login ? 'да' : 'нет'}</small></div>
-      <div><span>Последний вход</span><strong>${esc(m('Последний вход'))}</strong></div>
-      <div><span>Мир сохранён</span><strong>${esc(m('Сохранение мира'))}</strong></div>
-      <div><span>Защита спавна</span><strong>${w.spawn_protection ? esc(w.spawn_protection) + ' блоков' : 'нет'}</strong><small>нельзя ломать и строить</small></div>
-      <div><span>Бэкапы</span><strong>${esc(m('Бэкапы'))}</strong></div>
-    </div>
-    <div class="vl-home-cols">
-      <div><h4>Игроки</h4>${accs.length ? `<div class="vl-tablewrap"><table class="vl-table"><thead><tr><th>Аккаунт</th><th>Группа</th><th>Здоровье</th><th>Мана</th><th>Смертей</th><th>Был</th></tr></thead><tbody>${accs.map(row).join('')}</tbody></table></div>` : '<p class="vl-note">Пока никто не зарегистрировался.</p>'}</div>
-      <div><h4>События</h4><ul class="vl-feed">${(list('События с запуска сервера').length ? list('События с запуска сервера') : ['с запуска сервера событий нет']).map(i => `<li>${esc(i)}</li>`).join('')}</ul>
-           <h4>Деплои плагинов</h4><ul class="vl-feed">${list('Последние деплои плагинов').slice(0, 4).map(i => `<li>${esc(i)}</li>`).join('')}</ul></div>
-    </div>
-    <div class="vl-home-foot"><span>Вход в игре: <code>/register пароль</code> · <code>/login пароль</code> · другим героем: <code>/login Аккаунт пароль</code></span><button class="text-button" data-project="terraria">Паспорт проекта →</button></div>
-  </section>`;
-}
 function home() {
   if (!isHome() || !live) return;
-  const grid = document.querySelector('.stats-grid');
-  if (!grid) return;
-  const old = document.querySelector('[data-vl-home]');
-  if (old && old.dataset.at === live.updated) return;
-  const html = homeTerraria();
-  if (old) old.outerHTML = html; else grid.insertAdjacentHTML('afterend', html);
-  const el = document.querySelector('[data-vl-home]'); if (el) el.dataset.at = live.updated;
-  const alerts = Object.values(live.projects || {}).flatMap(p => p.alerts || []);
+  const alerts = (live.owner?.attention || []).filter(a => a.where !== 'проект');
   const card = document.querySelector('.stat-card[data-route="alerts"]');
-  if (card) { const s = card.querySelector('strong'), sm = card.querySelector('small'); if (s) s.textContent = alerts.length; if (sm) sm.textContent = alerts.length ? 'живые проверки · есть предупреждения' : 'живые проверки · всё в порядке'; }
+  if (card) { const s = card.querySelector('strong'), sm = card.querySelector('small'); if (s) s.textContent = alerts.length; if (sm) sm.textContent = alerts.length ? 'живые проверки · есть проблемы' : 'живые проверки · всё в порядке'; }
+  side();
 }
 
 function inject() {
@@ -118,72 +83,64 @@ document.addEventListener('click', ev => {
   if (t?.dataset.project) lastId = t.dataset.project;
 }, true);
 new MutationObserver(() => { inject(); }).observe(document.querySelector('#dialog-content') || document.body, { childList: true, subtree: true });
-new MutationObserver(() => { if (!document.querySelector('[data-vl-badge]')) badge(); if (isHome() && !document.querySelector('[data-vl-home]')) home(); }).observe(document.querySelector('#app') || document.body, { childList: true, subtree: true });
+new MutationObserver(() => { if (!document.querySelector('[data-vl-badge]')) badge(); if (isHome() && !document.querySelector('[data-vl-side]')) home(); }).observe(document.querySelector('#app') || document.body, { childList: true, subtree: true });
 
 const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = './live.css'; document.head.append(css);
 load(); setInterval(load, 60e3);
 
-// ── Главная: «Что требует внимания», «Деньги», «Здоровье серверов» (данные: projects.json → owner) ──
-const gb = b => b == null ? '—' : b >= 1e12 ? (b / 1e12).toFixed(1) + ' ТБ' : b >= 1e9 ? (b / 1e9).toFixed(1) + ' ГБ' : (b / 1e6).toFixed(0) + ' МБ';
-const rub = v => v == null || v === '' ? '—' : (typeof v === 'number' ? v.toLocaleString('ru', { maximumFractionDigits: 2 }) : esc(v)) + ' ₽';
-const usd = v => v == null ? '—' : '$' + Number(v).toLocaleString('ru', { maximumFractionDigits: 2 });
-const lvl = (v, warn, bad) => v == null ? '' : v >= bad ? 'vl-bad' : v >= warn ? 'vl-warnc' : 'vl-okc';
-const bar = (v, warn = 75, bad = 90) => `<div class="vl-bar ${lvl(v, warn, bad)}"><i style="width:${Math.min(100, v ?? 0)}%"></i></div>`;
-const upt = s => !s ? '—' : s >= 86400 ? `${Math.floor(s / 86400)} дн` : `${Math.floor(s / 3600)} ч`;
-const agoTs = t => { if (!t) return 'никогда'; const s = Date.now() / 1000 - t; return s < 180 ? 'сейчас' : s < 3600 ? `${Math.floor(s / 60)} мин назад` : s < 172800 ? `${Math.floor(s / 3600)} ч назад` : `${Math.floor(s / 86400)} дн назад`; };
-function miniBars(days, fmt) {
-  if (!days?.length) return '';
-  const max = Math.max(1, ...days.map(d => d[1]));
-  return `<div class="vl-mini">${days.map(([d, v]) => `<i title="${esc(d)}: ${esc(fmt(v))}" style="height:${Math.max(3, v / max * 100)}%"></i>`).join('')}</div>`;
+
+// ── Правая колонка в стиле хаба: «Состояние системы», «Terraria», живой «Последний деплой» ──
+const gbs = b => b == null ? '—' : b >= 1e9 ? (b / 1e9).toFixed(1) + ' ГБ' : (b / 1e6).toFixed(0) + ' МБ';
+const agoS = t => { if (!t) return 'никогда'; const s = Date.now() / 1000 - t; return s < 180 ? 'сейчас' : s < 3600 ? `${Math.floor(s / 60)} мин` : s < 172800 ? `${Math.floor(s / 3600)} ч` : `${Math.floor(s / 86400)} дн`; };
+const open = new Set(JSON.parse(localStorage.getItem('vl-open') || '[]'));
+const head = (title, ico, id) => `<div class="panel-heading"><h2>${icon(ico)}${esc(title)}</h2><button class="text-button" data-vl-toggle="${id}" aria-expanded="${open.has(id)}">${open.has(id) ? 'Свернуть' : 'Подробнее'} ${icon('chevron')}</button></div>`;
+const meter = (label, v) => `<div class="meter-row"><span class="vl-ml">${esc(label)}</span><div class="meter vl-m${v >= 90 ? 'bad' : v >= 75 ? 'warn' : ''}"><i style="width:${Math.min(100, v ?? 0)}%"></i></div><b>${v == null ? '—' : esc(v) + '%'}</b></div>`;
+function sysPanel() {
+  const o = live?.owner; if (!o || o.error) return '';
+  const att = (o.attention || []).filter(a => a.where !== 'проект'), bad = att.filter(a => a.level === 'bad').length;
+  const st = bad ? `<span class="status inactive">Проблем: ${bad}</span>` : att.length ? `<span class="status partial">Внимание: ${att.length}</span>` : '<span class="status active">Всё в порядке</span>';
+  const hs = o.health || [], keys = o.vpn_keys || [];
+  const brief = hs.map(h => `<div class="vl-srv"><small>${esc(h.name)}</small>${meter('CPU', h.load)}${meter('ОЗУ', h.ram)}${meter('Диск', h.disk)}</div>`).join('');
+  const more = open.has('sys') ? `
+    ${att.length ? `<div class="commit-list vl-att">${att.map(a => `<button type="button"><i class="vl-${esc(a.level)}"></i><span>${esc(a.title)}<small>${esc(a.detail)}</small></span><b>${esc(a.where)}</b></button>`).join('')}</div>` : ''}
+    ${hs.map(h => `<div class="vl-srvx"><small>${esc(h.name)} · работает ${esc(Math.floor((h.uptime_s || 0) / 86400))} дн</small>
+      <div class="vl-kv"><span>Подкачка</span><b>${h.swap == null ? 'нет' : esc(h.swap) + '%'}</b><span>Свободно на диске</span><b>${esc(gbs(h.disk_free))}</b><span>Служб</span><b>${esc(h.services)}${h.services_down ? ` · не работает ${esc(h.services_down)}` : ''}</b><span>Заблокировано взломщиков</span><b>${esc(h.banned ?? '—')}</b></div></div>`).join('')}
+    ${keys.length ? `<div class="vl-srvx"><small>VPN · онлайн ${keys.filter(k => k.online).length} из ${keys.length}</small><div class="commit-list">${keys.map(k => `<button type="button"><i class="${k.online ? '' : 'vl-off'}"></i><span>${esc(k.name)}<small>${k.online ? 'в сети' : 'был ' + esc(agoS(k.last))}</small></span><b>${esc(gbs(k.rx + k.tx))}</b></button>`).join('')}</div></div>` : ''}` : '';
+  return `<section class="panel vl-sys" data-vl-side="sys">${head('Состояние системы', 'shield', 'sys')}<div class="panel-sub">Проверка каждую минуту · ${esc(hhmm(o.updated))}</div><div class="vl-st">${st}</div>${brief}${more}</section>`;
 }
-function homeOwner() {
-  const o = live?.owner;
-  if (!o) return '';
-  if (o.error) return `<section class="vl-home" data-vl-owner><div class="vl-alert">⚠ Сводка не собралась: ${esc(o.error)}</div></section>`;
-  const att = o.attention || [], bad = att.filter(a => a.level === 'bad').length;
-  const attHtml = att.length ? `<ul class="vl-att">${att.slice(0, 12).map(a => `<li class="vl-att-${esc(a.level)}"><b>${esc(a.title)}</b>${a.detail ? `<span>${esc(a.detail)}</span>` : ''}<em>${esc(a.where)}</em></li>`).join('')}</ul>${att.length > 12 ? `<p class="vl-note">и ещё ${att.length - 12}</p>` : ''}`
-    : '<p class="vl-allgood">✓ Всё в порядке — сервисы работают, диски и сертификаты в норме, деплои прошли.</p>';
-  const s = o.money?.shopper, ai = o.money?.ai;
-  const shop = s ? `<div class="vl-card"><h4>Shopper · ${esc(s.period || 'неделя')}</h4>
-      <div class="vl-big">${rub(s.week)}</div><small>за неделю${s.today != null ? ` · сегодня ${rub(s.today)}` : ''}</small>
-      ${miniBars((s.days || []).map((v, i) => [s.dates?.[i] || i, v]), rub)}
-      <dl class="vl-dl"><dt>Налог к уплате</dt><dd>${rub(s.tax_due)}</dd><dt>Задолженность</dt><dd>${rub(s.tax_debt)}</dd><dt>Доступно к выводу</dt><dd>${rub(s.available)}</dd><dt>В обработке</dt><dd>${rub(s.processing)}</dd></dl>
-      <p class="vl-note">Цифры из админки Shopper — меняются там же.</p></div>` : '';
-  const aiHtml = ai ? `<div class="vl-card"><h4>Расходы на ИИ (Claude)</h4>
-      <div class="vl-big">${usd(ai.today)}</div><small>сегодня · неделя ${usd(ai.week)} · месяц ${usd(ai.month)}</small>
-      ${miniBars(ai.days, usd)}
-      <dl class="vl-dl">${Object.entries(ai.by_server || {}).map(([k, v]) => `<dt>Сервер ${esc(k)}</dt><dd>${usd(v.month)} · сессий ${esc(v.sessions)}</dd>`).join('')}</dl>
-      <p class="vl-note">${esc(ai.source)}</p></div>` : `<div class="vl-card"><h4>Расходы на ИИ</h4><p class="vl-note">Учёт ещё не набрался.</p></div>`;
-  const hs = (o.health || []).map(h => `<div class="vl-card vl-srv"><h4>${esc(h.name)}<span class="vl-up">работает ${esc(upt(h.uptime_s))}</span></h4>
-      <div class="vl-row"><span>Процессор (${esc(h.cpus)} ядра)</span><b>${esc(h.load ?? '—')}%</b></div>${bar(h.load, 80, 150)}
-      <div class="vl-row"><span>Память ${esc(gb(h.ram_total))}</span><b>${esc(h.ram ?? '—')}%</b></div>${bar(h.ram, 80, 92)}
-      ${h.swap != null ? `<div class="vl-row"><span>Подкачка</span><b>${esc(h.swap)}%</b></div>${bar(h.swap, 50, 80)}` : ''}
-      <div class="vl-row"><span>Диск · свободно ${esc(gb(h.disk_free))}</span><b>${esc(h.disk ?? '—')}%</b></div>${bar(h.disk, 80, 90)}
-      <div class="vl-chips"><span>служб ${esc(h.services)}${h.services_down ? ` · <b class="vl-bad-t">не работает ${esc(h.services_down)}</b>` : ''}</span><span>контейнеров ${esc(h.docker)}</span>${h.banned != null ? `<span>заблокировано взломщиков ${esc(h.banned)}</span>` : ''}</div></div>`).join('');
-  const keys = o.vpn_keys || [];
-  const vpn = keys.length ? `<div class="vl-card"><h4>VPN · ключи<span class="vl-up">онлайн ${keys.filter(k => k.online).length} из ${keys.length}</span></h4>
-      <div class="vl-tablewrap"><table class="vl-table"><thead><tr><th>Ключ</th><th>Трафик</th><th>Был в сети</th></tr></thead><tbody>${keys.map(k => `<tr><td>${k.online ? '<i class="vl-dot vl-on"></i>' : '<i class="vl-dot"></i>'}${esc(k.name)}</td><td>${esc(gb(k.rx + k.tx))}</td><td>${esc(k.online ? 'сейчас' : agoTs(k.last))}</td></tr>`).join('')}</tbody></table></div>
-      <p class="vl-note">Трафик считается с последнего перезапуска VPN.</p></div>` : '';
-  const dep = (o.deploys || []).length ? `<div class="vl-card"><h4>Последние деплои</h4><ul class="vl-feed">${o.deploys.map(d => `<li><b>${esc(d.name)}</b> · ${esc(d.line)}</li>`).join('')}</ul></div>` : '';
-  return `<section class="vl-home vl-owner" data-vl-owner>
-    <div class="vl-home-head"><div><h2>Что требует внимания</h2><p>Проверяется каждую минуту на обоих серверах</p></div>
-      <div class="vl-home-status ${bad ? 'vl-bad' : att.length ? 'vl-warn' : 'vl-ok'}">${bad ? `● Проблем: ${bad}` : att.length ? `● Предупреждений: ${att.length}` : '● Всё хорошо'}<small>обновлено ${esc(hhmm(o.updated))}</small></div></div>
-    ${attHtml}
-    <h3 class="vl-sec">Деньги</h3><div class="vl-grid">${shop}${aiHtml}</div>
-    <h3 class="vl-sec">Здоровье серверов</h3><div class="vl-grid">${hs}${vpn}</div>
-    ${dep ? `<div class="vl-grid">${dep}</div>` : ''}
-  </section>`;
+function terraPanel() {
+  const t = live?.projects?.terraria; if (!t) return '';
+  const w = t.world || {}, accs = t.accounts || [], on = t.online_names || [];
+  const running = !(t.alerts || []).some(a => a.includes('остановлен'));
+  const more = open.has('terra') ? `<div class="commit-list">${accs.map(a => `<button type="button"><i class="${a.online ? '' : 'vl-off'}"></i><span>${esc(a.name)}<small>${esc(a.group)} · ❤ ${esc(a.hp ?? '—')}/${esc(a.max_hp ?? '—')} · смертей ${esc(a.deaths ?? 0)}</small></span><b>${esc(a.online ? 'в игре' : a.last ? new Date(a.last + 'Z').toLocaleDateString('ru', { day: '2-digit', month: '2-digit' }) : '—')}</b></button>`).join('') || '<div class="mini-empty">Аккаунтов пока нет</div>'}</div>
+    <div class="vl-kv"><span>Мир</span><b>${esc(w.name || '—')}</b><span>Размер</span><b>${esc(w.size || '—')}</b><span>Адрес</span><b>${esc(w.address || '—')}</b><span>Защита спавна</span><b>${w.spawn_protection ? esc(w.spawn_protection) + ' блоков' : 'нет'}</b></div>` : '';
+  return `<section class="panel vl-terra" data-vl-side="terra">${head('Terraria', 'game', 'terra')}<div class="panel-sub">${esc(w.name || 'мир')} · ${esc(w.size || '')}</div>
+    <div class="vl-st">${running ? '<span class="status active">Сервер работает</span>' : '<span class="status inactive">Сервер остановлен</span>'}<span class="status live">Онлайн: ${esc(on.length)}</span><span class="status">Аккаунтов: ${esc(accs.length)}</span></div>${more}</section>`;
 }
-function homeOwnerRender() {
+function deployFill() {
+  const box = document.querySelector('.deploy-widget'); const d = live?.owner?.deploys;
+  if (!box || !d?.length) return;
+  const key = JSON.stringify(d); if (box.dataset.vlAt === key) return;
+  const h = box.querySelector('.panel-heading')?.outerHTML || '';
+  const row = x => { const m = x.line.match(/^(\S+) (\S+) (\S+) (\S+) (.*)$/) || []; const ok = m[3] === 'OK' || m[3] === 'ADOPTED';
+    return `<button type="button"><i class="${ok ? '' : 'vl-bad'}"></i><span>${esc(x.name)}<small>${esc((m[5] || x.line).replace(/\s*\((root|Claude|V0van200|[^)]*)\)\s*$/, '').slice(0, 70))}</small></span><b>${esc(m[1] ? m[1].slice(5).split('-').reverse().join('.') + ' ' + (m[2] || '').slice(0, 5) : '')}</b></button>`; };
+  box.innerHTML = `${h}<div class="panel-sub">Автодеплой из GitHub · ${d.length} проекта</div><div class="commit-list">${d.map(row).join('')}</div>`;
+  box.dataset.vlAt = key;
+}
+function side() {
   if (!isHome() || !live) return;
-  const grid = document.querySelector('.stats-grid');
-  if (!grid) return;
-  const old = document.querySelector('[data-vl-owner]');
-  if (old && old.dataset.at === live.updated) return;
-  const html = homeOwner();
-  if (!html) return;
-  if (old) old.outerHTML = html; else grid.insertAdjacentHTML('afterend', html);
-  const el = document.querySelector('[data-vl-owner]'); if (el) el.dataset.at = live.updated;
+  const col = document.querySelector('aside.right-column'); if (!col) return;
+  for (const [id, fn] of [['sys', sysPanel], ['terra', terraPanel]]) {
+    const html = fn(), old = col.querySelector(`[data-vl-side="${id}"]`);
+    if (!html) { old?.remove(); continue; }
+    if (old) { if (old.outerHTML !== html) old.outerHTML = html; }
+    else if (id === 'sys') col.insertAdjacentHTML('afterbegin', html);
+    else col.querySelector('[data-vl-side="sys"]')?.insertAdjacentHTML('afterend', html);
+  }
+  deployFill();
 }
-new MutationObserver(() => { if (isHome() && live && !document.querySelector('[data-vl-owner]')) homeOwnerRender(); }).observe(document.querySelector('#app') || document.body, { childList: true, subtree: true });
-setInterval(homeOwnerRender, 5000); setTimeout(homeOwnerRender, 800);
+document.addEventListener('click', ev => {
+  const b = ev.target.closest('[data-vl-toggle]'); if (!b) return;
+  const id = b.dataset.vlToggle; open.has(id) ? open.delete(id) : open.add(id);
+  localStorage.setItem('vl-open', JSON.stringify([...open])); side();
+});

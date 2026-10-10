@@ -51,38 +51,13 @@
 .vl-home-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-top:10px;font-size:12px;color:var(--muted,#899bb3)}
 .vl-home-foot code{color:var(--green,#8aff5a)}
 @media (max-width:860px){.vl-home-cols{grid-template-columns:1fr}.vl-table{display:block;overflow-x:auto}}
-/* ── блок владельца на главной ── */
-.vl-owner{margin-top:18px}
-.vl-att{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-.vl-att li{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
-.vl-att li b{font-weight:600}.vl-att li span{grid-column:1;opacity:.75;font-size:.9em}.vl-att li em{grid-row:1/3;grid-column:2;align-self:center;font-style:normal;opacity:.6;font-size:.85em}
-.vl-att-bad{border-color:rgba(255,90,90,.45)!important;background:rgba(255,80,80,.08)!important}
-.vl-att-warn{border-color:rgba(255,190,70,.4)!important;background:rgba(255,190,70,.07)!important}
-.vl-allgood{margin:10px 0 0;padding:12px 14px;border-radius:12px;background:rgba(60,200,120,.1);border:1px solid rgba(60,200,120,.35)}
-.vl-sec{margin:22px 0 10px;font-size:1.05em}
-.vl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.vl-card{border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px;background:rgba(255,255,255,.025);min-width:0}
-.vl-card h4{margin:0 0 8px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
-.vl-up{font-weight:400;opacity:.6;font-size:.82em}
-.vl-big{font-size:1.8em;font-weight:700;line-height:1.1}
-.vl-card small{opacity:.65}
-.vl-dl{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:10px 0 0}.vl-dl dt{opacity:.7}.vl-dl dd{margin:0;text-align:right;font-weight:600}
-.vl-mini{display:flex;align-items:flex-end;gap:3px;height:42px;margin:10px 0 2px}.vl-mini i{flex:1;background:currentColor;opacity:.45;border-radius:3px 3px 0 0;min-height:3px}
-.vl-row{display:flex;justify-content:space-between;margin-top:8px;font-size:.92em}.vl-row span{opacity:.75}
-.vl-bar{height:6px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:4px}.vl-bar i{display:block;height:100%;border-radius:6px;background:#3cc87a}
-.vl-bar.vl-warnc i{background:#f0b13c}.vl-bar.vl-bad i{background:#ff5a5a}
-.vl-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.vl-chips span{font-size:.82em;padding:3px 8px;border-radius:8px;background:rgba(255,255,255,.06)}
-.vl-bad-t{color:#ff6b6b}
-.vl-home-status.vl-warn{color:#f0b13c}
-@media (max-width:600px){.vl-grid{grid-template-columns:1fr}.vl-att li{grid-template-columns:1fr}.vl-att li em{grid-row:auto;grid-column:1}}
-
-.vl-card .vl-tablewrap{overflow-x:auto;max-width:100%}
-.vl-card .vl-table{width:100%;font-size:.88em;border-collapse:collapse}
-.vl-card .vl-table td,.vl-card .vl-table th{padding:6px 6px;white-space:nowrap}
-.vl-card .vl-table td:first-child{white-space:normal}
-.vl-owner,.vl-owner *{min-width:0;box-sizing:border-box}
-.vl-owner .vl-feed li{overflow-wrap:anywhere}
-
-.vl-tablewrap{overflow-x:auto;max-width:100%}
-.vl-home,.vl-home *{min-width:0}
-@media (max-width:600px){.vl-home-cols{grid-template-columns:1fr!important}}
+/* ── правая колонка: панели в стиле хаба ── */
+.vl-st{display:flex;flex-wrap:wrap;gap:5px;margin:2px 0 8px}
+.vl-srv{margin-top:6px}.vl-srv>small,.vl-srvx>small{display:block;margin:8px 6px 2px;color:#9eb3c8;font-size:11px}
+.vl-ml{width:34px;color:#8698b1}
+.meter.vl-mwarn i{background:linear-gradient(90deg,#e8c34f,#ffd98a)}.meter.vl-mbad i{background:linear-gradient(90deg,#ee7294,#ff9a8a)}
+.vl-srvx{border-top:1px solid var(--border);margin-top:10px;padding-top:4px}
+.vl-kv{display:grid;grid-template-columns:1fr auto;gap:4px 10px;margin:6px 6px 0;font-size:11px}.vl-kv span{color:#8698b1}.vl-kv b{font-weight:400;color:#c9d6e3;text-align:right}
+.vl-sys .commit-list span small,.vl-terra .commit-list span small,.deploy-widget .commit-list span small{display:block;color:#8698b1;font-size:10px;line-height:1.4;overflow-wrap:anywhere}
+.commit-list i.vl-bad{background:#ee7294}.commit-list i.vl-warn{background:#e8c34f}.commit-list i.vl-off{background:#4a5a6a}
+.vl-att{margin-top:6px}

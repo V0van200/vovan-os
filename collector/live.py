@@ -143,19 +143,62 @@ def vpn_live():
                     'used_24h': sum(1 for t in hs if t and NOW - t < 86400), 'never': sum(1 for t in hs if not t),
                     'rx': sum(int(p[5]) for p in peers if len(p) > 6), 'tx': sum(int(p[6]) for p in peers if len(p) > 6)}
     out['xray'] = sh('systemctl is-active xray')
+    out['keys'], out['traffic'] = vpn_keys_history()
+    return out
+
+VPN_DB = '/var/lib/vovan-os/vpn.sqlite'   # почасовые приросты трафика по ключам (десятки КБ)
+
+def _awg_counters():
+    res = {}
+    for line in sh('awg show awg0 dump 2>/dev/null').splitlines()[1:]:
+        p = line.split('\t')
+        if len(p) >= 7: res[p[3].split('/')[0]] = (int(p[5]), int(p[6]), int(p[4]) if p[4].isdigit() else 0)
+    return res
+
+def vpn_keys_history():
+    """Счётчики AmneziaWG знают только «с перезапуска». Раз в минуту копим приросты по часам → 1 ч / 24 ч / 7 / 30 дней / всего;
+    скорость «сейчас» — два замера с разницей 2 с. Ключи шифрования наружу не выдаются, только имена и цифры."""
     names = {'10.9.0.3': 'основной (твоё устройство)', '10.9.0.2': 'key-2 (первый)'}
     for f in glob.glob('/root/amnezia-clients/*.conf'):
         m = re.search(r'^Address\s*=\s*([\d.]+)', Path(f).read_text(errors='ignore'), re.M)
         if m: names[m.group(1)] = Path(f).stem
-    keys = []
-    for line in sh('awg show awg0 dump 2>/dev/null').splitlines()[1:]:
-        p = line.split('\t')
-        if len(p) < 7: continue
-        ip = p[3].split('/')[0]; hs = int(p[4]) if p[4].isdigit() else 0
-        keys.append({'name': names.get(ip, ip), 'ip': ip, 'last': hs or None, 'online': bool(hs and NOW - hs < 180),
-                     'rx': int(p[5]), 'tx': int(p[6])})
-    out['keys'] = sorted(keys, key=lambda k: -(k['rx'] + k['tx']))
-    return out
+    a = _awg_counters(); time.sleep(2); b = _awg_counters(); now = time.time()
+    os.makedirs(os.path.dirname(VPN_DB), exist_ok=True)
+    db = sqlite3.connect(VPN_DB, timeout=5)
+    db.executescript("""CREATE TABLE IF NOT EXISTS last(ip TEXT PRIMARY KEY, rx INT, tx INT, ts REAL);
+                        CREATE TABLE IF NOT EXISTS hourly(hour INT, ip TEXT, rx INT, tx INT, PRIMARY KEY(hour, ip));
+                        CREATE TABLE IF NOT EXISTS meta(k TEXT PRIMARY KEY, v TEXT);""")
+    db.execute("INSERT OR IGNORE INTO meta VALUES('since', ?)", (str(int(now)),))
+    hour = int(now // 3600)
+    for ip, (rx, tx, _) in b.items():
+        row = db.execute('SELECT rx, tx FROM last WHERE ip=?', (ip,)).fetchone()
+        if row:
+            drx = rx - row[0] if rx >= row[0] else rx      # счётчик сбросился (перезапуск VPN) — считаем с нуля
+            dtx = tx - row[1] if tx >= row[1] else tx
+            if drx or dtx:
+                db.execute('INSERT INTO hourly VALUES(?,?,?,?) ON CONFLICT(hour, ip) DO UPDATE SET rx=rx+excluded.rx, tx=tx+excluded.tx', (hour, ip, drx, dtx))
+        db.execute('INSERT OR REPLACE INTO last VALUES(?,?,?,?)', (ip, rx, tx, now))
+    db.execute('DELETE FROM hourly WHERE hour < ?', (hour - 24 * 90,))
+    db.commit()
+    since = int(db.execute("SELECT v FROM meta WHERE k='since'").fetchone()[0])
+    def period(ip, hours):
+        q = 'SELECT COALESCE(SUM(rx),0), COALESCE(SUM(tx),0) FROM hourly WHERE ip=?' + (' AND hour > ?' if hours else '')
+        return db.execute(q, (ip, hour - hours) if hours else (ip,)).fetchone()
+    keys, tot = [], {'h1': 0, 'd1': 0, 'd7': 0, 'd30': 0, 'all': 0, 'down_bps': 0, 'up_bps': 0}
+    for ip, (rx, tx, hs) in b.items():
+        prx, ptx, _ = a.get(ip, (rx, tx, 0))
+        down, up = max(0, tx - ptx) / 2, max(0, rx - prx) / 2        # tx сервера = скачано клиентом, rx = отправлено клиентом
+        stats = {k: sum(period(ip, h)) for k, h in (('h1', 1), ('d1', 24), ('d7', 168), ('d30', 720), ('all', 0))}
+        hist = {r[0]: r[1] + r[2] for r in db.execute('SELECT hour, rx, tx FROM hourly WHERE ip=? AND hour > ?', (ip, hour - 24))}
+        keys.append({'name': names.get(ip, ip), 'ip': ip, 'last': hs or None, 'online': bool(hs and now - hs < 180),
+                     'rx': rx, 'tx': tx, 'down_bps': down, 'up_bps': up, **stats,
+                     'hours24': [hist.get(h, 0) for h in range(hour - 23, hour + 1)]})
+        for k in ('h1', 'd1', 'd7', 'd30', 'all'): tot[k] += stats[k]
+        tot['down_bps'] += down; tot['up_bps'] += up
+    tot['since'] = since
+    tot['hours24'] = [sum(k['hours24'][i] for k in keys) for i in range(24)]
+    db.close()
+    return sorted(keys, key=lambda k: -(k['rx'] + k['tx'])), tot
 
 def extras_198():
     S = '/data/sites/eeklera-online'
@@ -554,7 +597,7 @@ def owner_view(s78, s198, stale198, projects, catalog):
         if money['ai']['today'] >= 50: add('warn', f'ИИ сегодня: ${money["ai"]["today"]}', 'длинные сессии дорогие — для новых задач начинай новый чат', 'ИИ')
         att.sort(key=lambda a: a['level'] != 'bad')
     return {'attention': att, 'money': money, 'health': health, 'deploys': deploys,
-            'vpn_keys': vpn.get('keys', []), 'vpn': {k: v for k, v in vpn.items() if k != 'keys'}, 'updated': iso()}
+            'vpn_keys': vpn.get('keys', []), 'vpn': {k: v for k, v in vpn.items() if k not in ('keys', 'traffic')}, 'vpn_traffic': vpn.get('traffic'), 'updated': iso()}
 
 def build():
     OUT.mkdir(parents=True, exist_ok=True)

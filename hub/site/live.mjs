@@ -99,14 +99,34 @@ function sysPanel() {
   const o = live?.owner; if (!o || o.error) return '';
   const att = (o.attention || []).filter(a => a.where !== 'проект'), bad = att.filter(a => a.level === 'bad').length;
   const st = bad ? `<span class="status inactive">Проблем: ${bad}</span>` : att.length ? `<span class="status partial">Внимание: ${att.length}</span>` : '<span class="status active">Всё в порядке</span>';
-  const hs = o.health || [], keys = o.vpn_keys || [];
+  const hs = o.health || [];
   const brief = hs.map(h => `<div class="vl-srv"><small>${esc(h.name)}</small>${meter('CPU', h.load)}${meter('ОЗУ', h.ram)}${meter('Диск', h.disk)}</div>`).join('');
   const more = open.has('sys') ? `
     ${att.length ? `<div class="commit-list vl-att">${att.map(a => `<button type="button"><i class="vl-${esc(a.level)}"></i><span>${esc(a.title)}<small>${esc(a.detail)}</small></span><b>${esc(a.where)}</b></button>`).join('')}</div>` : ''}
     ${hs.map(h => `<div class="vl-srvx"><small>${esc(h.name)} · работает ${esc(Math.floor((h.uptime_s || 0) / 86400))} дн</small>
       <div class="vl-kv"><span>Подкачка</span><b>${h.swap == null ? 'нет' : esc(h.swap) + '%'}</b><span>Свободно на диске</span><b>${esc(gbs(h.disk_free))}</b><span>Служб</span><b>${esc(h.services)}${h.services_down ? ` · не работает ${esc(h.services_down)}` : ''}</b><span>Заблокировано взломщиков</span><b>${esc(h.banned ?? '—')}</b></div></div>`).join('')}
-    ${keys.length ? `<div class="vl-srvx"><small>VPN · онлайн ${keys.filter(k => k.online).length} из ${keys.length}</small><div class="commit-list">${keys.map(k => `<button type="button"><i class="${k.online ? '' : 'vl-off'}"></i><span>${esc(k.name)}<small>${k.online ? 'в сети' : 'был ' + esc(agoS(k.last))}</small></span><b>${esc(gbs(k.rx + k.tx))}</b></button>`).join('')}</div></div>` : ''}` : '';
+` : '';
   return `<section class="panel vl-sys" data-vl-side="sys">${head('Состояние системы', 'shield', 'sys')}<div class="panel-sub">Проверка каждую минуту · ${esc(hhmm(o.updated))}</div><div class="vl-st">${st}</div>${brief}${more}</section>`;
+}
+const sizeB = b => b == null ? '—' : b >= 1e9 ? (b / 1e9).toFixed(2) + ' ГБ' : b >= 1e6 ? (b / 1e6).toFixed(1) + ' МБ' : b >= 1e3 ? (b / 1e3).toFixed(0) + ' КБ' : Math.round(b) + ' Б';
+const speed = b => b == null ? '—' : b * 8 >= 1e6 ? (b * 8 / 1e6).toFixed(1) + ' Мбит/с' : b * 8 >= 1e3 ? (b * 8 / 1e3).toFixed(0) + ' Кбит/с' : Math.round(b * 8) + ' бит/с';
+const hourBars = arr => { if (!arr?.length) return ''; const max = Math.max(1, ...arr); return `<div class="vl-hbars" title="по часам за 24 ч">${arr.map(v => `<i style="height:${Math.max(4, v / max * 100)}%" title="${esc(sizeB(v))}"></i>`).join('')}</div>`; };
+function vpnPanel() {
+  const o = live?.owner; const keys = o?.vpn_keys || [], tr = o?.vpn_traffic;
+  if (!keys.length) return '';
+  const on = keys.filter(k => k.online).length;
+  const since = tr?.since ? new Date(tr.since * 1000).toLocaleString('ru', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
+  const totals = tr ? `<div class="vl-kv vl-kv4"><span>Сейчас ↓</span><b>${esc(speed(tr.down_bps))}</b><span>Сейчас ↑</span><b>${esc(speed(tr.up_bps))}</b>
+      <span>За 1 час</span><b>${esc(sizeB(tr.h1))}</b><span>За 24 часа</span><b>${esc(sizeB(tr.d1))}</b><span>За 7 дней</span><b>${esc(sizeB(tr.d7))}</b><span>За 30 дней</span><b>${esc(sizeB(tr.d30))}</b></div>${hourBars(tr.hours24)}` : '';
+  const more = open.has('vpn') ? `<div class="vl-keys">${keys.map(k => `<div class="vl-key">
+      <div class="vl-key-h"><i class="vl-kdot ${k.online ? 'on' : ''}"></i><b>${esc(k.name)}</b><small>${k.online ? 'в сети' : 'был ' + esc(agoS(k.last))}</small></div>
+      ${k.online ? `<div class="vl-now">↓ ${esc(speed(k.down_bps))} · ↑ ${esc(speed(k.up_bps))}</div>` : ''}
+      <div class="vl-kv vl-kv4"><span>1 час</span><b>${esc(sizeB(k.h1))}</b><span>24 часа</span><b>${esc(sizeB(k.d1))}</b><span>7 дней</span><b>${esc(sizeB(k.d7))}</b><span>30 дней</span><b>${esc(sizeB(k.d30))}</b>
+        <span>Скачано</span><b>${esc(sizeB(k.tx))}</b><span>Отправлено</span><b>${esc(sizeB(k.rx))}</b></div>
+      ${hourBars(k.hours24)}</div>`).join('')}</div>
+      <p class="muted-small vl-foot">«Скачано / отправлено» — с последнего перезапуска VPN. Периоды считаются с ${esc(since)}; скорость — замер за 2 секунды, обновляется каждую минуту.</p>` : '';
+  return `<section class="panel vl-vpn" data-vl-side="vpn">${head('VPN', 'lock', 'vpn')}<div class="panel-sub">AmneziaWG · сервер 198 · ${esc(hhmm(o.updated))}</div>
+    <div class="vl-st"><span class="status ${on ? 'active' : 'empty'}">Онлайн: ${on} из ${keys.length}</span>${tr ? `<span class="status live">↓ ${esc(speed(tr.down_bps))}</span>` : ''}</div>${totals}${more}</section>`;
 }
 function terraPanel() {
   const t = live?.projects?.terraria; if (!t) return '';
@@ -130,12 +150,12 @@ function deployFill() {
 function side() {
   if (!isHome() || !live) return;
   const col = document.querySelector('aside.right-column'); if (!col) return;
-  for (const [id, fn] of [['sys', sysPanel], ['terra', terraPanel]]) {
+  for (const [id, fn] of [['sys', sysPanel], ['vpn', vpnPanel], ['terra', terraPanel]]) {
     const html = fn(), old = col.querySelector(`[data-vl-side="${id}"]`);
     if (!html) { old?.remove(); continue; }
     if (old) { if (old.outerHTML !== html) old.outerHTML = html; }
     else if (id === 'sys') col.insertAdjacentHTML('afterbegin', html);
-    else col.querySelector('[data-vl-side="sys"]')?.insertAdjacentHTML('afterend', html);
+    else { const prev = [...col.querySelectorAll('[data-vl-side]')].at(-1); (prev || col.firstElementChild)?.insertAdjacentHTML('afterend', html); }
   }
   deployFill();
 }

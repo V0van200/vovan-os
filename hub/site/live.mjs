@@ -78,7 +78,7 @@ function homeTerraria() {
       <div><span>Бэкапы</span><strong>${esc(m('Бэкапы'))}</strong></div>
     </div>
     <div class="vl-home-cols">
-      <div><h4>Игроки</h4>${accs.length ? `<table class="vl-table"><thead><tr><th>Аккаунт</th><th>Группа</th><th>Здоровье</th><th>Мана</th><th>Смертей</th><th>Был</th></tr></thead><tbody>${accs.map(row).join('')}</tbody></table>` : '<p class="vl-note">Пока никто не зарегистрировался.</p>'}</div>
+      <div><h4>Игроки</h4>${accs.length ? `<div class="vl-tablewrap"><table class="vl-table"><thead><tr><th>Аккаунт</th><th>Группа</th><th>Здоровье</th><th>Мана</th><th>Смертей</th><th>Был</th></tr></thead><tbody>${accs.map(row).join('')}</tbody></table></div>` : '<p class="vl-note">Пока никто не зарегистрировался.</p>'}</div>
       <div><h4>События</h4><ul class="vl-feed">${(list('События с запуска сервера').length ? list('События с запуска сервера') : ['с запуска сервера событий нет']).map(i => `<li>${esc(i)}</li>`).join('')}</ul>
            <h4>Деплои плагинов</h4><ul class="vl-feed">${list('Последние деплои плагинов').slice(0, 4).map(i => `<li>${esc(i)}</li>`).join('')}</ul></div>
     </div>

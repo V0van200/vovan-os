@@ -82,3 +82,7 @@
 .vl-card .vl-table td:first-child{white-space:normal}
 .vl-owner,.vl-owner *{min-width:0;box-sizing:border-box}
 .vl-owner .vl-feed li{overflow-wrap:anywhere}
+
+.vl-tablewrap{overflow-x:auto;max-width:100%}
+.vl-home,.vl-home *{min-width:0}
+@media (max-width:600px){.vl-home-cols{grid-template-columns:1fr!important}}

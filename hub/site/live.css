@@ -75,3 +75,10 @@
 .vl-bad-t{color:#ff6b6b}
 .vl-home-status.vl-warn{color:#f0b13c}
 @media (max-width:600px){.vl-grid{grid-template-columns:1fr}.vl-att li{grid-template-columns:1fr}.vl-att li em{grid-row:auto;grid-column:1}}
+
+.vl-card .vl-tablewrap{overflow-x:auto;max-width:100%}
+.vl-card .vl-table{width:100%;font-size:.88em;border-collapse:collapse}
+.vl-card .vl-table td,.vl-card .vl-table th{padding:6px 6px;white-space:nowrap}
+.vl-card .vl-table td:first-child{white-space:normal}
+.vl-owner,.vl-owner *{min-width:0;box-sizing:border-box}
+.vl-owner .vl-feed li{overflow-wrap:anywhere}

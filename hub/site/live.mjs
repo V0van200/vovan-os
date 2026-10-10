@@ -162,7 +162,7 @@ function homeOwner() {
       <div class="vl-chips"><span>служб ${esc(h.services)}${h.services_down ? ` · <b class="vl-bad-t">не работает ${esc(h.services_down)}</b>` : ''}</span><span>контейнеров ${esc(h.docker)}</span>${h.banned != null ? `<span>заблокировано взломщиков ${esc(h.banned)}</span>` : ''}</div></div>`).join('');
   const keys = o.vpn_keys || [];
   const vpn = keys.length ? `<div class="vl-card"><h4>VPN · ключи<span class="vl-up">онлайн ${keys.filter(k => k.online).length} из ${keys.length}</span></h4>
-      <table class="vl-table"><thead><tr><th>Ключ</th><th>Трафик</th><th>Был в сети</th></tr></thead><tbody>${keys.map(k => `<tr><td>${k.online ? '<i class="vl-dot vl-on"></i>' : '<i class="vl-dot"></i>'}${esc(k.name)}</td><td>${esc(gb(k.rx + k.tx))}</td><td>${esc(k.online ? 'сейчас' : agoTs(k.last))}</td></tr>`).join('')}</tbody></table>
+      <div class="vl-tablewrap"><table class="vl-table"><thead><tr><th>Ключ</th><th>Трафик</th><th>Был в сети</th></tr></thead><tbody>${keys.map(k => `<tr><td>${k.online ? '<i class="vl-dot vl-on"></i>' : '<i class="vl-dot"></i>'}${esc(k.name)}</td><td>${esc(gb(k.rx + k.tx))}</td><td>${esc(k.online ? 'сейчас' : agoTs(k.last))}</td></tr>`).join('')}</tbody></table></div>
       <p class="vl-note">Трафик считается с последнего перезапуска VPN.</p></div>` : '';
   const dep = (o.deploys || []).length ? `<div class="vl-card"><h4>Последние деплои</h4><ul class="vl-feed">${o.deploys.map(d => `<li><b>${esc(d.name)}</b> · ${esc(d.line)}</li>`).join('')}</ul></div>` : '';
   return `<section class="vl-home vl-owner" data-vl-owner>

@@ -523,8 +523,12 @@ def owner_view(s78, s198, stale198, projects, catalog):
     b = (x.get('backup_78') or {}).get('latest_at')
     if s198 and (not b or NOW - b > 36 * 3600): add('warn', 'Бэкап сервера 78 старше 36 часов', f'последний: {ago(b)}', '198')
     names = {p['id']: p.get('name', p['id']) for p in catalog}
+    xray_flagged = any('xray' in a['title'] for a in att)
     for pid, l in projects.items():
-        for a in l.get('alerts', [])[:3]: add('warn', names.get(pid, pid), a, 'проект')
+        for a in l.get('alerts', [])[:3]:
+            if xray_flagged and 'xray' in a: continue          # уже есть общая тревога про xray
+            add('warn', names.get(pid, pid), a, 'проект')
+    seen = set(); att[:] = [a for a in att if not ((a['title'], a['detail']) in seen or seen.add((a['title'], a['detail'])))]
     att.sort(key=lambda a: a['level'] != 'bad')
     # деньги
     money = {}

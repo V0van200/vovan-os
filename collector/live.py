@@ -143,6 +143,18 @@ def vpn_live():
                     'used_24h': sum(1 for t in hs if t and NOW - t < 86400), 'never': sum(1 for t in hs if not t),
                     'rx': sum(int(p[5]) for p in peers if len(p) > 6), 'tx': sum(int(p[6]) for p in peers if len(p) > 6)}
     out['xray'] = sh('systemctl is-active xray')
+    names = {'10.9.0.3': 'основной (твоё устройство)', '10.9.0.2': 'key-2 (первый)'}
+    for f in glob.glob('/root/amnezia-clients/*.conf'):
+        m = re.search(r'^Address\s*=\s*([\d.]+)', Path(f).read_text(errors='ignore'), re.M)
+        if m: names[m.group(1)] = Path(f).stem
+    keys = []
+    for line in sh('awg show awg0 dump 2>/dev/null').splitlines()[1:]:
+        p = line.split('\t')
+        if len(p) < 7: continue
+        ip = p[3].split('/')[0]; hs = int(p[4]) if p[4].isdigit() else 0
+        keys.append({'name': names.get(ip, ip), 'ip': ip, 'last': hs or None, 'online': bool(hs and NOW - hs < 180),
+                     'rx': int(p[5]), 'tx': int(p[6])})
+    out['keys'] = sorted(keys, key=lambda k: -(k['rx'] + k['tx']))
     return out
 
 def extras_198():
@@ -159,10 +171,27 @@ def extras_198():
             'vpn': vpn_live(),
             'backup_78': {'files': len(bfiles), 'latest_at': max(map(os.path.getmtime, bfiles)) if bfiles else None}}
 
+
+def ai_costs(path='/root/.claude/metrics/costs.jsonl'):
+    rows = []
+    for line in tail(path, 20000):
+        try:
+            r = json.loads(line); rows.append((r['session_id'], r['timestamp'], float(r['estimated_cost_usd'])))
+        except Exception: continue
+    if not rows: return None
+    rows.sort(key=lambda r: (r[0], r[1])); last = {}; by_day = {}
+    for sid, ts, cost in rows:
+        delta = max(0.0, cost - last.get(sid, 0.0)); last[sid] = cost
+        by_day[ts[:10]] = by_day.get(ts[:10], 0.0) + delta
+    day = lambda k: time.strftime('%Y-%m-%d', time.gmtime(NOW - k * 86400))
+    s = lambda n: round(sum(v for d, v in by_day.items() if d >= day(n - 1)), 2)
+    return {'today': s(1), 'week': s(7), 'month': s(30), 'since': min(by_day), 'sessions': len(last),
+            'days': [[d, round(by_day.get(d, 0.0), 2)] for d in (day(k) for k in range(13, -1, -1))]}
+
 def server_live(sid):
     other = '198.13.184.145' if sid == '78' else '78.17.19.43'
     d = {'collected_at': iso(), 'host': host_live(), 'services': services(), 'timers': timers(), 'docker': docker(), 'certs': certs(),
-         'security': security(), 'net': net(other, f'/var/tmp/vos-speed-{sid}.json')}
+         'security': security(), 'net': net(other, f'/var/tmp/vos-speed-{sid}.json'), 'ai_costs': ai_costs()}
     if sid == '198': d['extra'] = extras_198()
     return d
 
@@ -444,6 +473,85 @@ def generic(p, live_svc, live_dock, checks):
         if not ok: al.append(f"{c['url']} не отвечает ({c.get('code') or c.get('error')})")
     return ms, al
 
+
+# ───────────────────────── для владельца: внимание, деньги, здоровье ─────────────────────────
+def _cert_days(exp):
+    try: return int((time.mktime(time.strptime(' '.join(exp.split()), '%b %d %H:%M:%S %Y %Z')) - NOW) // 86400)
+    except Exception: return None
+
+def _last_deploy(path):
+    lines = [l for l in tail(path, 5) if l.strip()]
+    return lines[-1] if lines else None
+
+def owner_view(s78, s198, stale198, projects, catalog):
+    att = []
+    add = lambda level, title, detail='', where='': att.append({'level': level, 'title': title, 'detail': detail, 'where': where})
+    if stale198: add('bad', 'Сервер 198 не присылает данные', 'больше 5 минут нет свежих данных — VPN и eeklera.online не видны', '198')
+    health = []
+    for sid, s in (('78', s78), ('198', s198)):
+        h = s.get('host') or {}
+        if not h: continue
+        root = next((d for d in h.get('disks', []) if d['mount'] == '/'), None)
+        disk = round(100 * root['used'] / root['size']) if root and root['size'] else None
+        ram = round(100 * (1 - h['ram_available'] / h['ram_total'])) if h.get('ram_total') else None
+        swap = round(100 * (1 - h['swap_free'] / h['swap_total'])) if h.get('swap_total') else None
+        load = round(h['load'][0] / max(1, h.get('cpus') or 1) * 100) if h.get('load') else None
+        svcs = s.get('services', []); failed = [x for x in (s.get('security') or {}).get('failed_units', [])]
+        health.append({'id': sid, 'name': 'Основной (78)' if sid == '78' else 'VPN и сайт (198)', 'cpus': h.get('cpus'), 'load': load,
+                       'ram': ram, 'ram_total': h.get('ram_total'), 'swap': swap, 'disk': disk, 'disk_free': root and root['avail'],
+                       'uptime_s': h.get('uptime_s'), 'services': len(svcs), 'services_down': sum(1 for x in svcs if x.get('state') != 'active'),
+                       'docker': len(s.get('docker', [])), 'failed': failed,
+                       'banned': ((s.get('security') or {}).get('fail2ban') or {}).get('sshd', {}).get('banned_now')})
+        if disk is not None and disk >= 85: add('bad' if disk >= 93 else 'warn', f'Диск сервера {sid} заполнен на {disk}%', f'свободно {round(root["avail"] / 1e9, 1)} ГБ', sid)
+        if ram is not None and ram >= 90: add('warn', f'Память сервера {sid} занята на {ram}%', '', sid)
+        if swap is not None and swap >= 75: add('warn', f'Подкачка сервера {sid} занята на {swap}%', 'сервер упирается в память — возможны тормоза', sid)
+        if load is not None and load >= 150: add('warn', f'Сервер {sid} перегружен', f'нагрузка {load}% от процессоров', sid)
+        for u in failed: add('bad', f'Служба {u} упала', f'сервер {sid}', sid)
+        for c in s.get('certs', []):
+            d = _cert_days(c.get('expires', ''))
+            if d is not None and d < 21: add('bad' if d < 7 else 'warn', f'Сертификат {c["name"]} истекает через {d} дн', ', '.join(c.get('domains', [])[:3]), sid)
+    deploys = []
+    for name, path in (('CoreHub', '/data/corehub/deploy/history.txt'), ('Kabluk', '/data/kabluk/deploy/history.txt'),
+                       ('Terraria', '/data/terraria/deploy/history.txt'), ('Хаб Vovan OS', '/data/vovan-os-hub/history.log')):
+        l = _last_deploy(path)
+        if not l: continue
+        deploys.append({'name': name, 'line': l[:160]})
+        if re.search(r'FAILED|ROLLED BACK|упал|откат', l): add('bad', f'Последний деплой {name} не прошёл', l[20:140], '78')
+    x = (s198.get('extra') or {})
+    vpn = x.get('vpn') or {}
+    if s198 and vpn.get('xray') not in (None, 'active'): add('bad', 'VPN xray не работает', f'состояние: {vpn.get("xray")}', '198')
+    b = (x.get('backup_78') or {}).get('latest_at')
+    if s198 and (not b or NOW - b > 36 * 3600): add('warn', 'Бэкап сервера 78 старше 36 часов', f'последний: {ago(b)}', '198')
+    names = {p['id']: p.get('name', p['id']) for p in catalog}
+    for pid, l in projects.items():
+        for a in l.get('alerts', [])[:3]: add('warn', names.get(pid, pid), a, 'проект')
+    att.sort(key=lambda a: a['level'] != 'bad')
+    # деньги
+    money = {}
+    try:
+        d = json.loads(Path('/var/lib/shopper/data.json').read_text())
+        days = [float(v or 0) for v in d.get('dayAmounts', [])]; dates = d.get('incomeDates', [])
+        today = time.strftime('%Y-%m-%d', time.gmtime(NOW + 3 * 3600))   # дата по Москве
+        money['shopper'] = {'period': d.get('incomePeriod'), 'week': round(sum(days), 2), 'days': days, 'dates': dates,
+                            'today': days[dates.index(today)] if today in dates and dates.index(today) < len(days) else None,
+                            'tax_due': d.get('taxDue'), 'tax_debt': d.get('taxDebt'), 'tax_bonus': d.get('taxBonus'),
+                            'available': (d.get('walletV2') or {}).get('available'), 'processing': (d.get('walletV2') or {}).get('processing'),
+                            'source': 'админка Shopper (vovan20.ru/shopper/admin)'}
+    except Exception as e: money['shopper_error'] = str(e)[:120]
+    ai = {sid: s.get('ai_costs') for sid, s in (('78', s78), ('198', s198)) if s.get('ai_costs')}
+    if ai:
+        tot = lambda k: round(sum(v[k] for v in ai.values()), 2)
+        days = {}
+        for v in ai.values():
+            for dd, c in v['days']: days[dd] = round(days.get(dd, 0) + c, 2)
+        money['ai'] = {'today': tot('today'), 'week': tot('week'), 'month': tot('month'), 'by_server': ai,
+                       'since': min(v['since'] for v in ai.values()), 'days': sorted(days.items()),
+                       'source': 'учёт ECC в Claude Code, оценка по токенам; ведётся с 9 окт — первая запись включает всю сессию до этого'}
+        if money['ai']['today'] >= 50: add('warn', f'ИИ сегодня: ${money["ai"]["today"]}', 'длинные сессии дорогие — для новых задач начинай новый чат', 'ИИ')
+        att.sort(key=lambda a: a['level'] != 'bad')
+    return {'attention': att, 'money': money, 'health': health, 'deploys': deploys,
+            'vpn_keys': vpn.get('keys', []), 'vpn': {k: v for k, v in vpn.items() if k != 'keys'}, 'updated': iso()}
+
 def build():
     OUT.mkdir(parents=True, exist_ok=True)
     snap = json.loads(BASE_SNAPSHOT.read_text())
@@ -481,7 +589,9 @@ def build():
         live['metrics'] = live.get('metrics', []) + ms; live['alerts'] = live.get('alerts', []) + al
         p['live'] = live; projects[p['id']] = live
     snap['source']['live_at'] = iso(); snap['source']['mode'] = 'live'
-    for name, obj in (('snapshot.json', snap), ('projects.json', {'updated': iso(), 'projects': projects})):
+    try: owner = owner_view(s78, s198, stale198, projects, snap['catalog']['projects'])
+    except Exception as e: owner = {'error': f'{type(e).__name__}: {str(e)[:160]}'}
+    for name, obj in (('snapshot.json', snap), ('projects.json', {'updated': iso(), 'projects': projects, 'owner': owner})):
         tmp = OUT / (name + '.tmp'); tmp.write_text(json.dumps(obj, ensure_ascii=False, separators=(',', ':'), default=str)); tmp.replace(OUT / name)
     print(f"live ok: {sum(1 for x in projects.values() if x['connected'])} проектов с источниками, {len(checks)} сайтов проверено, 198 {'устарел' if stale198 else 'свежий'}")
 

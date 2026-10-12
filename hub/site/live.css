@@ -69,3 +69,6 @@
 .vl-kdot{width:7px;height:7px;border-radius:50%;background:#4a5a6a;flex-shrink:0}.vl-kdot.on{background:#8aff5a;box-shadow:0 0 6px #8aff5a99}
 .vl-now{margin:4px 6px 0;font-size:11px;color:#91e4df}
 .vl-foot{margin:8px 6px 0;font-size:10px}
+
+.snapshot-tag.vl-server-online{color:#65e6a0;border-color:#245c45;background:rgba(28,132,78,.12)}
+.snapshot-tag.vl-server-offline{color:#ff9299;border-color:#704047;background:rgba(152,44,55,.12)}

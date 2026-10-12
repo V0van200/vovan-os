@@ -4,7 +4,7 @@ import { icon } from './icons.mjs';
 // Что делает: 1) значок «ЖИВЫЕ ДАННЫЕ · чч:мм» вместо «ЛОКАЛЬНО»; 2) блок «Сейчас» в паспорте проекта;
 // 3) раз в минуту обновляет открытый паспорт. Когда Astra встроит live в свой интерфейс — этот файл можно убрать.
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-let live = null, lastId = null, loadedAt = null;
+let live = null, serverSnapshot = null, lastId = null, loadedAt = null;
 
 async function load() {
   try {
@@ -12,7 +12,25 @@ async function load() {
     if (!r.ok) throw Error(r.status);
     live = await r.json(); loadedAt = new Date();
   } catch { live = null; }
-  badge(); refreshOpen(); home();
+  try {
+    const r = await fetch('./live/snapshot.json', { cache: 'no-store' });
+    if (!r.ok) throw Error(r.status);
+    serverSnapshot = await r.json();
+  } catch { serverSnapshot = null; }
+  badge(); serverStatus(); refreshOpen(); home();
+}
+
+function serverStatus() {
+  for (const el of document.querySelectorAll('[data-server-status]')) {
+    const server = serverSnapshot?.servers?.[el.dataset.serverStatus];
+    const online = !!server && server.live?.stale === false;
+    const label = server ? (online ? 'Онлайн' : 'Офлайн') : 'Нет данных';
+    if (el.textContent !== label) el.textContent = label;
+    if (el.classList.contains('vl-server-online') !== online) el.classList.toggle('vl-server-online', online);
+    if (el.classList.contains('vl-server-offline') === online) el.classList.toggle('vl-server-offline', !online);
+    const title = server?.collected_at ? `Данные: ${hhmm(server.collected_at)} UTC` : 'Нет свежих данных сервера';
+    if (el.title !== title) el.title = title;
+  }
 }
 
 const hhmm = iso => { const d = new Date(iso); return Number.isNaN(d.valueOf()) ? '' : d.toLocaleTimeString('ru', { hour: '2-digit', minute: '2-digit' }); };
@@ -83,7 +101,7 @@ document.addEventListener('click', ev => {
   if (t?.dataset.project) lastId = t.dataset.project;
 }, true);
 new MutationObserver(() => { inject(); }).observe(document.querySelector('#dialog-content') || document.body, { childList: true, subtree: true });
-new MutationObserver(() => { if (!document.querySelector('[data-vl-badge]')) badge(); if (isHome() && !document.querySelector('[data-vl-side]')) home(); }).observe(document.querySelector('#app') || document.body, { childList: true, subtree: true });
+new MutationObserver(() => { if (!document.querySelector('[data-vl-badge]')) badge(); serverStatus(); if (isHome() && !document.querySelector('[data-vl-side]')) home(); }).observe(document.querySelector('#app') || document.body, { childList: true, subtree: true });
 
 const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = './live.css'; document.head.append(css);
 load(); setInterval(load, 60e3);

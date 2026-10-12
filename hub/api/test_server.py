@@ -61,8 +61,10 @@ class HubApiTest(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertTrue(health["ok"])
         self.request_json("/preferences/server", "PUT", "de")
+        self.request_json("/preferences/profile", "PUT", {"name": "Vovan", "about": "Hub"})
         _, state = self.request_json("/state")
         self.assertEqual(state["preferences"]["server"], "de")
+        self.assertEqual(state["preferences"]["profile"]["name"], "Vovan")
         self.assertTrue(state["sources"]["snapshot"]["available"])
 
     def test_custom_projects_tasks_and_project_status(self):

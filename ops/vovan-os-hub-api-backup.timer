@@ -1,0 +1,9 @@
+[Unit]
+Description=Daily VOVAN OS Hub state backup
+[Timer]
+OnCalendar=*-*-* 02:40:00
+Persistent=true
+RandomizedDelaySec=5m
+[Install]
+WantedBy=timers.target
+

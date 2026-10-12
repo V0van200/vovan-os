@@ -104,6 +104,7 @@ new MutationObserver(() => { inject(); }).observe(document.querySelector('#dialo
 new MutationObserver(() => { if (!document.querySelector('[data-vl-badge]')) badge(); serverStatus(); if (isHome() && !document.querySelector('[data-vl-side]')) home(); }).observe(document.querySelector('#app') || document.body, { childList: true, subtree: true });
 
 const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = './live.css'; document.head.append(css);
+document.addEventListener('hub:live-updated', () => load());
 load(); setInterval(load, 60e3);
 
 

@@ -1,0 +1,7 @@
+[Unit]
+Description=Deploy VOVAN OS Hub API from the main branch
+After=vovan-os-hub-deploy.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/vovan-os-hub-api-deploy
+

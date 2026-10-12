@@ -60,7 +60,7 @@ function spark(points) {
 
 function panel(id) {
   const p = live?.projects?.[id];
-  if (!p) return `<section class="vl-panel vl-muted"><h3>Сейчас</h3><p>Живых данных по этому проекту нет.</p></section>`;
+  if (!p) return `<section class="vl-panel vl-muted" data-vl-panel="${esc(id)}"><h3>Сейчас</h3><p>Живых данных по этому проекту нет.</p></section>`;
   const metrics = (p.metrics || []).map(m => `<div class="vl-metric ${m.level ? 'vl-' + esc(m.level) : ''}"><span>${esc(m.label)}</span><strong>${esc(m.value)}</strong>${m.hint ? `<small>${esc(m.hint)}</small>` : ''}</div>`).join('');
   const alerts = (p.alerts || []).map(a => `<div class="vl-alert">⚠ ${esc(a)}</div>`).join('');
   const series = (p.series || []).map(s => `<div class="vl-series"><h4>${esc(s.title)}</h4>${s.points?.length > 1 ? spark(s.points) : '<p class="vl-note">Данные копятся с сегодняшнего дня — график появится завтра.</p>'}</div>`).join('');

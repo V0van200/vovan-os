@@ -16,7 +16,7 @@ MAX_CLIENTS = int(os.environ.get("HUB_API_MAX_SSE_CLIENTS", "30"))
 stopping = threading.Event()
 clients = threading.BoundedSemaphore(MAX_CLIENTS)
 PROJECT_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9._-]{0,99}$")
-PREF_KEYS = {"server", "compact", "appearance", "vl-open", "nav", "home-widgets", "project-filters"}
+PREF_KEYS = {"server", "compact", "appearance", "vl-open", "nav", "home-widgets", "project-filters", "profile"}
 
 def utc_now():
     return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")

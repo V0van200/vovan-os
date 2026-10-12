@@ -7,7 +7,7 @@ let apiReady=false,apiWrites=Promise.resolve();
 const put=(key,value)=>{
  try{localStorage.setItem('vovan:'+key,JSON.stringify(value))}catch{toast('Не удалось сохранить: хранилище браузера заполнено.');return false}
  const targets={projects:'custom-projects',tasks:'tasks'};
- const prefKeys=['server','compact','appearance','nav','home-widgets','project-filters'];
+ const prefKeys=['server','compact','appearance','nav','home-widgets','project-filters','profile'];
  if(apiReady&&(targets[key]||prefKeys.includes(key))){
   const url=targets[key]?'./api/'+targets[key]:'./api/preferences/'+encodeURIComponent(key);
   apiWrites=apiWrites.then(()=>fetch(url,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(value)})).then(r=>{if(!r.ok)throw Error('sync failed')}).catch(()=>{apiReady=false;document.dispatchEvent(new CustomEvent('hub:sync-error'))});
@@ -62,7 +62,7 @@ function shell(){
 }
 function renderPage(){
  const pages={home:home,projects:()=>projectsPage(),agents:()=>projectsPage(['agents'],'ИИ-агенты'),sites:()=>projectsPage(['site'],'Сайты'),games:()=>projectsPage(['game'],'Игры'),bots:()=>projectsPage(['bot'],'Боты'),files:filesPage,databases:databasesPage,deploys:deploysPage,analytics:analyticsPage,settings:settingsPage,services:servicesPage,github:githubPage,graph:graphPage,tasks:tasksPage,logs:logsPage,alerts:alertsPage};
- applyAppearance(); $('#main').innerHTML=query.trim()?searchPage(): (referencePage(route,{data,snapshot,tasks,projectFilter,dbFilter,look,status,compact}) ?? (pages[route]||pages.home)());
+ applyAppearance(); $('#main').innerHTML=query.trim()?searchPage(): (referencePage(route,{data,snapshot,tasks,projectFilter,dbFilter,look,status,compact,apiReady,navigationSettings}) ?? (pages[route]||pages.home)());
  document.title=(nav.find(n=>n[0]===route)?.[2]||'Центр управления')+' · VOVAN OS';
 }
 function home(){
@@ -168,7 +168,7 @@ document.addEventListener('click',ev=>{
  if(t.dataset.v2View){viewState.view=t.dataset.v2View;renderPage();return}
  if(t.dataset.v2Folder){viewState.fileGroup=t.dataset.v2Folder;renderPage();return}
  if(t.dataset.selectBot){viewState.selectedBot=t.dataset.selectBot;renderPage();return}
- if(t.dataset.theme||t.dataset.accent){changeAppearance(t.dataset.theme?'theme':'accent',t.dataset.theme||t.dataset.accent);renderPage();return}
+ if(t.dataset.theme||t.dataset.accent){changeAppearance(t.dataset.theme?'theme':'accent',t.dataset.theme||t.dataset.accent);put('appearance',JSON.parse(localStorage.getItem('vovan:appearance')));renderPage();return}
  if(['source-info','db-info','deploy-info','bot-info'].includes(t.dataset.action)){modal('Подключение источников',apiReady?'<p>Хаб получает серверные снимки и личные данные через онлайн API под авторизацией админки.</p><p>Снимки проектов обновляются при поступлении от сборщика; команды управления серверами подключаются отдельно.</p>':'<p>Сейчас нет соединения с API. Открыт последний доступный снимок, а изменения останутся в этом браузере до восстановления связи.</p><p>Проверьте доступ к vovan20.ru и войдите через админку.</p>');return}
  if(t.dataset.action==='all-folders'){viewState.fileGroup='all';renderPage();return}
  if(t.dataset.mapfilter){mapFilter=t.dataset.mapfilter;renderPage();return}
@@ -191,7 +191,7 @@ document.addEventListener('pointerdown',ev=>{if(ev.target.closest('.sidebar-resi
 document.addEventListener('pointermove',ev=>{if(!resizingSidebar)return;navPrefs.width=Math.max(190,Math.min(360,ev.clientX));document.body.style.setProperty('--sidebar',navPrefs.width+'px')});
 document.addEventListener('pointerup',()=>{if(!resizingSidebar)return;resizingSidebar=false;document.body.classList.remove('resizing-sidebar');put('nav',navPrefs)});
 document.addEventListener('input',ev=>{const t=ev.target;if(t.id==='nav-width'){navPrefs.width=Number(t.value);document.body.style.setProperty('--sidebar',navPrefs.collapsed?'68px':navPrefs.width+'px');document.querySelector('#nav-width-value').textContent=navPrefs.width+' px'}if(t.id==='global-search'){query=t.value;renderPage()}if(t.id==='table-search'){const q=t.value.toLowerCase();document.querySelectorAll('[data-table-search]').forEach(d=>d.hidden=!d.dataset.tableSearch.includes(q))}});
-document.addEventListener('change',ev=>{const t=ev.target;if(t.id==='nav-width'){navPrefs.width=Number(t.value);saveNavPrefs()}if(t.dataset.navVisible){navPrefs.hidden=t.checked?navPrefs.hidden.filter(x=>x!==t.dataset.navVisible):[...new Set([...navPrefs.hidden,t.dataset.navVisible])];saveNavPrefs()}if(t.hasAttribute('data-v2-kind')){viewState.kind=t.value;renderPage()}if(t.hasAttribute('data-v2-sort')){viewState.sort=t.value;renderPage()}if(t.dataset.pref){changeAppearance(t.dataset.pref,t.checked)}if(t.id==='server-select'){selectedServer=t.value;put('server',selectedServer);shell()}if(t.id==='quiet-toggle'){compact=t.checked;put('compact',compact);document.body.classList.toggle('quiet',compact)}if(t.dataset.task){tasks=tasks.map(x=>x.id===t.dataset.task?{...x,done:t.checked,status:t.checked?'done':'new'}:x);put('tasks',tasks);renderPage()}if(t.id==='import-file')importFiles(t.files)});
+document.addEventListener('change',ev=>{const t=ev.target;if(t.id==='nav-width'){navPrefs.width=Number(t.value);saveNavPrefs()}if(t.dataset.navVisible){navPrefs.hidden=t.checked?navPrefs.hidden.filter(x=>x!==t.dataset.navVisible):[...new Set([...navPrefs.hidden,t.dataset.navVisible])];saveNavPrefs()}if(t.hasAttribute('data-v2-kind')){viewState.kind=t.value;renderPage()}if(t.hasAttribute('data-v2-sort')){viewState.sort=t.value;renderPage()}if(t.dataset.pref){changeAppearance(t.dataset.pref,t.checked);put('appearance',JSON.parse(localStorage.getItem('vovan:appearance')))}if(t.id==='server-select'){selectedServer=t.value;put('server',selectedServer);shell()}if(t.id==='quiet-toggle'){compact=t.checked;put('compact',compact);document.body.classList.toggle('quiet',compact)}if(t.dataset.task){tasks=tasks.map(x=>x.id===t.dataset.task?{...x,done:t.checked,status:t.checked?'done':'new'}:x);put('tasks',tasks);renderPage()}if(t.id==='import-file')importFiles(t.files)});
 document.addEventListener('submit',ev=>{
  if(ev.target.id==='project-form'){ev.preventDefault();const f=ev.target,fd=new FormData(f),name=String(fd.get('name')).trim();if(!name)return;const p={id:f.dataset.edit||'local-'+crypto.randomUUID(),name,kind:fd.get('kind'),note:String(fd.get('note')).trim(),local:true};custom=f.dataset.edit?custom.map(x=>x.id===p.id?p:x):[...custom,p];put('projects',custom);data=model(snapshot,custom);$('#detail').close();shell();toast(apiReady?'Проект сохранён в онлайн-каталоге.':'Проект сохранён в этом браузере: серверная связь недоступна.');}
  if(ev.target.id==='task-form'){ev.preventDefault();const fd=new FormData(ev.target),title=String(fd.get('title')).trim();if(!title)return;tasks=[...tasks,{id:crypto.randomUUID(),title,project:fd.get('project'),done:false}];put('tasks',tasks);$('#detail').close();renderPage();toast(apiReady?'Задача добавлена в онлайн-очередь.':'Задача сохранена в этом браузере: серверная связь недоступна.');}
@@ -204,7 +204,7 @@ try{
   const response=await fetch('./api/state',{cache:'no-store'});
   if(response.ok){
    const remote=await response.json();apiReady=remote.ok===true;
-   const preferenceKeys=['server','compact','appearance','nav','home-widgets','project-filters'];
+   const preferenceKeys=['server','compact','appearance','nav','home-widgets','project-filters','profile'];
    for(const key of preferenceKeys){
     if(Object.hasOwn(remote.preferences||{},key))localStorage.setItem('vovan:'+key,JSON.stringify(remote.preferences[key]));
     else {const cached=get(key,undefined);if(cached!==undefined)fetch('./api/preferences/'+encodeURIComponent(key),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(cached)}).catch(()=>{apiReady=false})}

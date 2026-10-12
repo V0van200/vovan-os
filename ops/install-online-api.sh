@@ -11,6 +11,8 @@ STATE=/data/vovan-os-hub/state
 UNIT=/etc/systemd/system/vovan-os-hub-api.service
 DEPLOY_UNIT=/etc/systemd/system/vovan-os-hub-api-deploy.service
 TIMER=/etc/systemd/system/vovan-os-hub-api-deploy.timer
+BACKUP_UNIT=/etc/systemd/system/vovan-os-hub-api-backup.service
+BACKUP_TIMER=/etc/systemd/system/vovan-os-hub-api-backup.timer
 CONFIG=/etc/nginx/sites-enabled/vovan20.ru
 CONFIG_REAL="$(readlink -f "$CONFIG")"
 BACKUP="$CONFIG_REAL.codex-backup.$(date +%Y%m%d-%H%M%S)"
@@ -28,10 +30,16 @@ install -m 0644 "$ROOT/ops/vovan-os-hub-api.service" "$UNIT"
 install -m 0755 "$ROOT/ops/vovan-os-hub-api-deploy.sh" /usr/local/sbin/vovan-os-hub-api-deploy
 install -m 0644 "$ROOT/ops/vovan-os-hub-api-deploy.service" "$DEPLOY_UNIT"
 install -m 0644 "$ROOT/ops/vovan-os-hub-api-deploy.timer" "$TIMER"
+install -m 0644 "$ROOT/ops/vovan-os-hub-api-backup.service" "$BACKUP_UNIT"
+install -m 0644 "$ROOT/ops/vovan-os-hub-api-backup.timer" "$BACKUP_TIMER"
+install -d -m 0755 /usr/local/lib/vovan-os
+install -m 0644 "$ROOT/ops/backup-hub-api.py" /usr/local/lib/vovan-os/backup-hub-api.py
+install -m 0755 "$ROOT/ops/rollback-hub-api.sh" /usr/local/sbin/vovan-os-hub-api-rollback
 systemctl daemon-reload
 systemctl enable --now vovan-os-hub-api.service
 systemctl restart vovan-os-hub-api.service
 systemctl enable --now vovan-os-hub-api-deploy.timer
+systemctl enable --now vovan-os-hub-api-backup.timer
 systemctl start vovan-os-hub-api-deploy.service
 curl --fail --silent --show-error http://127.0.0.1:3980/health >/dev/null
 

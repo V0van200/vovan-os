@@ -1,0 +1,9 @@
+[Unit]
+Description=Check for VOVAN OS Hub API updates
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=15s
+AccuracySec=2s
+[Install]
+WantedBy=timers.target
+

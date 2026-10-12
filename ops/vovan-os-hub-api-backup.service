@@ -1,0 +1,6 @@
+[Unit]
+Description=Back up VOVAN OS Hub settings and tasks
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/lib/vovan-os/backup-hub-api.py
+

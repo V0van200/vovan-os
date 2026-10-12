@@ -33,6 +33,14 @@ await page.goto('http://127.0.0.1:8080/#databases');await page.locator('[data-db
 await page.locator('#table-search').fill('accounts');assert.ok(await page.locator('.schema-table:visible').count());await page.locator('.schema-table:visible summary').first().click();assert.ok(await page.locator('.schema-table[open] tbody tr').count());await page.keyboard.press('Escape');
 await page.goto('http://127.0.0.1:8080/#graph');assert.equal(await page.locator('.graph-node').count(),129);await page.locator('[data-graphnode="project:kabluk"]').click();assert.ok(await page.locator('.graph-node').count()<129);await page.locator('[data-node-details]').click();assert.match(await page.locator('dialog').innerText(),/Каблук|Kabluk/);await page.keyboard.press('Escape');
 await page.goto('http://127.0.0.1:8080/#settings');
+await page.locator('#nav-width').fill('290');await page.locator('#nav-width').dispatchEvent('change');
+assert.equal(JSON.parse(await page.evaluate(()=>localStorage.getItem('vovan:nav'))).width,290);
+await page.locator('[data-nav-visible="games"]').uncheck();assert.equal(await page.locator('.nav-item[href="#games"]').count(),0);
+await page.locator('[data-nav-move="projects:down"]').click();assert.equal(await page.locator('.nav-item').nth(1).getAttribute('href'),'#agents');
+await page.locator('[data-action="toggle-sidebar"]').click();assert.ok((await page.locator('body').getAttribute('class')).includes('sidebar-collapsed'));
+await page.reload();await page.waitForSelector('main');assert.equal(await page.locator('.nav-item[href="#games"]').count(),0);assert.ok((await page.locator('body').getAttribute('class')).includes('sidebar-collapsed'));
+await page.locator('[data-action="reset-nav"]').click();assert.equal(await page.locator('.nav-item[href="#games"]').count(),1);
+await page.goto('http://127.0.0.1:8080/#settings');
 const [download]=await Promise.all([page.waitForEvent('download'),page.locator('[data-action="export"]').click()]);const path=await download.path();const backup=JSON.parse(fs.readFileSync(path));assert.equal(backup.snapshot.catalog.projects.length,49);assert.equal(backup.projects.length,1);assert.equal(backup.tasks.length,1);
 await page.locator('#import-file').setInputFiles({name:'broken.json',mimeType:'application/json',buffer:Buffer.from('{"version":1}')});await page.waitForTimeout(100);assert.match(await page.locator('#toast').innerText(),/отменён/);assert.match(await page.locator('main').innerText(),/Настройки/);
 await page.locator('#import-file').setInputFiles({name:'backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup))});await page.waitForTimeout(200);assert.match(await page.locator('#toast').innerText(),/импортирован/);

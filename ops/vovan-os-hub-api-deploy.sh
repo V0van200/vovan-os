@@ -29,6 +29,13 @@ fi
 chmod 755 "$tmp" "$tmp/server.py"
 mv "$tmp" "$REL/$name"
 previous=$(readlink -f "$LIVE/current" 2>/dev/null || true)
+wait_health() {
+  for _ in $(seq 1 40); do
+    if curl --fail --silent --show-error --max-time 2 http://127.0.0.1:3980/health >/dev/null 2>&1; then return 0; fi
+    sleep 0.25
+  done
+  return 1
+}
 ln -sfn "$REL/$name" "$LIVE/current.next"
 mv -Tf "$LIVE/current.next" "$LIVE/current"
 if ! systemctl restart vovan-os-hub-api.service; then
@@ -40,7 +47,7 @@ if ! systemctl restart vovan-os-hub-api.service; then
   echo "$(date -Is) FAIL ${sha:0:10} service restart; rolled back" >> "$LOG"
   exit 1
 fi
-if ! curl --fail --silent --show-error --max-time 3 http://127.0.0.1:3980/health >/dev/null; then
+if ! wait_health; then
   if [ -n "$previous" ]; then
     ln -sfn "$previous" "$LIVE/current.rollback"
     mv -Tf "$LIVE/current.rollback" "$LIVE/current"

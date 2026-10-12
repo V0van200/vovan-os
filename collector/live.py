@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Vovan OS — живые данные для хаба. ТОЛЬКО ЧИТАЕТ, ничего не меняет на серверах.
 
-  python3 live.py server [--push HOST:PATH]   состояние этого сервера (198 шлёт своё на 78 каждую минуту)
-  python3 live.py build                       на 78: сервер 78 + присланный 198 + данные проектов →
+  python3 live.py server [--id de|78|198] [--push HOST:PATH]   состояние этого сервера
+  python3 live.py build                       на 78: серверы 78, 198 и de + данные проектов →
                                               /data/vovan-os-hub/live/{snapshot.json, projects.json}
 
 snapshot.json — тот же формат, что hub/site/snapshot.json, но сервисы, нагрузка, диски, контейнеры и таймеры —
@@ -10,6 +10,7 @@ snapshot.json — тот же формат, что hub/site/snapshot.json, но 
 В выход не попадают: IP-адреса посетителей, ключи, токены, тексты сообщений.
 """
 import json, os, re, sqlite3, sys, time, glob, socket, subprocess, urllib.request, concurrent.futures as cf
+from datetime import datetime, timezone
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from collect import sh, services, timers, docker, certs, SYSTEM
@@ -43,6 +44,15 @@ def tail(path, n):
 def mtime(path):
     try: return os.path.getmtime(path)
     except OSError: return None
+
+def is_stale(live, max_age=300):
+    """True when collected_at is absent, invalid, or older than five minutes."""
+    try:
+        stamp = datetime.fromisoformat(str(live['collected_at']).replace('Z', '+00:00'))
+        if stamp.tzinfo is None: stamp = stamp.replace(tzinfo=timezone.utc)
+        return NOW - stamp.timestamp() > max_age
+    except (KeyError, TypeError, ValueError):
+        return True
 
 # ───────────────────────── сервер ─────────────────────────
 
@@ -237,6 +247,25 @@ def server_live(sid):
          'security': security(), 'net': net(other, f'/var/tmp/vos-speed-{sid}.json'), 'ai_costs': ai_costs()}
     if sid == '198': d['extra'] = extras_198()
     return d
+
+def server_de_live():
+    """Read Germany over the existing 78→de SSH path; keep the last good sample on failure."""
+    path = OUT / 'server-de.json'
+    cmd = ['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=8', 'de',
+           'python3 /root/work/vovan-os/collector/live.py server --id de']
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=45)
+        if r.returncode: raise RuntimeError('ssh returned non-zero status')
+        d = json.loads(r.stdout)
+        if not isinstance(d.get('host'), dict) or not isinstance(d.get('services'), list) or not d.get('collected_at'):
+            raise ValueError('invalid server sample')
+        tmp = path.with_suffix('.json.tmp')
+        tmp.write_text(json.dumps(d, ensure_ascii=False, separators=(',', ':'), default=str))
+        tmp.replace(path)
+        return d
+    except Exception:
+        try: return json.loads(path.read_text())
+        except Exception: return {}
 
 # ───────────────────────── проекты (только на 78) ─────────────────────────
 
@@ -605,16 +634,20 @@ def build():
     s78 = server_live('78'); (OUT / 'server-78.json').write_text(json.dumps(s78, ensure_ascii=False, default=str))
     try: s198 = json.loads((OUT / 'server-198.json').read_text())
     except Exception: s198 = {}
-    stale198 = not s198 or NOW - (mtime(OUT / 'server-198.json') or 0) > 300
-    ctx = {'s78': s78, 's198': s198}
-    for sid, live in (('78', s78), ('198', s198)):
+    sde = server_de_live()
+    stale198 = is_stale(s198)
+    ctx = {'s78': s78, 's198': s198, 'sde': sde}
+    live_servers = {'78': s78, '198': s198, 'de': sde}
+    for sid, live in live_servers.items():
         srv = snap['servers'].get(sid)
-        if not srv or not live: continue
-        srv['collected_at'] = live['collected_at']; srv['host'] = {**srv['host'], **live['host']}
-        for k in ('services', 'timers', 'docker', 'certs'): srv[k] = live[k]
-        srv['live'] = {'security': live.get('security'), 'net': live.get('net'), 'stale': sid == '198' and stale198}
-    live_svc = {(sid, s['name']): s for sid, l in (('78', s78), ('198', s198)) for s in l.get('services', [])}
-    live_dock = {(sid, d['name']): d for sid, l in (('78', s78), ('198', s198)) for d in l.get('docker', [])}
+        if not srv: continue
+        if live:
+            srv['collected_at'] = live['collected_at']; srv['host'] = {**srv['host'], **live['host']}
+            for k in ('services', 'timers', 'docker', 'certs'): srv[k] = live.get(k, [])
+        srv['live'] = {'security': live.get('security') if live else None,
+                       'net': live.get('net') if live else None, 'stale': is_stale(live)}
+    live_svc = {(sid, s['name']): s for sid, l in live_servers.items() for s in l.get('services', [])}
+    live_dock = {(sid, d['name']): d for sid, l in live_servers.items() for d in l.get('docker', [])}
     urls = sorted({u for p in snap['catalog']['projects'] for u in p['links']['web'] if p['status'] in ('running', 'live')})
     with cf.ThreadPoolExecutor(8) as ex: checks = dict(zip(urls, ex.map(http_check, urls)))
     projects = {}
@@ -640,12 +673,13 @@ def build():
     except Exception as e: owner = {'error': f'{type(e).__name__}: {str(e)[:160]}'}
     for name, obj in (('snapshot.json', snap), ('projects.json', {'updated': iso(), 'projects': projects, 'owner': owner})):
         tmp = OUT / (name + '.tmp'); tmp.write_text(json.dumps(obj, ensure_ascii=False, separators=(',', ':'), default=str)); tmp.replace(OUT / name)
-    print(f"live ok: {sum(1 for x in projects.values() if x['connected'])} проектов с источниками, {len(checks)} сайтов проверено, 198 {'устарел' if stale198 else 'свежий'}")
+    print(f"live ok: {sum(1 for x in projects.values() if x['connected'])} проектов с источниками, {len(checks)} сайтов проверено, 198 {'устарел' if stale198 else 'свежий'}, de {'устарел' if is_stale(sde) else 'свежий'}")
 
 if __name__ == '__main__':
     mode = sys.argv[1] if len(sys.argv) > 1 else 'build'
     if mode == 'server':
-        sid = '78' if socket.gethostname().startswith('VM-379167') or os.path.exists('/data/kabluk') else '198'
+        sid = sys.argv[sys.argv.index('--id') + 1] if '--id' in sys.argv else ('78' if socket.gethostname().startswith('VM-379167') or os.path.exists('/data/kabluk') else '198')
+        if sid not in ('de', '78', '198'): raise SystemExit('server id must be de, 78, or 198')
         data = json.dumps(server_live(sid), ensure_ascii=False, default=str)
         if '--push' in sys.argv:
             host, path = sys.argv[sys.argv.index('--push') + 1].split(':', 1)

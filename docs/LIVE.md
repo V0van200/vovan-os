@@ -10,6 +10,7 @@
    collector/live.py build
      ├─ состояние сервера 78 (нагрузка, память, диски, сервисы, контейнеры, таймеры, сертификаты, защита, пинг, скорость)
      ├─ + присланное с 198 (то же + VPN, сайт EEKLERA: посетители по журналу nginx, релиз, деплои; свежесть бэкапа 78)
+     ├─ + состояние de по SSH через уже настроенное соединение `de` (внутренний `server-de.json`)
      ├─ + источники проектов (базы и журналы, только чтение)
      └─ /data/vovan-os-hub/live/snapshot.json   → отдаётся как /admin/hub/snapshot.json
         /data/vovan-os-hub/live/projects.json   → /admin/hub/live/projects.json
@@ -19,7 +20,7 @@
 
 ## snapshot.json
 Тот же формат версии 1, что `hub/site/snapshot.json`, плюс:
-- `servers.<id>`: `host`, `services`, `docker`, `timers`, `certs` — живые; `live.security` (fail2ban, файрвол, упавшие службы, открытые наружу порты), `live.net` (пинг, скорость скачивания раз в час), `live.stale` — данные 198 старше 5 минут;
+- `servers.<id>`: `host`, `services`, `docker`, `timers`, `certs` — живые; `live.security` (fail2ban, файрвол, упавшие службы, открытые наружу порты), `live.net` (пинг, скорость скачивания раз в час), `live.stale` — `true`, если `collected_at` старше 5 минут или источник не ответил;
 - `catalog.projects[].services[].state` и `docker[].status` — живые (`base_state`/`base_status` — как было при инвентаризации);
 - `catalog.projects[].live` — то же, что в projects.json;
 - `source.live_at`, `source.mode = "live"`.

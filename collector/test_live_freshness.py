@@ -20,6 +20,26 @@ class FreshnessTests(unittest.TestCase):
         self.assertTrue(live.is_stale({"collected_at": self.stamp(301)}))
         self.assertTrue(live.is_stale({}))
 
+    def test_live_de_is_added_when_baseline_snapshot_is_old(self):
+        sample = {"collected_at": self.stamp(0), "host": {"hostname": "de", "cpus": 4},
+                  "services": [{"name": "nginx"}], "timers": [], "docker": [], "certs": [],
+                  "security": {"firewall": "включён"}, "net": {"ping": 1}}
+        snapshot = {"servers": {"78": {"host": {"hostname": "nl"}}}}
+        result = live.merge_live_servers(snapshot, {"78": {}, "198": {}, "de": sample})
+        de = result["servers"]["de"]
+        self.assertEqual(de["host"]["hostname"], "de")
+        self.assertEqual(de["services"], sample["services"])
+        self.assertFalse(de["live"]["stale"])
+        self.assertEqual(de["live"]["security"], sample["security"])
+
+    def test_existing_server_is_merged_without_dropping_inventory(self):
+        sample = {"collected_at": self.stamp(0), "host": {"hostname": "de", "cpus": 4},
+                  "services": [], "timers": [], "docker": [], "certs": []}
+        snapshot = {"servers": {"de": {"host": {"ram_total": 8}, "nginx": [{"server_name": "x"}]}}}
+        de = live.merge_live_servers(snapshot, {"de": sample})["servers"]["de"]
+        self.assertEqual(de["host"], {"ram_total": 8, "hostname": "de", "cpus": 4})
+        self.assertEqual(de["nginx"], [{"server_name": "x"}])
+
     def test_remote_sample_is_saved_for_next_build(self):
         sample = {"collected_at": self.stamp(0), "host": {"hostname": "de"}, "services": []}
         with tempfile.TemporaryDirectory() as directory, patch.object(live, "OUT", Path(directory)), patch.object(

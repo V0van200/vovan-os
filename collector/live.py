@@ -248,6 +248,28 @@ def server_live(sid):
     if sid == '198': d['extra'] = extras_198()
     return d
 
+def merge_live_servers(snap, live_servers):
+    """Merge samples into the static snapshot, creating de when the 78 baseline is old."""
+    servers = snap.setdefault('servers', {})
+    for sid, live in live_servers.items():
+        srv = servers.get(sid)
+        if not srv and sid == 'de' and live:
+            srv = {'collected_at': live.get('collected_at'), 'host': live.get('host', {}),
+                   'services': [], 'timers': [], 'docker': [], 'nginx': [], 'certs': [],
+                   'apps': [], 'databases': [], 'backups': [], 'vpn': {}}
+            servers[sid] = srv
+        if not srv:
+            continue
+        if live:
+            srv['collected_at'] = live.get('collected_at')
+            srv['host'] = {**srv.get('host', {}), **live.get('host', {})}
+            for key in ('services', 'timers', 'docker', 'certs'):
+                srv[key] = live.get(key, [])
+        srv['live'] = {'security': live.get('security') if live else None,
+                       'net': live.get('net') if live else None, 'stale': is_stale(live)}
+    return snap
+
+
 def server_de_live():
     """Read Germany over the existing 78→de SSH path; keep the last good sample on failure."""
     path = OUT / 'server-de.json'
@@ -638,14 +660,7 @@ def build():
     stale198 = is_stale(s198)
     ctx = {'s78': s78, 's198': s198, 'sde': sde}
     live_servers = {'78': s78, '198': s198, 'de': sde}
-    for sid, live in live_servers.items():
-        srv = snap['servers'].get(sid)
-        if not srv: continue
-        if live:
-            srv['collected_at'] = live['collected_at']; srv['host'] = {**srv['host'], **live['host']}
-            for k in ('services', 'timers', 'docker', 'certs'): srv[k] = live.get(k, [])
-        srv['live'] = {'security': live.get('security') if live else None,
-                       'net': live.get('net') if live else None, 'stale': is_stale(live)}
+    snap = merge_live_servers(snap, live_servers)
     live_svc = {(sid, s['name']): s for sid, l in live_servers.items() for s in l.get('services', [])}
     live_dock = {(sid, d['name']): d for sid, l in live_servers.items() for d in l.get('docker', [])}
     urls = sorted({u for p in snap['catalog']['projects'] for u in p['links']['web'] if p['status'] in ('running', 'live')})

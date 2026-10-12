@@ -215,6 +215,7 @@ body::before {
 @media (max-width: 410px) {
   .workspace { padding-right: 10px; padding-left: 10px; }
   .topbar { margin-right: -10px; margin-left: -10px; padding-right: 10px; padding-left: 10px; }
+  .right-column { grid-template-columns: 1fr; }
   .stats-grid { gap: 8px; }
   .stat-card { min-height: 84px; padding: 10px 9px; gap: 6px; }
   .stat-icon { min-width: 27px; width: 27px; height: 29px; }

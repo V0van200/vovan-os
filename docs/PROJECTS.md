@@ -27,7 +27,7 @@
 | **Стриминг (MediaMTX)** | infra | — | 78 | mediamtx 🟢 | — | 0 | high |
 | **VPN** | infra | — | 198+78 | xray 🟢, wstunnel 🟢, stunnel4 🟢 | — | 0 | high |
 | **Прочие сервисы 78** | services | [server-misc](https://github.com/V0van200/server-misc) | 78 | blenderq 🟢, casting-engine 🟢, drop 🟢, strike 🟢, webos 🟢 | — | 0 | low |
-| **cools1s / kursis** | site | — | 78 | — | cools1s.ru, cools1s.online, kursis.ru | 0 | medium |
+| **cools1s** | site | — | 78 | — | cools1s.ru, www.cools1s.ru, cools1s.online | 0 | medium |
 
 ## Репозитории без работающей части на серверах
 

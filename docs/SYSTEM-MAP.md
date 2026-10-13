@@ -208,9 +208,6 @@
 **kabluk.78-17-19-43.sslip.io**
 - `/` → сервис **kabluk** (:8091)
 
-**kursis.ru, www.kursis.ru** — корень `/var/www/cools1s`
-- `/` → статика
-
 **vovan20.ru, www.vovan20.ru**
 - `= /__auth_panel` → сервис **auth-gateway** (:3481)
 - `= /__auth` → сервис **auth-gateway** (:3481)

@@ -24,7 +24,7 @@
   "media": {"name": "Стриминг (MediaMTX)", "kind": "infra", "repo": null, "server": "78", "services": ["mediamtx"], "confidence": "high", "note": "RTMP 1935, WebRTC/HLS 8888–8892."},
   "vpn": {"name": "VPN", "kind": "infra", "repo": null, "server": "198+78", "services": ["xray", "wstunnel", "stunnel4"], "confidence": "high", "note": "AmneziaWG (awg0/awg1) и Xray на 198; Xray/wstunnel/stunnel на 78. Ключи никогда не публикуются."},
   "misc-78": {"name": "Прочие сервисы 78", "kind": "services", "repo": "server-misc", "server": "78", "services": ["blenderq", "casting-engine", "drop", "strike", "webos"], "confidence": "low", "note": "Репозиторий server-misc содержит 13 подпроектов — сопоставить по одному."},
-  "cools1s": {"name": "cools1s / kursis", "kind": "site", "repo": null, "server": "78", "domains": ["cools1s.ru", "cools1s.online", "kursis.ru"], "paths": ["/var/www/cools1s"], "confidence": "medium"}
+  "cools1s": {"name": "cools1s", "kind": "site", "repo": null, "server": "78", "domains": ["cools1s.ru", "www.cools1s.ru", "cools1s.online"], "paths": ["/var/www/cools1s"], "confidence": "medium"}
  },
  "repos_without_runtime": {
   "Eeklera": "Старый вариант сайта; сравнить с eeklera-online перед архивацией.",

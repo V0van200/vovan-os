@@ -22,7 +22,7 @@
 | [EEKLERA OS + база знаний /neuro](projects/eeklera-os.md) | 🌐 сайт онлайн | 198, 78 | 0 | 0 | 957.4 МБ | 2026-10-02 |  |
 | [Studio (vovan20.ru)](projects/studio.md) | 🌐 сайт онлайн | 78 | 0 | 0 | 16.4 МБ | 2026-06-22 |  |
 | [Graph](projects/graph.md) | 🟢 работает | 78 | 1 | 0 | 24.2 МБ | 2026-10-04 |  |
-| [cools1s / kursis](projects/cools1s.md) | 🌐 сайт онлайн | 78 | 0 | 0 | 1.2 МБ | 2026-06-24 |  |
+| [cools1s](projects/cools1s.md) | 🌐 сайт онлайн | 78 | 0 | 0 | 1.2 МБ | 2026-06-24 |  |
 | [Мини-сайты vovan20.ru (3d, ai, hub)](projects/www-misc.md) | 🟡 не запущен | 78 | 0 | 0 | 39.2 КБ | 2026-07-15 | 1 |
 
 ## Платформы

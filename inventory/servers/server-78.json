@@ -1444,28 +1444,6 @@
    "auth": false
   },
   {
-   "file": "kursis.ru",
-   "names": [
-    "kursis.ru",
-    "www.kursis.ru"
-   ],
-   "listen": [
-    "80"
-   ],
-   "root": "/var/www/cools1s",
-   "locations": [
-    {
-     "path": "/",
-     "proxy": null,
-     "root": null,
-     "return": null,
-     "auth": false
-    }
-   ],
-   "redirect_only": false,
-   "auth": false
-  },
-  {
    "file": "vovan20.ru",
    "names": [
     "vovan20.ru",

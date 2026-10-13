@@ -69,6 +69,17 @@ class HubApiTest(unittest.TestCase):
         self.assertEqual(state["preferences"]["profile"]["name"], "Vovan")
         self.assertTrue(state["sources"]["snapshot"]["available"])
 
+    def test_live_snapshot_endpoint_returns_latest_source_document(self):
+        self.snapshot.write_text('{"version":1,"servers":{"de":{"ok":true}}}', encoding="utf-8")
+        status, snapshot = self.request_json("/snapshot")
+        self.assertEqual(status, 200)
+        self.assertEqual(snapshot["version"], 1)
+        self.assertIn("de", snapshot["servers"])
+        self.snapshot.write_text('{"version":2,"servers":{"78":{}}}', encoding="utf-8")
+        _, updated = self.request_json("/snapshot")
+        self.assertEqual(updated["version"], 2)
+        self.assertIn("78", updated["servers"])
+
     def test_custom_projects_tasks_and_project_status(self):
         self.request_json("/custom-projects", "PUT", [
             {"id": "local-demo", "name": "Demo", "kind": "app", "note": "next", "local": True}

@@ -270,6 +270,11 @@ class Handler(BaseHTTPRequestHandler):
                     "tasks": read_tasks(db),
                     "project_meta": [dict(row) for row in db.execute("SELECT * FROM project_meta ORDER BY project_id")],
                 })
+        if path == "/snapshot":
+            snapshot = json_file(SNAPSHOT)
+            if snapshot is None:
+                return self.send_json(503, {"error": "snapshot_unavailable"})
+            return self.send_json(200, snapshot)
         if path == "/changes":
             try:
                 limit = max(1, min(200, int(parse_qs(urlsplit(self.path).query).get("limit", ["100"])[0])))

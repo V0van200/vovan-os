@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Small authenticated-by-front-proxy API for the online VOVAN OS hub."""
-import json, os, re, signal, sqlite3, threading, time, uuid
+import hashlib, json, os, re, signal, sqlite3, threading, time, uuid
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlsplit, unquote
+from urllib.parse import urlsplit, unquote, parse_qs
 
 HOST = os.environ.get("HUB_API_HOST", "127.0.0.1")
 PORT = int(os.environ.get("HUB_API_PORT", "3980"))
@@ -13,6 +13,7 @@ PROJECTS = Path(os.environ.get("HUB_API_PROJECTS", "/data/vovan-os-hub/live/proj
 DB = Path(os.environ.get("HUB_API_DB", "/data/vovan-os-hub/state/hub.sqlite3"))
 MAX_BODY = 256 * 1024
 MAX_CLIENTS = int(os.environ.get("HUB_API_MAX_SSE_CLIENTS", "30"))
+CHANGE_LIMIT = 1000
 stopping = threading.Event()
 clients = threading.BoundedSemaphore(MAX_CLIENTS)
 PROJECT_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9._-]{0,99}$")
@@ -45,6 +46,18 @@ def init_db():
                 status TEXT NOT NULL DEFAULT 'new', priority TEXT NOT NULL DEFAULT 'normal',
                 details TEXT NOT NULL DEFAULT '', created_at TEXT NOT NULL, updated_at TEXT NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS system_events (
+                id INTEGER PRIMARY KEY AUTOINCREMENT, event_key TEXT NOT NULL UNIQUE,
+                occurred_at TEXT NOT NULL, category TEXT NOT NULL, severity TEXT NOT NULL,
+                server_id TEXT NOT NULL DEFAULT '', project_id TEXT NOT NULL DEFAULT '',
+                title TEXT NOT NULL, detail TEXT NOT NULL, before_json TEXT,
+                after_json TEXT, next_step TEXT NOT NULL DEFAULT '', source TEXT NOT NULL
+            );
+            CREATE INDEX IF NOT EXISTS system_events_recent ON system_events(occurred_at DESC, id DESC);
+            CREATE TABLE IF NOT EXISTS observer_state (
+                id INTEGER PRIMARY KEY CHECK (id=1), generation_json TEXT NOT NULL,
+                state_json TEXT NOT NULL, updated_at TEXT NOT NULL
+            );
         """)
         db.commit()
 
@@ -55,7 +68,7 @@ def file_state(path):
     except OSError:
         return {"available": False, "updated_at": None, "bytes": None}
 
-def generation():
+def source_generation():
     values = []
     for path in (SNAPSHOT, PROJECTS):
         try:
@@ -65,11 +78,146 @@ def generation():
             values.extend((0, 0))
     return tuple(values)
 
+def generation():
+    with connect() as db:
+        row = db.execute("SELECT COALESCE(MAX(id),0) AS latest FROM system_events").fetchone()
+    return (*source_generation(), int(row["latest"]))
+
 def read_preferences(db):
     return {row["key"]: json.loads(row["value_json"]) for row in db.execute("SELECT key,value_json FROM preferences")}
 
 def read_tasks(db):
     return [dict(row) for row in db.execute("SELECT id,project_id,title,status,priority,details,created_at,updated_at FROM tasks ORDER BY created_at DESC")]
+
+def record_event(db, event, source):
+    key = hashlib.sha256((source + ":" + str(time.time_ns()) + ":" + str(uuid.uuid4())).encode()).hexdigest()
+    db.execute("""INSERT INTO system_events
+        (event_key,occurred_at,category,severity,server_id,project_id,title,detail,before_json,after_json,next_step,source)
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,?)""",
+        (key, utc_now(), event["category"], event.get("severity", "ok"), event.get("server_id", ""), event.get("project_id", ""),
+         event["title"], event.get("detail", ""), json.dumps(event.get("before"), ensure_ascii=False),
+         json.dumps(event.get("after"), ensure_ascii=False), event.get("next_step", ""), source))
+    db.execute("DELETE FROM system_events WHERE id NOT IN (SELECT id FROM system_events ORDER BY id DESC LIMIT ?)", (CHANGE_LIMIT,))
+
+def json_file(path):
+    try:
+        with path.open(encoding="utf-8") as stream:
+            value = json.load(stream)
+        return value if isinstance(value, dict) else None
+    except (OSError, json.JSONDecodeError, UnicodeDecodeError):
+        return None
+
+def observed_state(snapshot, projects):
+    """Keep only stable, useful fields; volatile load and RAM do not become noisy events."""
+    state = {"servers": {}, "services": {}, "containers": {}, "alerts": {}}
+    for server_id, server in (snapshot.get("servers") or {}).items():
+        if not isinstance(server, dict):
+            continue
+        collected = server.get("collected_at") or ""
+        live = server.get("live") or {}
+        stale = bool(live.get("stale"))
+        if collected:
+            try:
+                dt = datetime.fromisoformat(collected.replace("Z", "+00:00"))
+                stale = stale or (datetime.now(timezone.utc) - dt).total_seconds() > 180
+            except (TypeError, ValueError):
+                stale = bool(live.get("stale")) if live.get("stale") is not None else None
+        elif live.get("stale") is None:
+            stale = None
+        state["servers"][str(server_id)] = {"stale": stale, "collected_at": collected}
+        for service in server.get("services") or []:
+            if isinstance(service, dict) and service.get("name"):
+                key = f"{server_id}:{service['name']}"
+                state["services"][key] = {"server": str(server_id), "name": str(service["name"]), "state": str(service.get("state") or "unknown")}
+        for container in server.get("docker") or []:
+            if isinstance(container, dict) and container.get("name"):
+                key = f"{server_id}:{container['name']}"
+                raw = str(container.get("status") or "unknown")
+                normalized = "running" if raw.lower().startswith("up ") or raw.lower() == "up" else "exited" if raw.lower().startswith("exited") else raw
+                state["containers"][key] = {"server": str(server_id), "name": str(container["name"]), "state": normalized}
+    project_map = projects.get("projects") or {}
+    if isinstance(project_map, dict):
+        for project_id, project in project_map.items():
+            if isinstance(project, dict):
+                state["alerts"][str(project_id)] = sorted({str(item)[:300] for item in project.get("alerts", []) if item})
+    return state
+
+def transition_events(previous, current):
+    events = []
+    for server_id, now in current.get("servers", {}).items():
+        old = previous.get("servers", {}).get(server_id)
+        if old is None or old.get("stale") is None or now.get("stale") is None or old.get("stale") == now.get("stale"):
+            continue
+        status = "Нет свежей связи" if now["stale"] else "Связь восстановлена"
+        events.append({"category": "server", "severity": "warning" if now["stale"] else "ok", "server_id": server_id,
+                       "title": f"{status}: сервер {server_id}",
+                       "detail": "Сборщик давно не присылал свежие данные." if now["stale"] else "Сборщик снова прислал актуальные данные.",
+                       "before": old.get("stale"), "after": now.get("stale"),
+                       "next_step": "Проверьте доступность сервера и сборщик данных." if now["stale"] else "Связь восстановилась; проверьте, не осталось ли связанных предупреждений."})
+    for group, category, label in (("services", "service", "Сервис"), ("containers", "container", "Контейнер")):
+        before = previous.get(group, {})
+        after = current.get(group, {})
+        for key in sorted(before.keys() & after.keys()):
+            old, now = before[key], after[key]
+            if old.get("state") == now.get("state"):
+                continue
+            down = now.get("state") not in {"active", "active/running", "running", "Up", "healthy"}
+            events.append({"category": category, "severity": "warning" if down else "ok", "server_id": now.get("server", ""),
+                           "title": f"{label} {now.get('name')} · {now.get('server')}: {old.get('state')} → {now.get('state')}",
+                           "detail": "Состояние изменилось по данным серверной инвентаризации.",
+                           "before": old.get("state"), "after": now.get("state"),
+                           "next_step": "Откройте карточку сервера и проверьте журнал службы." if down else "Проверьте, что связанный проект снова отвечает."})
+    for project_id, alerts in current.get("alerts", {}).items():
+        before = set(previous.get("alerts", {}).get(project_id, []))
+        after = set(alerts)
+        for alert in sorted(after - before):
+            events.append({"category": "project", "severity": "warning", "project_id": project_id,
+                           "title": f"Новое предупреждение: {project_id}", "detail": alert,
+                           "before": None, "after": alert, "next_step": "Проверьте источник данных и создайте задачу, если требуется исправление."})
+        for alert in sorted(before - after):
+            events.append({"category": "project", "severity": "ok", "project_id": project_id,
+                           "title": f"Предупреждение снято: {project_id}", "detail": alert,
+                           "before": alert, "after": None, "next_step": "Убедитесь, что метрика или проверка действительно восстановлена."})
+    return events
+
+def observe_snapshot():
+    """Persist transitions even when no one has the dashboard open."""
+    current_generation = source_generation()
+    with connect() as db:
+        row = db.execute("SELECT generation_json FROM observer_state WHERE id=1").fetchone()
+    same_generation = row is not None and row["generation_json"] == json.dumps(current_generation)
+    if not same_generation:
+        time.sleep(0.35)
+        if source_generation() != current_generation:
+            return  # The collector replaces two files in sequence; wait for a stable pair.
+    snapshot, projects = json_file(SNAPSHOT), json_file(PROJECTS)
+    if source_generation() != current_generation:
+        return  # The collector replaces two files in sequence; wait for a stable pair.
+    if snapshot is None or projects is None:
+        return
+    current_state = observed_state(snapshot, projects)
+    generation_json = json.dumps(current_generation)
+    state_json = json.dumps(current_state, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    with connect() as db:
+        row = db.execute("SELECT generation_json,state_json FROM observer_state WHERE id=1").fetchone()
+        previous = json.loads(row["state_json"]) if row else None
+        if row and row["generation_json"] == generation_json and row["state_json"] == state_json:
+            return
+        if previous is not None:
+            for event in transition_events(previous, current_state):
+                canonical = json.dumps(event, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+                digest = hashlib.sha256((generation_json + canonical).encode("utf-8")).hexdigest()
+                db.execute("""INSERT OR IGNORE INTO system_events
+                    (event_key,occurred_at,category,severity,server_id,project_id,title,detail,before_json,after_json,next_step,source)
+                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?)""",
+                    (digest, utc_now(), event["category"], event["severity"], event.get("server_id", ""), event.get("project_id", ""),
+                     event["title"], event["detail"], json.dumps(event.get("before"), ensure_ascii=False),
+                     json.dumps(event.get("after"), ensure_ascii=False), event["next_step"], "server_snapshot"))
+            db.execute("DELETE FROM system_events WHERE id NOT IN (SELECT id FROM system_events ORDER BY id DESC LIMIT ?)", (CHANGE_LIMIT,))
+        db.execute("""INSERT INTO observer_state(id,generation_json,state_json,updated_at) VALUES(1,?,?,?)
+            ON CONFLICT(id) DO UPDATE SET generation_json=excluded.generation_json,state_json=excluded.state_json,updated_at=excluded.updated_at""",
+            (generation_json, state_json, utc_now()))
+        db.commit()
 
 class Handler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
@@ -122,6 +270,22 @@ class Handler(BaseHTTPRequestHandler):
                     "tasks": read_tasks(db),
                     "project_meta": [dict(row) for row in db.execute("SELECT * FROM project_meta ORDER BY project_id")],
                 })
+        if path == "/changes":
+            try:
+                limit = max(1, min(200, int(parse_qs(urlsplit(self.path).query).get("limit", ["100"])[0])))
+            except (TypeError, ValueError):
+                return self.send_json(400, {"error": "invalid_limit"})
+            with connect() as db:
+                rows = db.execute("""SELECT id,event_key,occurred_at,category,severity,server_id,project_id,title,detail,
+                    before_json,after_json,next_step,source FROM system_events ORDER BY id DESC LIMIT ?""", (limit,)).fetchall()
+            events = []
+            for row in rows:
+                item = dict(row)
+                item["before"] = json.loads(item.pop("before_json") or "null")
+                item["after"] = json.loads(item.pop("after_json") or "null")
+                events.append(item)
+            return self.send_json(200, {"ok": True, "events": events, "count": len(events), "limit": limit,
+                                        "updated_at": utc_now(), "history_starts_at": events[-1]["occurred_at"] if events else None})
         if path == "/events":
             return self.events()
         return self.send_json(404, {"error": "not_found"})
@@ -151,6 +315,23 @@ class Handler(BaseHTTPRequestHandler):
                         return self.send_json(400, {"error": "invalid_project"})
                     clean.append({k: p.get(k) for k in ("id", "name", "kind", "note", "local")})
                 with connect() as db:
+                    old_row = db.execute("SELECT value_json FROM preferences WHERE key='custom_projects'").fetchone()
+                    old_projects = {p["id"]: p for p in json.loads(old_row["value_json"])} if old_row else {}
+                    new_projects = {p["id"]: p for p in clean}
+                    for project_id, project in new_projects.items():
+                        old = old_projects.get(project_id)
+                        if old is None:
+                            record_event(db, {"category": "project", "project_id": project_id,
+                                "title": "Проект добавлен в каталог", "detail": "Создана карточка проекта в общем онлайн-хабе.",
+                                "next_step": "Добавьте репозиторий, сервер и следующий шаг в карточку проекта."}, "owner_action")
+                        elif any(old.get(key) != project.get(key) for key in ("name", "kind", "note")):
+                            record_event(db, {"category": "project", "project_id": project_id,
+                                "title": "Карточка проекта обновлена", "detail": "Изменены название, тип или заметка; текст заметки в журнал не копируется.",
+                                "next_step": "Проверьте описание и связи проекта."}, "owner_action")
+                    for project_id in old_projects.keys() - new_projects.keys():
+                        record_event(db, {"category": "project", "project_id": project_id,
+                            "title": "Личная карточка проекта удалена", "detail": "Карточка удалена из пользовательского каталога.",
+                            "next_step": "Если проект всё ещё нужен, добавьте его заново."}, "owner_action")
                     db.execute("INSERT INTO preferences(key,value_json,updated_at) VALUES('custom_projects',?,?) ON CONFLICT(key) DO UPDATE SET value_json=excluded.value_json,updated_at=excluded.updated_at",
                                (json.dumps(clean, ensure_ascii=False), utc_now()))
                     db.commit()
@@ -177,6 +358,23 @@ class Handler(BaseHTTPRequestHandler):
                 now = utc_now()
                 with connect() as db:
                     db.execute("BEGIN")
+                    old_tasks = {row["id"]: dict(row) for row in db.execute("SELECT id,project_id,title,status,priority,details FROM tasks")}
+                    new_tasks = {task["id"]: task for task in clean}
+                    for task_id, task in new_tasks.items():
+                        old = old_tasks.get(task_id)
+                        if old is None:
+                            record_event(db, {"category": "task", "project_id": task["project_id"], "title": "Добавлена задача",
+                                "detail": "Новая задача сохранена в общей онлайн-очереди.", "before": None, "after": task["status"],
+                                "next_step": "Откройте раздел задач и назначьте следующий шаг."}, "owner_action")
+                        elif any(old[field] != task[field] for field in ("project_id", "title", "status", "priority", "details")):
+                            record_event(db, {"category": "task", "project_id": task["project_id"] or old["project_id"],
+                                "title": "Задача обновлена", "detail": "Изменена задача в общей онлайн-очереди.",
+                                "before": old["status"], "after": task["status"], "next_step": "Проверьте назначенный статус и связанный проект."}, "owner_action")
+                    for task_id, old in old_tasks.items():
+                        if task_id not in new_tasks:
+                            record_event(db, {"category": "task", "project_id": old["project_id"], "title": "Задача удалена",
+                                "detail": "Запись удалена из общей онлайн-очереди.", "before": old["status"], "after": None,
+                                "next_step": "Если работа ещё нужна, добавьте её снова."}, "owner_action")
                     db.execute("DELETE FROM tasks")
                     db.execute("INSERT INTO preferences(key,value_json,updated_at) VALUES('tasks_initialized','true',?) ON CONFLICT(key) DO UPDATE SET value_json='true',updated_at=excluded.updated_at", (now,))
                     for task in clean:
@@ -198,11 +396,23 @@ class Handler(BaseHTTPRequestHandler):
                 note = str(value.get("note") or "")[:4000]
                 now = utc_now()
                 with connect() as db:
+                    old = db.execute("SELECT status,visible,favorite,next_step,note FROM project_meta WHERE project_id=?", (project_id,)).fetchone()
                     db.execute("""INSERT INTO project_meta(project_id,status,visible,favorite,next_step,note,updated_at)
                         VALUES(?,?,?,?,?,?,?) ON CONFLICT(project_id) DO UPDATE SET
                         status=excluded.status,visible=excluded.visible,favorite=excluded.favorite,
                         next_step=excluded.next_step,note=excluded.note,updated_at=excluded.updated_at""",
                         (project_id, status, visible, favorite, next_step, note, now))
+                    before = dict(old) if old else None
+                    after = {"status": status, "visible": visible, "favorite": favorite, "next_step": next_step, "note": note}
+                    if old is None or any(old[key] != val for key, val in after.items()):
+                        labels = {"status": "статус", "visible": "видимость", "favorite": "избранное", "next_step": "следующий шаг", "note": "заметка"}
+                        changed = [labels[key] for key, val in after.items() if old is None or old[key] != val]
+                        before_status = before.get("status") if before else None
+                        after_status = status if before_status != status else None
+                        record_event(db, {"category": "project", "project_id": project_id, "title": "Обновлён паспорт проекта",
+                            "detail": "Изменено: " + ", ".join(changed) + ". Содержимое заметок в истории не сохраняется.",
+                            "before": before_status if after_status is not None else None, "after": after_status,
+                            "next_step": "Проверьте карточку проекта и его следующий шаг."}, "owner_action")
                     db.commit()
                 return self.send_json(200, {"ok": True, "project_id": project_id, "updated_at": now})
         except ValueError as exc:
@@ -233,7 +443,8 @@ class Handler(BaseHTTPRequestHandler):
                     time.sleep(0.35)
                     current = generation()
                     payload = {"id": "-".join(map(str, current)), "time": utc_now(), "sources": {"snapshot": file_state(SNAPSHOT), "projects": file_state(PROJECTS)}}
-                    frame = ("id: %s\nevent: snapshot\ndata: %s\n\n" % (payload["id"], json.dumps(payload, separators=(",", ":")))).encode("utf-8")
+                    event_name = "change" if previous is not None and current[:-1] == previous[:-1] else "snapshot"
+                    frame = ("id: %s\nevent: %s\ndata: %s\n\n" % (payload["id"], event_name, json.dumps(payload, separators=(",", ":")))).encode("utf-8")
                     self.wfile.write(frame)
                     self.wfile.flush()
                     previous = current
@@ -254,6 +465,15 @@ class Server(ThreadingHTTPServer):
 
 def main():
     init_db()
+    observe_snapshot()  # First run becomes a baseline; it is not presented as a change.
+    def watch():
+        while not stopping.is_set():
+            try:
+                observe_snapshot()
+            except (OSError, sqlite3.Error, ValueError) as exc:
+                print("Snapshot observer error: %s" % type(exc).__name__, flush=True)
+            stopping.wait(2)
+    threading.Thread(target=watch, name="snapshot-observer", daemon=True).start()
     httpd = Server((HOST, PORT), Handler)
     def stop(_signal, _frame):
         stopping.set()

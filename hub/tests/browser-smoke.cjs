@@ -9,7 +9,7 @@ page.on('pageerror',e=>errors.push(e.message));
 page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1:8080')&&!r.url().startsWith('data:'))external.push(r.url())});
 await page.goto('http://127.0.0.1:8080');await page.waitForSelector('.stats-grid');
 assert.match(await page.locator('.stat-card').first().innerText(),/49/);
-for(const route of ['projects','agents','sites','games','bots','files','databases','deploys','analytics','settings','services','github','graph','tasks','logs','alerts']){
+for(const route of ['changes','projects','agents','sites','games','bots','files','databases','deploys','analytics','settings','services','github','graph','tasks','logs','alerts']){
  await page.goto('http://127.0.0.1:8080/#'+route);await page.waitForTimeout(100);
  assert.ok(await page.locator('main').innerText(),route);
  const overflow=await page.evaluate(()=>document.body.scrollWidth>innerWidth+1);
@@ -36,7 +36,7 @@ await page.goto('http://127.0.0.1:8080/#settings');
 await page.locator('#nav-width').fill('290');await page.locator('#nav-width').dispatchEvent('change');
 assert.equal(JSON.parse(await page.evaluate(()=>localStorage.getItem('vovan:nav'))).width,290);
 await page.locator('[data-nav-visible="games"]').uncheck();assert.equal(await page.locator('.nav-item[href="#games"]').count(),0);
-await page.locator('[data-nav-move="projects:down"]').click();assert.equal(await page.locator('.nav-item').nth(1).getAttribute('href'),'#agents');
+await page.locator('[data-nav-move="projects:down"]').click();assert.equal(await page.locator('.nav-item').nth(2).getAttribute('href'),'#agents');
 await page.locator('[data-action="toggle-sidebar"]').click();assert.ok((await page.locator('body').getAttribute('class')).includes('sidebar-collapsed'));
 await page.reload();await page.waitForSelector('main');assert.equal(await page.locator('.nav-item[href="#games"]').count(),0);assert.ok((await page.locator('body').getAttribute('class')).includes('sidebar-collapsed'));
 await page.locator('[data-action="reset-nav"]').click();assert.equal(await page.locator('.nav-item[href="#games"]').count(),1);
@@ -53,6 +53,6 @@ await page.screenshot({path:'/workspace/vovan-os/tests/mobile.png',fullPage:true
 await page.locator('[data-action="menu"]').click();await page.locator('.nav-item[href="#databases"]').click();await page.waitForSelector('.database-card');assert.equal(await page.locator('body').getAttribute('class'),'');assert.ok(await page.locator('.database-card').count());
 for(const route of ['projects','files','analytics','settings','graph']){await page.goto('http://127.0.0.1:8080/#'+route);await page.waitForTimeout(100);assert.equal(await page.evaluate(()=>document.body.scrollWidth>innerWidth+1),false,'Mobile overflow '+route)}
 assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
-console.log('PASS: 16 routes, 49 projects, 129 graph nodes, database search, local project/task persistence, export/import, responsive layouts, no external requests.');
+console.log('PASS: 17 routes, 49 projects, 129 graph nodes, database search, local project/task persistence, export/import, responsive layouts, no external requests.');
 await browser.close();
 })().catch(e=>{console.error(e);process.exit(1)});

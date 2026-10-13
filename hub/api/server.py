@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Small authenticated-by-front-proxy API for the online VOVAN OS hub."""
-import hashlib, json, os, re, signal, sqlite3, threading, time, uuid
+import hashlib, ipaddress, json, os, re, signal, socket, sqlite3, ssl, threading, time, uuid
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -11,11 +12,16 @@ PORT = int(os.environ.get("HUB_API_PORT", "3980"))
 SNAPSHOT = Path(os.environ.get("HUB_API_SNAPSHOT", "/data/vovan-os-hub/live/snapshot.json"))
 PROJECTS = Path(os.environ.get("HUB_API_PROJECTS", "/data/vovan-os-hub/live/projects.json"))
 DB = Path(os.environ.get("HUB_API_DB", "/data/vovan-os-hub/state/hub.sqlite3"))
+DOMAIN_MAP = Path(os.environ.get("HUB_API_DOMAIN_MAP", "/var/www/vovan-os-hub/domain-map.json"))
+DOMAIN_CHECK_INTERVAL = max(30, int(os.environ.get("HUB_API_DOMAIN_CHECK_INTERVAL", "60")))
+DOMAIN_CHECK_TIMEOUT = max(1, min(8, int(os.environ.get("HUB_API_DOMAIN_CHECK_TIMEOUT", "4"))))
 MAX_BODY = 256 * 1024
 MAX_CLIENTS = int(os.environ.get("HUB_API_MAX_SSE_CLIENTS", "30"))
 CHANGE_LIMIT = 1000
 stopping = threading.Event()
 clients = threading.BoundedSemaphore(MAX_CLIENTS)
+domain_health_lock = threading.Lock()
+domain_health = {"ok": True, "status": "checking", "updated_at": None, "domains": []}
 PROJECT_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9._-]{0,99}$")
 PREF_KEYS = {"server", "compact", "appearance", "vl-open", "nav", "home-widgets", "project-filters", "profile"}
 
@@ -106,6 +112,127 @@ def json_file(path):
         return value if isinstance(value, dict) else None
     except (OSError, json.JSONDecodeError, UnicodeDecodeError):
         return None
+
+def domain_targets(document):
+    """Read the fixed domain allowlist; never accept probe targets from a request."""
+    if not isinstance(document, dict):
+        return []
+    web_names = {str(name).lower().rstrip(".") for name in document.get("https_names", []) if isinstance(name, str)}
+    result = {}
+    for record in document.get("records", []):
+        if not isinstance(record, dict):
+            continue
+        expected_ip = record.get("ip")
+        try:
+            if not ipaddress.ip_address(expected_ip).is_global:
+                expected_ip = None
+        except (ValueError, TypeError):
+            expected_ip = None
+        for raw_name in record.get("names", []):
+            if not isinstance(raw_name, str):
+                continue
+            name = raw_name.lower().rstrip(".")
+            if re.fullmatch(r"(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}", name):
+                result[name] = {"name": name, "expected_ip": expected_ip, "https": name in web_names}
+    for raw_name in document.get("unresolved", []):
+        if not isinstance(raw_name, str):
+            continue
+        name = raw_name.lower().rstrip(".")
+        if re.fullmatch(r"(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}", name):
+            result.setdefault(name, {"name": name, "expected_ip": None, "https": False})
+    return [result[key] for key in sorted(result)]
+
+def resolve_public_ips(host, timeout=DOMAIN_CHECK_TIMEOUT):
+    # The names come only from the checked-in domain inventory. The result is
+    # still validated before any connection is made to avoid probing private IPs.
+    try:
+        answers = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
+    except socket.gaierror as exc:
+        if exc.errno == socket.EAI_NONAME:
+            return []
+        raise
+    ips = set()
+    for answer in answers:
+        try:
+            address = answer[4][0].split("%", 1)[0]
+            parsed = ipaddress.ip_address(address)
+            if parsed.is_global:
+                ips.add(str(parsed))
+        except (ValueError, IndexError, TypeError):
+            continue
+    return sorted(ips)
+
+def probe_https(host, ip, timeout=DOMAIN_CHECK_TIMEOUT):
+    """Validate TLS and make one bounded GET to /, connected only to the expected public IP."""
+    try:
+        address = ipaddress.ip_address(ip)
+        if not address.is_global:
+            return {"tls": {"status": "not_checked", "reason": "Адрес не является публичным"},
+                    "http": {"status": "not_checked", "code": None}}
+        raw = socket.create_connection((str(address), 443), timeout=timeout)
+        with ssl.create_default_context().wrap_socket(raw, server_hostname=host) as connection:
+            connection.settimeout(timeout)
+            certificate = connection.getpeercert()
+            expires = certificate.get("notAfter")
+            expires_at = datetime.fromtimestamp(ssl.cert_time_to_seconds(expires), timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z") if expires else None
+            days_left = (datetime.fromtimestamp(ssl.cert_time_to_seconds(expires), timezone.utc) - datetime.now(timezone.utc)).days if expires else None
+            tls_status = "expired" if days_left is not None and days_left < 0 else "expiring" if days_left is not None and days_left <= 30 else "valid"
+            request = f"GET / HTTP/1.1\r\nHost: {host}\r\nUser-Agent: VovanHub-DomainCheck/1.0\r\nAccept: */*\r\nConnection: close\r\n\r\n".encode("ascii")
+            connection.sendall(request)
+            try:
+                with connection.makefile("rb") as stream:
+                    line = stream.readline(256).decode("latin-1", "replace").strip()
+            except (OSError, TimeoutError):
+                line = ""
+            match = re.match(r"^HTTP/\d(?:\.\d)?\s+(\d{3})(?:\s|$)", line)
+            code = int(match.group(1)) if match else None
+            http_status = "protected" if code in (401, 403) else "available" if code is not None and 200 <= code < 400 else "client_error" if code is not None and 400 <= code < 500 else "server_error" if code is not None and code >= 500 else "no_response"
+            return {"tls": {"status": tls_status, "expires_at": expires_at, "days_left": days_left, "reason": ""},
+                    "http": {"status": http_status, "code": code}}
+    except ssl.SSLCertVerificationError as exc:
+        code = getattr(exc, "verify_code", None)
+        reason = "Сертификат истёк" if code == 10 else "Домен не совпадает с сертификатом" if code == 62 else "Сертификат не подтверждён"
+        return {"tls": {"status": "invalid", "expires_at": None, "days_left": None, "reason": reason},
+                "http": {"status": "not_checked", "code": None}}
+    except (OSError, ssl.SSLError, ValueError, TimeoutError):
+        return {"tls": {"status": "unreachable", "expires_at": None, "days_left": None, "reason": "Не удалось установить HTTPS-соединение"},
+                "http": {"status": "unavailable", "code": None}}
+
+def check_domain_target(target, resolver=resolve_public_ips, probe=probe_https):
+    name, expected = target["name"], target.get("expected_ip")
+    try:
+        resolved = resolver(name)
+        dns_error = False
+    except (OSError, socket.gaierror, TimeoutError):
+        resolved, dns_error = [], True
+    if dns_error:
+        dns_status = "unavailable"
+    elif expected and expected in resolved:
+        dns_status = "ok"
+    elif expected:
+        dns_status = "mismatch" if resolved else "missing"
+    else:
+        dns_status = "unexpected_record" if resolved else "not_found"
+    result = {"name": name, "expected_ip": expected, "resolved_ips": resolved, "dns": {"status": dns_status},
+              "tls": {"status": "not_checked", "expires_at": None, "days_left": None, "reason": ""},
+              "http": {"status": "not_checked", "code": None}}
+    if target.get("https") and dns_status == "ok":
+        result.update(probe(name, expected))
+    return result
+
+def refresh_domain_health():
+    document = json_file(DOMAIN_MAP)
+    if document is None:
+        state = {"ok": False, "status": "unavailable", "updated_at": utc_now(), "domains": []}
+    else:
+        targets = domain_targets(document)
+        with ThreadPoolExecutor(max_workers=min(8, max(1, len(targets)))) as pool:
+            checked = list(pool.map(check_domain_target, targets))
+        state = {"ok": True, "status": "ready", "updated_at": utc_now(), "domains": checked}
+    with domain_health_lock:
+        domain_health.clear()
+        domain_health.update(state)
+    return state
 
 def observed_state(snapshot, projects):
     """Keep only stable, useful fields; volatile load and RAM do not become noisy events."""
@@ -275,6 +402,9 @@ class Handler(BaseHTTPRequestHandler):
             if snapshot is None:
                 return self.send_json(503, {"error": "snapshot_unavailable"})
             return self.send_json(200, snapshot)
+        if path == "/domain-health":
+            with domain_health_lock:
+                return self.send_json(200 if domain_health.get("ok") else 503, dict(domain_health))
         if path == "/changes":
             try:
                 limit = max(1, min(200, int(parse_qs(urlsplit(self.path).query).get("limit", ["100"])[0])))
@@ -479,6 +609,16 @@ def main():
                 print("Snapshot observer error: %s" % type(exc).__name__, flush=True)
             stopping.wait(2)
     threading.Thread(target=watch, name="snapshot-observer", daemon=True).start()
+    def check_domains():
+        while not stopping.is_set():
+            try:
+                refresh_domain_health()
+            except (OSError, ValueError, sqlite3.Error) as exc:
+                print("Domain health check error: %s" % type(exc).__name__, flush=True)
+                with domain_health_lock:
+                    domain_health.update({"ok": False, "status": "unavailable", "updated_at": utc_now()})
+            stopping.wait(DOMAIN_CHECK_INTERVAL)
+    threading.Thread(target=check_domains, name="domain-health-check", daemon=True).start()
     httpd = Server((HOST, PORT), Handler)
     def stop(_signal, _frame):
         stopping.set()

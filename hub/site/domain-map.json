@@ -1,6 +1,20 @@
 {
   "verified_at": "2026-10-13T02:07:00Z",
   "resolver": "Google Public DNS (8.8.8.8)",
+  "https_names": [
+    "vovan20.ru",
+    "www.vovan20.ru",
+    "hub.vovan20.ru",
+    "api.vovan20.ru",
+    "stage.vovan20.ru",
+    "eeklera.online",
+    "www.eeklera.online",
+    "os.eeklera.online",
+    "sentra.vovan20.ru",
+    "shop.eeklera.online",
+    "cools1s.ru",
+    "www.cools1s.ru"
+  ],
   "records": [
     {
       "names": [

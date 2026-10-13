@@ -10,7 +10,7 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.request import Request, urlopen
-from hub.api.server import observed_state, transition_events
+from hub.api.server import check_domain_target, domain_targets, observed_state, probe_https, transition_events
 
 API = Path(__file__).with_name("server.py")
 
@@ -22,6 +22,8 @@ class HubApiTest(unittest.TestCase):
         cls.snapshot = root / "snapshot.json"
         cls.projects = root / "projects.json"
         cls.db = root / "hub.sqlite3"
+        cls.domain_map = root / "domain-map.json"
+        cls.domain_map.write_text('{"records":[],"unresolved":[]}', encoding="utf-8")
         cls.snapshot.write_text('{"version":1,"servers":{"de":{"collected_at":"2026-10-13T10:00:00Z","services":[{"name":"nginx","state":"active"}],"docker":[]}}}', encoding="utf-8")
         cls.projects.write_text('{"projects":{"demo":{"alerts":[]}}}', encoding="utf-8")
         sock = socket.socket()
@@ -31,7 +33,7 @@ class HubApiTest(unittest.TestCase):
         env = dict(os.environ, HUB_API_PORT=str(cls.port),
                    HUB_API_SNAPSHOT=str(cls.snapshot),
                    HUB_API_PROJECTS=str(cls.projects),
-                   HUB_API_DB=str(cls.db))
+                   HUB_API_DB=str(cls.db), HUB_API_DOMAIN_MAP=str(cls.domain_map))
         cls.proc = subprocess.Popen([sys.executable, str(API)], env=env,
                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         cls.base = f"http://127.0.0.1:{cls.port}"
@@ -79,6 +81,47 @@ class HubApiTest(unittest.TestCase):
         _, updated = self.request_json("/snapshot")
         self.assertEqual(updated["version"], 2)
         self.assertIn("78", updated["servers"])
+
+    def test_domain_health_endpoint_is_available_without_exposing_probe_controls(self):
+        status, result = self.request_json("/domain-health")
+        self.assertEqual(status, 200)
+        self.assertTrue(result["ok"])
+        self.assertEqual(result["domains"], [])
+        self.assertNotIn("target", result)
+
+    def test_domain_inventory_builds_only_valid_fixed_targets(self):
+        targets = domain_targets({
+            "https_names": ["site.example"],
+            "records": [{"names": ["site.example", "bad host", "127.0.0.1"], "ip": "203.0.113.20"}],
+            "unresolved": ["future.example", "http://127.0.0.1/"],
+        })
+        self.assertEqual([target["name"] for target in targets], ["future.example", "site.example"])
+        self.assertEqual(targets[1]["expected_ip"], None)  # Documentation-only IPs are not probe targets.
+        self.assertTrue(targets[1]["https"])
+
+    def test_domain_check_reports_dns_mismatch_without_connecting_to_new_ip(self):
+        calls = []
+        target = {"name": "site.example", "expected_ip": "8.8.8.8", "https": True}
+        result = check_domain_target(target, resolver=lambda _name: ["1.1.1.1"], probe=lambda *_args: calls.append(True))
+        self.assertEqual(result["dns"]["status"], "mismatch")
+        self.assertEqual(result["resolved_ips"], ["1.1.1.1"])
+        self.assertEqual(calls, [])
+
+    def test_domain_check_probes_only_after_expected_public_dns_matches(self):
+        target = {"name": "site.example", "expected_ip": "8.8.8.8", "https": True}
+        observed = {}
+        def probe(host, ip):
+            observed.update(host=host, ip=ip)
+            return {"tls": {"status": "expiring", "days_left": 8}, "http": {"status": "protected", "code": 403}}
+        result = check_domain_target(target, resolver=lambda _name: ["8.8.8.8"], probe=probe)
+        self.assertEqual(observed, {"host": "site.example", "ip": "8.8.8.8"})
+        self.assertEqual(result["tls"]["status"], "expiring")
+        self.assertEqual(result["http"]["status"], "protected")
+
+    def test_https_probe_refuses_non_public_addresses(self):
+        result = probe_https("site.example", "127.0.0.1")
+        self.assertEqual(result["tls"]["status"], "not_checked")
+        self.assertEqual(result["http"]["status"], "not_checked")
 
     def test_custom_projects_tasks_and_project_status(self):
         self.request_json("/custom-projects", "PUT", [

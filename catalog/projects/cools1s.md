@@ -1,20 +1,19 @@
-# cools1s / kursis
+# cools1s
 
-**Сайты** · 🌐 сайт онлайн — сайт отдаётся: cools1s.ru, cools1s.online, kursis.ru
+**Сайты** · 🌐 сайт онлайн — сайт отдаётся: cools1s.ru, cools1s.online
 
-Сайты cools1s.ru и kursis.ru (колесо /wheel).
+Сайт cools1s.ru и cools1s.online (колесо /wheel).
 
 ## Со слов владельца
 
 - **Для чего:** сайт стримера; колесо /wheel — розыгрыш
 - **Сейчас:** работает
-- **Планы:** cools1s.ru оставить; kursis.ru удалить (ждёт подтверждения)
+- **Планы:** Развивать проект под названием cools1s; использовать актуальные домены проекта.
 
 ## Ссылки
 
 - https://cools1s.ru
 - https://cools1s.online
-- https://kursis.ru
 
 ## Домены
 
@@ -25,9 +24,6 @@
   - `(корень)` → /var/www/cools1s (сервер 78)
 - **cools1s.online**
   - `/` → http://localhost:3001 (сервер 78)
-- **kursis.ru**
-  - `/` → статика (сервер 78)
-  - `(корень)` → /var/www/cools1s (сервер 78)
 
 ## Папки на серверах
 

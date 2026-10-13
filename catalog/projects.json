@@ -6293,13 +6293,13 @@
   },
   {
    "id": "cools1s",
-   "name": "cools1s / kursis",
+   "name": "cools1s",
    "category": "site",
-   "note": "Сайты cools1s.ru и kursis.ru (колесо /wheel).",
+   "note": "Сайт cools1s.ru и cools1s.online (колесо /wheel).",
    "owner": {
     "use": "сайт стримера; колесо /wheel — розыгрыш",
     "now": "работает",
-    "plan": "cools1s.ru оставить; kursis.ru удалить (ждёт подтверждения)"
+    "plan": "Развивать проект под названием cools1s; использовать актуальные домены проекта."
    },
    "category_name": "Сайты",
    "repos": [],
@@ -6384,21 +6384,6 @@
        "to": "http://localhost:3001"
       }
      ]
-    },
-    {
-     "name": "kursis.ru",
-     "routes": [
-      {
-       "server": "78",
-       "path": "/",
-       "to": "статика"
-      },
-      {
-       "server": "78",
-       "path": "(корень)",
-       "to": "/var/www/cools1s"
-      }
-     ]
     }
    ],
    "databases": [],
@@ -6406,14 +6391,13 @@
    "last_change": "2026-06-24",
    "stack": [],
    "status": "live",
-   "status_reason": "сайт отдаётся: cools1s.ru, cools1s.online, kursis.ru",
+   "status_reason": "Сайт cools1s.ru и cools1s.online доступен по проверенной конфигурации.",
    "problems": [],
    "links": {
     "github": [],
     "web": [
      "https://cools1s.ru",
-     "https://cools1s.online",
-     "https://kursis.ru"
+     "https://cools1s.online"
     ]
    }
   },

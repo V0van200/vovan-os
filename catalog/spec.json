@@ -782,7 +782,7 @@
   },
   {
    "id": "cools1s",
-   "name": "cools1s / kursis",
+   "name": "cools1s",
    "category": "site",
    "paths": [
     "78:/www-static/www-misc/cools1s",
@@ -790,14 +790,13 @@
    ],
    "domains": [
     "cools1s.ru",
-    "cools1s.online",
-    "kursis.ru"
+    "cools1s.online"
    ],
-   "note": "Сайты cools1s.ru и kursis.ru (колесо /wheel).",
+   "note": "Сайт cools1s.ru и cools1s.online (колесо /wheel).",
    "owner": {
     "use": "сайт стримера; колесо /wheel — розыгрыш",
     "now": "работает",
-    "plan": "cools1s.ru оставить; kursis.ru удалить (ждёт подтверждения)"
+    "plan": "Развивать проект под названием cools1s; использовать актуальные домены проекта."
    }
   },
   {

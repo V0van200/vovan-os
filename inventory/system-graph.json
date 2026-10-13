@@ -509,18 +509,6 @@
    "server": "78"
   },
   {
-   "id": "domain:kursis.ru",
-   "type": "domain",
-   "label": "kursis.ru",
-   "server": "78"
-  },
-  {
-   "id": "domain:www.kursis.ru",
-   "type": "domain",
-   "label": "www.kursis.ru",
-   "server": "78"
-  },
-  {
    "id": "db:78-data-terraria-config-tshock-sqlite",
    "type": "database",
    "engine": "sqlite",
@@ -913,7 +901,7 @@
   {
    "id": "project:cools1s",
    "type": "project",
-   "label": "cools1s / kursis",
+   "label": "cools1s",
    "kind": "site",
    "repo": null,
    "repo_url": null,
@@ -1918,11 +1906,6 @@
   {
    "from": "project:cools1s",
    "to": "domain:cools1s.online",
-   "kind": "has"
-  },
-  {
-   "from": "project:cools1s",
-   "to": "domain:kursis.ru",
    "kind": "has"
   }
  ]

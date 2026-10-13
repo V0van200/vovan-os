@@ -30,9 +30,11 @@ async function connect() {
     source = new EventSource('./api/events');
     source.onopen = () => show('connected');
     source.onerror = () => show('reconnecting');
-    const dispatchUpdate = () => document.dispatchEvent(new CustomEvent('hub:live-updated'));
-    source.addEventListener('snapshot', dispatchUpdate);
-    source.addEventListener('change', dispatchUpdate);
+    source.addEventListener('snapshot', () => {
+      document.dispatchEvent(new CustomEvent('hub:live-updated'));
+      document.dispatchEvent(new CustomEvent('hub:live-snapshot'));
+    });
+    source.addEventListener('change', () => document.dispatchEvent(new CustomEvent('hub:live-updated')));
   } catch {
     show('unavailable');
     retryTimer = setTimeout(connect, 15000);

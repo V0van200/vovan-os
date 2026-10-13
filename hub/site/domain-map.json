@@ -1,0 +1,44 @@
+{
+  "verified_at": "2026-10-13T02:07:00Z",
+  "resolver": "Google Public DNS (8.8.8.8)",
+  "records": [
+    {
+      "names": [
+        "vovan20.ru",
+        "www.vovan20.ru",
+        "hub.vovan20.ru",
+        "api.vovan20.ru",
+        "stage.vovan20.ru"
+      ],
+      "ip": "89.125.168.13",
+      "server": "de"
+    },
+    {
+      "names": [
+        "vpn.vovan20.ru",
+        "eeklera.online",
+        "www.eeklera.online",
+        "os.eeklera.online",
+        "sentra.vovan20.ru",
+        "shop.eeklera.online"
+      ],
+      "ip": "198.13.184.145",
+      "server": "198"
+    },
+    {
+      "names": [
+        "cools1s.ru",
+        "www.cools1s.ru"
+      ],
+      "ip": "78.17.19.43",
+      "server": "78"
+    }
+  ],
+  "unresolved": [
+    "agents.vovan20.ru",
+    "claw.vovan20.ru",
+    "os.vovan20.ru",
+    "cools1s.online",
+    "www.cools1s.online"
+  ]
+}

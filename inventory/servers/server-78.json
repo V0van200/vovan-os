@@ -1444,28 +1444,6 @@
    "auth": false
   },
   {
-   "file": "cools1s.ru",
-   "names": [
-    "cools1s.ru",
-    "www.cools1s.ru"
-   ],
-   "listen": [
-    "80"
-   ],
-   "root": "/var/www/cools1s",
-   "locations": [
-    {
-     "path": "/",
-     "proxy": null,
-     "root": null,
-     "return": null,
-     "auth": false
-    }
-   ],
-   "redirect_only": false,
-   "auth": false
-  },
-  {
    "file": "vovan20.ru",
    "names": [
     "vovan20.ru",
